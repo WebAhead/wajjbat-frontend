@@ -2,7 +2,6 @@
 
 ## Local installation
 
-
 ```
 git clone git@github.com:FACN7/wajjbat-frontend.git
 
@@ -106,14 +105,6 @@ npm start
         - Full name
         - User's reviews
     - Can anyone view?
-
-## General
-- Mobile-first design
-- Responsive (strech goal)
-- Deployment (AWS)
-- Setup ESLint on VSCode/Atom
-- Switch languages / design between Arabic & English
-
 
 ## Sprint 1 sub-teams
 - Front-End
