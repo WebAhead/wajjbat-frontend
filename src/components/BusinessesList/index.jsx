@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import http from "../../services/httpService";
+import axios from "axios";
 import BusinessCard from "../BusinessCard";
 
 const endPointUrl = `https://api.myjson.com/bins/wcdjs`;
@@ -8,8 +8,12 @@ export default function BusinessesList() {
 
   useEffect(() => {
     (async function getBuisinesses() {
-      const { data } = await http.get(endPointUrl);
-      setBusinesses(data.businesses);
+      try {
+        const { data } = await axios.get(endPointUrl);
+        setBusinesses(data.businesses);
+      } catch (error) {
+        throw new Error(error);
+      }
     })();
   }, []);
 
