@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.scss";
-export default function index() {
+
+export default function NavBar() {
   return (
     <div className="navBar">
       <div className="changeLanguage"></div>
