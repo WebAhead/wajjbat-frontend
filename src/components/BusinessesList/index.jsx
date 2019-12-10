@@ -12,7 +12,7 @@ export default function BusinessesList() {
       setBusinesses(data.businesses);
     })();
   }, []);
-  console.log("res: ", businesses);
+
   return (
     <React.Fragment>
       <div className="businesses-list">

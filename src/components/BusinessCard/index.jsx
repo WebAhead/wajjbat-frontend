@@ -9,8 +9,8 @@ export default function BusinessCard({ business }) {
           <img src={business.image} alt="alt" />
         </div>
         <div className="business-content">
-          <p className="business-description">{business.name}</p>
-          <p className="business-name">{business.description}</p>
+          <p className="business-name">{business.name}</p>
+          <p className="business-description">{business.description}</p>
           <div className="business-bottom-content">
             <div className="business-type">{business.type}</div>
             {/* this will be replaced by Rating component */}
