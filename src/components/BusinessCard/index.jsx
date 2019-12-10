@@ -6,23 +6,15 @@ export default function BusinessCard({ business }) {
     <React.Fragment>
       <div className="business-card">
         <div className="business-img">
-          <img
-            src="https://images.unsplash.com/photo-1561222471-e96a96669d36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"
-            alt="alt"
-          />
+          <img src={business.image} alt="alt" />
         </div>
         <div className="business-content">
-          <p className="business-name">business name</p>
-
-          <p className="business-description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, ea!
-            Est, tempora. Quas, incidunt!
-          </p>
-
+          <p className="business-description">{business.name}</p>
+          <p className="business-name">{business.description}</p>
           <div className="business-bottom-content">
-            <div className="business-type">business type</div>
+            <div className="business-type">{business.type}</div>
             {/* this will be replaced by Rating component */}
-            <div className="business-rating">business rating</div>
+            <div className="business-rating">{business.rating}</div>
           </div>
         </div>
       </div>

@@ -2,10 +2,11 @@
 
 .business-card {
   display: flex;
-  border: $main-green 2px solid;
+  border: $main-green 1px solid;
   border-radius: 5px;
   width: 80%;
-  margin: auto;
+  height: 100px;
+  margin: 0.5em auto 0.5em auto;
   font-size: 0.8em;
 
   .business-img {
