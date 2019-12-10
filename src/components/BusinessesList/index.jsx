@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BusinessCard from "../BusinessCard";
 
-const endPointUrl = `https://api.myjson.com/bins/wcdjs`;
+const endPointUrl = process.env.REACT_APP_API_URL;
+
 export default function BusinessesList() {
   const [businesses, setBusinesses] = useState([]);
 
@@ -12,7 +13,7 @@ export default function BusinessesList() {
         const { data } = await axios.get(endPointUrl);
         setBusinesses(data.businesses);
       } catch (error) {
-        throw new Error(error);
+        console.log(error);
       }
     })();
   }, []);
