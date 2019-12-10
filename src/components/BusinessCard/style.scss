@@ -1,0 +1,54 @@
+@import "../../theme/colors.scss";
+
+.business-card {
+  display: flex;
+  border: $main-green 1px solid;
+  border-radius: 5px;
+  width: 80%;
+  height: 100px;
+  margin: 0.5em auto 0.5em auto;
+  font-size: 0.8em;
+
+  .business-img {
+    width: 30%;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .business-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 70%;
+    padding: 0.5em;
+
+    .business-name {
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .business-description {
+      text-overflow: ellipsis;
+      text-align: justify;
+    }
+
+    .business-bottom-content {
+      display: flex;
+      justify-content: space-between;
+
+      .business-type {
+        color: $light-green;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .business-card {
+    width: 50%;
+    font-size: 1em;
+  }
+}
