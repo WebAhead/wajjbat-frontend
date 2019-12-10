@@ -1,7 +1,9 @@
 @import "./theme/colors.scss";
+@import "./theme/fonts.scss";
 
 .App {
   h1 {
     color: $main-green;
+    font-size: $font-size-h1;
   }
 }
