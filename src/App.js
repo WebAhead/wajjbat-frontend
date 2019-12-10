@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import "./App.scss";
+import BusinessCard from "./components/BusinessCard";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Hello World</h1>
-        <button>Hello</button>
+        <BusinessCard></BusinessCard>
       </div>
     );
   }
