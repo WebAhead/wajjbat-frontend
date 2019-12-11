@@ -3,8 +3,12 @@ import "./App.scss";
 import "../src/pages/Home";
 import HomePage from "../src/pages/Home";
 class App extends Component {
-  render() {
-    return <div className="App"></div>;
+  render(props) {
+    return (
+      <div className="App">
+        <HomePage lang={this.props.lang} />
+      </div>
+    );
   }
 }
 
