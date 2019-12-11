@@ -1,9 +1,7 @@
-/* eslint-disable no-restricted-globals */
 import React, { useState, useEffect } from "react";
 import "./style.scss";
 import { FormattedMessage } from "react-intl";
 export default function NavBar(props) {
-  console.log(props.lang);
   const [lang, setLang] = useState("ar");
   const handleLang = event => {
     const newLang = event.target.value;
