@@ -1,4 +1,5 @@
 import React from "react";
+import { Rating } from "@material-ui/lab";
 import "./style.scss";
 
 export default function BusinessCard({ business }) {
@@ -13,8 +14,15 @@ export default function BusinessCard({ business }) {
           <p className="business-description">{business.description}</p>
           <div className="business-bottom-content">
             <div className="business-type">{business.type}</div>
-            {/* this will be replaced by Rating component */}
-            <div className="business-rating">{business.rating}</div>
+            <div className="business-rating">
+              <Rating
+                name="half-rating"
+                value={business.rating}
+                precision={0.5}
+                readOnly
+                size="small"
+              />
+            </div>
           </div>
         </div>
       </div>

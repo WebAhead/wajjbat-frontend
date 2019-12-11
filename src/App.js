@@ -1,10 +1,17 @@
-import React, { Component } from "react";
+import React, { Fragment, Component } from "react";
+import { Route, Switch } from "react-router-dom";
 import "./App.scss";
-import "../src/pages/Home";
-import HomePage from "../src/pages/Home";
+import Home from "./pages/Home";
+
 class App extends Component {
   render() {
-    return <div className="App"></div>;
+    return (
+      <Fragment>
+        <Switch className="App">
+          <Route exact path="/" component={Home} />
+        </Switch>
+      </Fragment>
+    );
   }
 }
 
