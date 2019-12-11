@@ -4,7 +4,7 @@ import NavBar from "../../components/NavBar/index";
 import BusinessesList from "../../components/BusinessesList";
 import axios from "axios";
 
-const endPointUrl = process.env.REACT_APP_API_URL + "wcdjs";
+const endPointUrl = process.env.REACT_APP_API_URL;
 
 export default function Homepage(props) {
   const [businesses, setBusinesses] = useState([]);
