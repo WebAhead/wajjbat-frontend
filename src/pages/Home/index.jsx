@@ -6,10 +6,9 @@ import axios from "axios";
 
 const endPointUrl = process.env.REACT_APP_API_URL;
 
-export default function Homepage() {
+export default function Homepage(props) {
   const [businesses, setBusinesses] = useState([]);
   const [topRated, setTopRated] = useState([]);
-
   useEffect(() => {
     (async function getBusinesses() {
       try {
@@ -24,7 +23,7 @@ export default function Homepage() {
 
   return (
     <div>
-      <NavBar />
+      <NavBar setLang={props.setLang} />
       <SliderContainer topRated={topRated} />
       <BusinessesList businesses={businesses} />
     </div>
