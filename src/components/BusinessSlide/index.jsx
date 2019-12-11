@@ -1,4 +1,5 @@
 import React from "react";
+import { Rating } from "@material-ui/lab";
 import "./style.scss";
 export default function BusinessSlide(props) {
   return (
@@ -10,9 +11,13 @@ export default function BusinessSlide(props) {
       <div className="type-rating-container">
         <h5 className="type">{props.type}</h5>
         <div className="rating">
-          {Array.from({ length: Math.round(props.rating) }, (_, index) => (
-            <img key={index} src={require("../../assets/icons/rating.jpg")} />
-          ))}
+          <Rating
+            name="half-rating"
+            value={props.rating}
+            precision={0.5}
+            readOnly
+            size="small"
+          />
         </div>
       </div>
     </div>

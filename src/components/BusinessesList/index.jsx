@@ -1,28 +1,22 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import BusinessCard from "../BusinessCard";
+import { Link } from "react-router-dom";
+import "./style.scss";
 
-const endPointUrl = process.env.REACT_APP_API_URL;
-
-export default function BusinessesList() {
-  const [businesses, setBusinesses] = useState([]);
-
-  useEffect(() => {
-    (async function getBuisinesses() {
-      try {
-        const { data } = await axios.get(endPointUrl);
-        setBusinesses(data.businesses);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
-
+export default function BusinessesList({ businesses }) {
   return (
     <React.Fragment>
       <div className="businesses-list">
         {businesses.map(business => (
-          <BusinessCard key={business.id} business={business}></BusinessCard>
+          <Link
+            key={business.id}
+            to={{
+              pathname: `/businessProfile/${business.id}`,
+              business: { ...business }
+            }}
+          >
+            <BusinessCard business={business} />
+          </Link>
         ))}
       </div>
     </React.Fragment>
