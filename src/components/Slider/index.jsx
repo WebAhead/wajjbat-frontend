@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
+import { Link } from "react-router-dom";
 import BusinessSlide from "../BusinessSlide";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-export default function SliderContainer() {
-  const [businesses, getBusinesses] = useState([]);
-  useEffect(() => {
-    axios
-      .get("https://api.myjson.com/bins/wcdjs")
-      .then(data => getBusinesses(data.data.topRated));
-  }, []);
+
+export default function SliderContainer({ topRated }) {
   const settings = {
     className: "center",
     centerMode: true,
@@ -23,21 +18,29 @@ export default function SliderContainer() {
   const carouselSet = () => {
     return (
       <Slider {...settings}>
-        {businesses.map((currentBus, index) => (
-          <BusinessSlide
-            key={index}
-            description={currentBus.description}
-            image={currentBus.image}
-            name={currentBus.name}
-            rating={currentBus.rating}
-            type={currentBus.type}
-          />
+        {topRated.map((currentBus, index) => (
+          <Link
+            key={currentBus.id}
+            to={{
+              pathname: `/businessProfile/${currentBus.id}`,
+              business: { ...currentBus }
+            }}
+          >
+            <BusinessSlide
+              key={index}
+              description={currentBus.description}
+              image={currentBus.image}
+              name={currentBus.name}
+              rating={currentBus.rating}
+              type={currentBus.type}
+            />
+          </Link>
         ))}
       </Slider>
     );
   };
   return (
-    <div style={{ maxWidth: "100vw" }}>
+    <div style={{ maxWidth: "100vw", marginTop: 15 }}>
       <div>{carouselSet()}</div>
     </div>
   );
