@@ -3,13 +3,9 @@ import "./style.scss";
 import { FormattedMessage } from "react-intl";
 export default function NavBar(props) {
   const [lang, setLang] = useState("ar");
-  const handleLang = event => {
-    const newLang = event.target.value;
-    setLang(newLang);
-  };
-  useEffect(() => {
-    props.lang(lang);
-  }, [lang, props]);
+  const handleLang = ({ target }) => setLang(target.value);
+  useEffect(() => props.setLang(lang), [lang, props]);
+
   return (
     <div className="navBar">
       <div className="changeLanguage">

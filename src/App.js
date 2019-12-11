@@ -11,7 +11,9 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={props => <HomePage lang={this.props.lang} {...props} />}
+            render={props => (
+              <HomePage setLang={this.props.setLang} {...props} />
+            )}
           />
         </Switch>
       </Fragment>

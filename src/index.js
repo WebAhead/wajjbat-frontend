@@ -5,16 +5,17 @@ import App from "./App";
 import "./theme/reset.scss";
 import { IntlProvider } from "react-intl";
 import messages from "./Languages";
+
 const AppIndex = () => {
   const [lang, setLang] = useState("ar");
-  useEffect(() => {
-    setLang(lang);
-  }, [lang]);
+  useEffect(() => setLang(lang), [lang]);
 
   return (
     <IntlProvider locale={lang} messages={messages[lang]}>
       <BrowserRouter>
-        <App lang={setLang} />
+        <div style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
+          <App setLang={setLang} />
+        </div>
       </BrowserRouter>
     </IntlProvider>
   );
