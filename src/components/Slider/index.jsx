@@ -22,7 +22,7 @@ export default function SliderContainer({ topRated }) {
           <Link
             key={currentBus.id}
             to={{
-              pathname: `/businessProfile/${currentBus.id}`,
+              pathname: `/business/${currentBus.id}`,
               business: { ...currentBus }
             }}
           >
