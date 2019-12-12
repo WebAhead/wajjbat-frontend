@@ -18,15 +18,15 @@
 
   .changeLanguage {
     @extend box;
-    width: 45px;
-    height: 30px;
-    margin-left: 10px;
+    width: 65px;
+    height: 45px;
+    margin: auto 10px;
     .select {
       background: none;
       border-style: none;
       outline: 0;
       width: 100%;
-      height: 25px;
+      height: 100%;
     }
   }
 
@@ -38,8 +38,8 @@
 
   .login {
     @extend box;
-    width: 45px;
-    height: 30px;
-    margin-right: 10px;
+    width: 65px;
+    height: 45px;
+    margin: auto 10px;
   }
 }
