@@ -11,7 +11,7 @@ export default function BusinessesList({ businesses }) {
           <Link
             key={business.id}
             to={{
-              pathname: `/businessProfile/${business.id}`,
+              pathname: `/business/${business.id}`,
               business: { ...business }
             }}
           >
