@@ -5,10 +5,9 @@ import axios from "axios";
 
 const endPointUrl = process.env.REACT_APP_API_URL + "wcdjs";
 
-export default function Homepage() {
+export default function Homepage(props) {
   const [businesses, setBusinesses] = useState([]);
   const [topRated, setTopRated] = useState([]);
-
   useEffect(() => {
     (async function getBusinesses() {
       try {
