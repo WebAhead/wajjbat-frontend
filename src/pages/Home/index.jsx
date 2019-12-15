@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import SliderContainer from "../../components/Slider";
-import NavBar from "../../components/NavBar/index";
 import BusinessesList from "../../components/BusinessesList";
 import axios from "axios";
 
-const endPointUrl = process.env.REACT_APP_API_URL;
+const endPointUrl = process.env.REACT_APP_API_URL + "wcdjs";
 
 export default function Homepage(props) {
   const [businesses, setBusinesses] = useState([]);
@@ -23,7 +22,6 @@ export default function Homepage(props) {
 
   return (
     <div>
-      <NavBar setLang={props.setLang} />
       <SliderContainer topRated={topRated} />
       <BusinessesList businesses={businesses} />
     </div>
