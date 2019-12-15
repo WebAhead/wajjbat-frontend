@@ -1,0 +1,10 @@
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  button {
+    width: 70px;
+    height: 40px;
+    font-size: 10px;
+  }
+}
