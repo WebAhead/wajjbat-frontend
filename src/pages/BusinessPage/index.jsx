@@ -1,7 +1,9 @@
 import React, { useEffect, useState, Fragment } from "react";
+
 import axios from "axios";
 import Slider from "react-slick";
 import "./style.scss";
+import GoogleMaps from "../../components/GoogleMaps";
 
 const endPointUrl = process.env.REACT_APP_API_URL + "12curc";
 
@@ -29,6 +31,9 @@ export default function BusinessPage(props) {
     autoplay: true
   };
 
+
+
+
   return (
     <Fragment>
       <header className="business-page-header">
@@ -51,6 +56,12 @@ export default function BusinessPage(props) {
           <button to="">Reviews</button>
         </div>
       </nav>
+<GoogleMaps/>
+      
+
     </Fragment>
   );
 }
+
+// export default GoogleApiWrapper({
+// })(BusinessPage);
