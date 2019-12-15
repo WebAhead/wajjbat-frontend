@@ -21,18 +21,12 @@ export default function Homepage(props) {
     })();
   }, []);
 
-  useEffect(() => {
-    console.log("topRated", topRated);
-    console.log("businesses", businesses);
-  });
-
   //here we get the user location by after they approve using The HTML Geolocation API which is used to locate a user's position.
   useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const { coords } = position;
-        setUserPosition({ lat: coords.latitude, lng: coords.longitude });
-      });
+      navigator.geolocation.getCurrentPosition(({ coords }) =>
+        setUserPosition({ lat: coords.latitude, lng: coords.longitude })
+      );
     }
   }, []);
 
