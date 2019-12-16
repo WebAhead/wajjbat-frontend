@@ -7,3 +7,26 @@
   text-align: justify;
   overflow: hidden;
 }
+
+
+
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 3.5em;
+
+  .form-title {
+    font-size: 3em;
+  }
+
+  .form-items {
+    display: flex;
+    flex-direction: column;
+
+  }
+
+
+}
