@@ -36,7 +36,7 @@ export default function BusinessPage(props) {
           <img src={mainImage} alt="" />
         </div>
         <div className="sub-images">
-          <Slider {...settings} className="slider-container">
+          <Slider {...settings}>
             {subImages.map((subImage, index) => (
               <img src={subImage} key={index + 1} alt="" />
             ))}
