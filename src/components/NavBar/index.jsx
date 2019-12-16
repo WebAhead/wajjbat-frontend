@@ -15,12 +15,8 @@ export default function NavBar(props) {
         </select>
       </div>
 
-      <div className="signUp">
-        <FormattedMessage id="signup" />
-      </div>
-      <div className="login">
-        <FormattedMessage id="signin" />
-      </div>
+      <div className="signUp">{/* <FormattedMessage id="signup" /> */}</div>
+      <div className="login">{/* <FormattedMessage id="signin" />   */}</div>
     </div>
   );
 }

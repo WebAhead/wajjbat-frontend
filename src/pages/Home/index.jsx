@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SliderContainer from "../../components/Slider";
 import BusinessesList from "../../components/BusinessesList";
 import axios from "axios";
+import Footer from "../../components/Footer";
 
 const endPointUrl = process.env.REACT_APP_API_URL;
 
@@ -40,6 +41,7 @@ export default function Homepage(props) {
     <div>
       <SliderContainer topRated={topRated} />
       <BusinessesList businesses={businesses} />
+      <Footer />
     </div>
   );
 }
