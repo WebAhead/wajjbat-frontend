@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
-import StyledDropzone from "./DropZone";
-export default function UploadInput({ addUrl }) {
-  const uploadFile = (file, signedRequest, url) => {
+import Dropzone from "../Dropzone";
+export default function UploadInput({ onChange, onError }) {
+  const uploadFile = (file, signedRequest, url) =>
     axios
       .put(signedRequest, file, {
         headers: {
@@ -11,15 +11,14 @@ export default function UploadInput({ addUrl }) {
       })
       .then(res => {
         if (res.status === 200) {
-          document.getElementById("preview").src = url;
-          document.getElementById("avatar-url").value = url;
+          onChange(url);
         } else {
-          alert("Could not upload file.");
+          onError("Could not upload file.");
         }
       })
       .catch(error => console.log(error));
-  };
-  const getSignedRequest = file => {
+
+  const getSignedRequest = file =>
     axios
       .get(
         `http://192.168.0.87:8000/api/sign-s3?file-name=${file.name}&file-type=${file.type}`
@@ -28,14 +27,14 @@ export default function UploadInput({ addUrl }) {
         if (res.status === 200) {
           uploadFile(file, res.data.signedRequest, res.data.url);
         } else {
-          alert("Could not get signed URL.");
+          onError("Could not get signed URL.");
         }
       })
       .catch(error => error);
-  };
+
   return (
     <div>
-      <StyledDropzone getImages={getSignedRequest} />
+      <Dropzone getSignedRequest={getSignedRequest} />
     </div>
   );
 }
