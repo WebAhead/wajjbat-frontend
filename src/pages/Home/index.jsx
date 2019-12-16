@@ -9,17 +9,6 @@ export default function Homepage(props) {
   const [businesses, setBusinesses] = useState([]);
   const [topRated, setTopRated] = useState([]);
   const [userPosition, setUserPosition] = useState({});
-  useEffect(() => {
-    (async function getBusinesses() {
-      try {
-        const { data } = await axios.get(endPointUrl + "wcdjs");
-        setBusinesses(data.businesses);
-        setTopRated(data.topRated);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
 
   //here we get the user location by after they approve using The HTML Geolocation API which is used to locate a user's position.
   useEffect(() => {
