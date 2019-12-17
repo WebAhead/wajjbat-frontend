@@ -5,13 +5,13 @@
 .container {
   display: flex;
   flex-direction: column;
-  border-style: solid;
-  border-width: 2px;
-  border-color: $main-green;
   border-radius: 10px;
   min-height: 200px;
   max-height: 200px;
-  margin: 0 10px;
+  margin: 0 10px 10px 10px;
+  box-shadow: 0 5px 10px -6px $dark-green;
+  padding-bottom: 5px;
+  background-color: white;
 
   .name {
     align-self: center;
@@ -24,7 +24,6 @@
     font-size: $font-size-p;
     width: 90%;
     @include lineClamp(2);
-
   }
 
   .img {

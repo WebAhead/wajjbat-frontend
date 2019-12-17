@@ -5,13 +5,18 @@ import GoogleLogin from "react-google-login";
 import "./style.scss";
 import "../../theme/utils.scss";
 
+const endPointUrl = process.env.REACT_APP_TEMP_API_URL;
+const facebookId = process.env.REACT_APP_FACEBOOK_ID;
+const googleId = process.env.REACT_APP_GOOGLE_ID;
+
 export default function Signin() {
   const responseFacebook = async response => {
+    console.log(response);
     const { name, email, id } = response;
     const { url } = response.picture.data;
 
     try {
-      await axios.post("http://192.168.0.71:8000/api/oauth/facebook", {
+      await axios.post(endPointUrl + "facebook", {
         name,
         email,
         id,
@@ -27,7 +32,7 @@ export default function Signin() {
     const { googleId: id, email, name, imageUrl: url } = response.profileObj;
 
     try {
-      await axios.post("http://192.168.0.71:8000/api/oauth/google", {
+      await axios.post(endPointUrl + "google", {
         id,
         email,
         name,
@@ -46,15 +51,16 @@ export default function Signin() {
         <div className="signin-form">
           <form className="form-items">
             <FacebookLogin
-              appId="565357740945087"
+              appId={facebookId}
               fields="name,email,picture"
               callback={responseFacebook}
               autoLoad={false}
+              icon="fa-facebook"
             />
             <br />
             <br />
             <GoogleLogin
-              clientId="106689794615-k4jlefaset0m3i8l0eh9lfiff6i8s3gb.apps.googleusercontent.com"
+              clientId={googleId}
               buttonText="LOGIN WITH GOOGLE"
               onSuccess={responseGoogle}
               onFailure={responseGoogle}
