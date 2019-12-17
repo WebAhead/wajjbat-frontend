@@ -3,7 +3,6 @@ import axios from "axios";
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 import "./style.scss";
-import "../../theme/utils.scss";
 
 const endPointUrl = process.env.REACT_APP_TEMP_API_URL;
 const facebookId = process.env.REACT_APP_FACEBOOK_ID;
