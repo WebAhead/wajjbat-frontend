@@ -12,6 +12,8 @@
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-facebook-login": "^4.1.1",
+    "react-google-login": "^5.0.7",
     "react-dropzone": "^10.2.1",
     "react-intl": "^3.9.2",
     "react-router-dom": "^5.1.2",

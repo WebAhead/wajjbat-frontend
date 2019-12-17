@@ -11,6 +11,27 @@
   word-break: keep-all;
 }
 
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 3.5em;
+
+  .form-title {
+    font-size: 3em;
+  }
+
+  .form-items {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.fa-facebook {
+  margin-left: 1em;
+}
+
 @font-face {
   font-family: "Helvetica";
   src: url("../assets/fonts/Helvetica-arabic.ttf") format("truetype"),
