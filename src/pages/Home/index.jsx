@@ -24,10 +24,8 @@ export default function Homepage(props) {
     (async function getBusinesses() {
       try {
         const { data } = await axios.post(`${endPointUrl}/api/businesses`, {
-          body: {
-            lat: userPosition.lat,
-            lng: userPosition.lng
-          }
+          lat: userPosition.lat,
+          lng: userPosition.lng
         });
         setBusinesses(data.businesses);
         setTopRated(data.topRated);
