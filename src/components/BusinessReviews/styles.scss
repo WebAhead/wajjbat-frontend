@@ -3,43 +3,13 @@
   display: flex;
   padding: 10px;
   justify-content: center;
+  font-size: 12px;
 }
-.MuiLinearProgress-root {
-  width: 200px;
-  display: flex;
-  align-self: center;
-  margin: 5px;
-  height: 6px;
+.reviews-h1 {
+  padding: 5px;
+  font-size: x-large;
+  text-align: center;
 }
-.MuiLinearProgress-barColorPrimary {
-  background-color: $light-green !important;
-}
-.MuiLinearProgress-colorPrimary {
-  background-color: $main-green !important;
-}
-.container {
-  border: 1px solid;
-  border-radius: 5px;
-  .review-outter-container {
-    display: flex;
-    justify-content: space-between;
-    .img-rating-container {
-      display: flex;
-      width: 150px;
-      padding: 5px;
-      justify-content: space-between;
-    }
-    .date {
-      padding: 5px;
-      font-style: italic;
-      color: $dark-grey;
-    }
-  }
-  .review-inner-container {
-    display: flex;
-    justify-content: center;
-    margin: 5px;
-    border-radius: 5px;
-    height: 80px;
-  }
+.colorPrimary {
+  color: "black";
 }
