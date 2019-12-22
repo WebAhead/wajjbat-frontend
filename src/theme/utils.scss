@@ -2,20 +2,40 @@
   white-space: normal;
   text-overflow: ellipsis;
   display: -webkit-box;
-  word-break: break-all;
   -webkit-line-clamp: $lines;
   -webkit-box-orient: vertical;
   text-align: justify;
   overflow: hidden;
-line-height: 1.3;
-margin-top: -1px;
+  line-height: 1.3;
+  margin-top: -1px;
+  word-break: keep-all;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 3.5em;
+
+  .form-title {
+    font-size: 3em;
+  }
+
+  .form-items {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.fa-facebook {
+  margin-left: 1em;
 }
 
 @font-face {
-  font-family: 'Helvetica';
-  src:
-      url('../assets/fonts/Helvetica-arabic.ttf') format('truetype'),
-      url('../assets/fonts/Helvetica-arabic.ttf') format('truetype');
-   font-weight: normal;
-   font-style: normal;
+  font-family: "Helvetica";
+  src: url("../assets/fonts/Helvetica-arabic.ttf") format("truetype"),
+    url("../assets/fonts/Helvetica-arabic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }

@@ -4,6 +4,9 @@ import BusinessSlide from "../BusinessSlide";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { FormattedMessage } from "react-intl";
+
+import "./style.scss";
 
 export default function SliderContainer({ topRated }) {
   const settings = {
@@ -40,7 +43,10 @@ export default function SliderContainer({ topRated }) {
     );
   };
   return (
-    <div style={{ maxWidth: "100vw", marginTop: 15 }}>
+    <div className="slider-container">
+      <h1 className="slider-title">
+        <FormattedMessage id="topRated" />
+      </h1>
       <div>{carouselSet()}</div>
     </div>
   );

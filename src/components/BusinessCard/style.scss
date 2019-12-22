@@ -6,8 +6,8 @@
   border: $main-green 2px solid;
   border-radius: 5px;
   width: 85%;
-  height: 120px;
-  margin: 0.5em auto 0.5em auto;
+  height: 125px;
+  margin: 0.5em auto 1.5em auto;
   font-size: 0.8em;
 
   .business-img {
@@ -44,10 +44,9 @@
 
       .business-type {
         color: $dark-grey;
-        margin: .5em inherit .2em inherit;
+        margin: 0.5em inherit 0.2em inherit;
         font-style: italic;
       }
-
     }
   }
 }

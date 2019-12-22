@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SliderContainer from "../../components/Slider";
 import BusinessesList from "../../components/BusinessesList";
 import axios from "axios";
+import Footer from "../../components/Footer";
 
 const endPointUrl = process.env.REACT_APP_API_URL;
 
@@ -9,17 +10,6 @@ export default function Homepage(props) {
   const [businesses, setBusinesses] = useState([]);
   const [topRated, setTopRated] = useState([]);
   const [userPosition, setUserPosition] = useState({});
-  useEffect(() => {
-    (async function getBusinesses() {
-      try {
-        const { data } = await axios.get(endPointUrl + "wcdjs");
-        setBusinesses(data.businesses);
-        setTopRated(data.topRated);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
 
   if (userPosition.lat !== undefined) {
     // Check if the user browser support storage to save the location info in the sessionStorage
@@ -43,10 +33,8 @@ export default function Homepage(props) {
     (async function getBusinesses() {
       try {
         const { data } = await axios.post(`${endPointUrl}/api/businesses`, {
-          body: {
-            lat: userPosition.lat,
-            lng: userPosition.lng
-          }
+          lat: userPosition.lat,
+          lng: userPosition.lng
         });
         setBusinesses(data.businesses);
         setTopRated(data.topRated);
