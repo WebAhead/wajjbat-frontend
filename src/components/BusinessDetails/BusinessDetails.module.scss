@@ -1,0 +1,72 @@
+@import "../../theme/colors.scss";
+
+
+.upper-details-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 10px;
+
+
+  .business-type {
+    color: $main-grey;
+    margin-bottom: 10px;
+  }
+
+}
+
+  .business-name,
+  .contact-title {
+    font-size: 25px;
+    margin: 10px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .business-description {
+    width: 80%;
+    margin: auto;
+  }
+
+  .place-features {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px;
+  }
+
+  .contact-container {
+    margin-top: 30px;
+    .contact-info {
+      display: flex;
+      justify-content: space-around;
+      margin: 10px;
+
+      .business-contact {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        flex-direction: row-reverse;
+        margin-top: 20px;
+        .icon {
+          margin: 0px 10px;
+          max-width: 18px;
+        }
+      }
+    }
+  }
+
+  .address {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 22px;
+    .business-address {
+      color: $dark-grey;
+      margin: 10px;
+    }
+  }
+
+
+.emptyBusinessDetails {
+  text-align: center;
+  margin-top: 40px;
+}

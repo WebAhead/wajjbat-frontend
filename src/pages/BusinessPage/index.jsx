@@ -1,13 +1,17 @@
 import React, { useEffect, useState, Fragment } from "react";
+
 import axios from "axios";
 import Slider from "react-slick";
 import "./style.scss";
+import BusinessDetails from "../../components/BusinessDetails";
 import BussinessReviews from "../../components/BusinessReviews";
-const endPointUrl = process.env.REACT_APP_API_URL;
 
 export default function BusinessPage(props) {
   const [mainImage, setMainImage] = useState("");
   const [subImages, setSubImages] = useState([]);
+  const [userPosition, setUserPosition] = useState({});
+  const [businessData, setBusinessData] = useState([]);
+
   const [reviews, setReveiws] = useState("");
 
   useEffect(() => {
@@ -20,6 +24,7 @@ export default function BusinessPage(props) {
       setSubImages([...data.subImages, data.primaryImage]);
     })();
   }, [props.match.params.id]);
+
   const settings = {
     infinite: true,
     arrows: false,
@@ -30,6 +35,10 @@ export default function BusinessPage(props) {
     slidesToShow: subImages.length > 3 ? 3 : 1,
     autoplay: true
   };
+
+  useEffect(() => navigator.geolocation.getCurrentPosition(({ coords }) =>
+    setUserPosition({ lat: coords.latitude, lng: coords.longitude })
+  ), []);
 
   return (
     <Fragment>
@@ -48,11 +57,12 @@ export default function BusinessPage(props) {
 
       <nav className="business-page-nav">
         <div className="nav-items">
-          <button to="">Details</button>
-          <button to="">Menu</button>
-          <button to="">Reviews</button>
+          <button className="nav-button" to="">Details</button>
+          <button className="nav-button" to="">Reviews</button>
         </div>
       </nav>
+
+      <BusinessDetails businessData={businessData.details} userPosition={userPosition} />
     </Fragment>
   );
 }
