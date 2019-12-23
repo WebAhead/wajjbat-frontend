@@ -1,68 +1,72 @@
 import React, { useEffect, useState, Fragment } from "react";
 
 import axios from "axios";
-import Slider from "react-slick";
 import "./style.scss";
 import BusinessDetails from "../../components/BusinessDetails";
-import BussinessReviews from "../../components/BusinessReviews";
+import BusinessReviews from "../../components/BusinessReviews";
+import { Route, Link } from 'react-router-dom';
+import { AnimatedSwitch } from 'react-router-transition';
+import BusinessPageImageGallery from '../../components/BusinessPageImageGallery';
 
 export default function BusinessPage(props) {
-  const [mainImage, setMainImage] = useState("");
-  const [subImages, setSubImages] = useState([]);
   const [userPosition, setUserPosition] = useState({});
-  const [businessData, setBusinessData] = useState([]);
+  const [businessData, setBusinessData] = useState({});
 
   const [reviews, setReveiws] = useState("");
 
   useEffect(() => {
     (async function getImages() {
       const { data } = await axios.get(
-        endPointUrl + "/api/businesses/" + props.match.params.id
+        process.env.REACT_APP_API_URL + "/api/businesses/" + props.match.params.id
       );
       setReveiws(data.reviews);
-      setMainImage(data.primaryImage);
-      setSubImages([...data.subImages, data.primaryImage]);
+      setBusinessData(data)
     })();
   }, [props.match.params.id]);
 
-  const settings = {
-    infinite: true,
-    arrows: false,
-    speed: 200,
-    afterChange: index => {
-      setMainImage(subImages[index]);
-    },
-    slidesToShow: subImages.length > 3 ? 3 : 1,
-    autoplay: true
-  };
 
   useEffect(() => navigator.geolocation.getCurrentPosition(({ coords }) =>
     setUserPosition({ lat: coords.latitude, lng: coords.longitude })
   ), []);
 
+
   return (
     <Fragment>
-      <header className="business-page-header">
-        <div className="main-image">
-          <img src={mainImage} alt="" />
-        </div>
-        <div className="sub-images">
-          <Slider {...settings}>
-            {subImages.map((subImage, index) => (
-              <img src={subImage} key={index + 1} alt="" />
-            ))}
-          </Slider>
-        </div>
-      </header>
+      {businessData.primaryImage &&
+        <BusinessPageImageGallery
+          defaultMainImage={businessData.primaryImage}
+          defaultSubImages={[...businessData.subImages, businessData.primaryImage]}
+        />
+      }
+
 
       <nav className="business-page-nav">
         <div className="nav-items">
-          <button className="nav-button" to="">Details</button>
-          <button className="nav-button" to="">Reviews</button>
+          <Link className="nav-button" to={`/business/${props.match.params.id}`}>Details</Link>
+          <Link className="nav-button" to={`/business/${props.match.params.id}/reviews`}>Reviews</Link>
         </div>
       </nav>
 
-      <BusinessDetails businessData={businessData.details} userPosition={userPosition} />
-    </Fragment>
+      <AnimatedSwitch
+        atEnter={{ offset: 100 }}
+        atLeave={{}}
+        atActive={{ offset: 0 }}
+        mapStyles={styles => ({
+          transform: `translateX(${styles.offset}%)`,
+        })}
+      >
+        <Route
+          path={`/business/:id`}
+          exact
+          component={() => <BusinessDetails businessData={businessData.details} userPosition={userPosition} />}
+        />
+        <Route
+          path={`/business/:id/reviews`}
+          exact
+          component={() => <BusinessReviews reviews={reviews} />}
+        />
+
+      </AnimatedSwitch>
+    </Fragment >
   );
 }
