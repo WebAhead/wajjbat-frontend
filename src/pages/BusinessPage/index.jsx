@@ -2,22 +2,24 @@ import React, { useEffect, useState, Fragment } from "react";
 import axios from "axios";
 import Slider from "react-slick";
 import "./style.scss";
-
-const endPointUrl = process.env.REACT_APP_API_URL + "12curc";
+import BussinessReviews from "../../components/BusinessReviews";
+const endPointUrl = process.env.REACT_APP_API_URL;
 
 export default function BusinessPage(props) {
   const [mainImage, setMainImage] = useState("");
   const [subImages, setSubImages] = useState([]);
+  const [reviews, setReveiws] = useState("");
 
   useEffect(() => {
-    console.log("useEffect");
     (async function getImages() {
-      const { data } = await axios.get(endPointUrl);
-      setMainImage(data.images.primaryImage);
-      setSubImages([...data.images.subImages, data.images.primaryImage]);
+      const { data } = await axios.get(
+        endPointUrl + "/api/businesses/" + props.match.params.id
+      );
+      setReveiws(data.reviews);
+      setMainImage(data.primaryImage);
+      setSubImages([...data.subImages, data.primaryImage]);
     })();
-  }, []);
-  console.log("subImg: ", subImages.length);
+  }, [props.match.params.id]);
   const settings = {
     infinite: true,
     arrows: false,
