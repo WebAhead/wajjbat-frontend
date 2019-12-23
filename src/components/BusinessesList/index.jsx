@@ -11,9 +11,7 @@ export default function BusinessesList({ businesses, userPosition }) {
           <Link
             key={business.id}
             to={{
-              pathname: `/business/${business.id}`,
-              business: { ...business },
-              userPosition: { userPosition }
+              pathname: `/business/${business.id}`
             }}
           >
             <BusinessCard business={business} />
