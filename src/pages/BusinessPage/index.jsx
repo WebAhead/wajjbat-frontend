@@ -53,9 +53,6 @@ export default function BusinessPage(props) {
           <button to="">Reviews</button>
         </div>
       </nav>
-      <div>
-        <BussinessReviews reviews={reviews} />
-      </div>
     </Fragment>
   );
 }

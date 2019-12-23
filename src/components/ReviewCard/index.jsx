@@ -1,18 +1,21 @@
 import React from "react";
 import { Rating } from "@material-ui/lab";
-import "./styles.scss";
+import style from "./ReviewCard.module.scss";
+
 export default function ReviewCard(props) {
   return (
-    <div className="review-container">
-      <p className="date">{props.dateCreated}</p>
-      <div className="img-rating-container">
-        <p>{props.fullname}</p>
-        <img
-          className="profile-img"
-          src={props.profile_image}
-          height={"50px"}
-          width={"50px"}
-        />
+    <div className={style['review-card']}>
+      <div className={style['upper-review-card']}>
+        <div className={style['profile-details']}>
+          <img className={style['profile-image']} src={props.profile_image} alt="" />
+          <span className={style['profile-fullname']}>{props.fullname}</span>
+        </div>
+        <span>{props.dateCreated}</span>
+      </div>
+      <div className={style['middle-review-card']}>
+        {props.review_body}
+      </div>
+      <div className={style['lower-review-card']}>
         <Rating
           name="half-rating"
           value={props.rating}
@@ -20,9 +23,6 @@ export default function ReviewCard(props) {
           readOnly
           size="small"
         />
-        <div className="review-inner-container">
-          <p>{props.review_body}</p>
-        </div>
       </div>
     </div>
   );
