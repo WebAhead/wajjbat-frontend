@@ -1,26 +1,19 @@
 import React from "react";
+import style from '../BusinessDetails/BusinessDetails.module.scss';
 
 export default function Contact({ email, phone }) {
   return (
-    <div className="contact">
-      <h2 className="contact-title">Contact</h2>
+    <div className={style['contact']}>
+      <h2 className={style['contact-title']}>Contact</h2>
 
-      <div className="contact-info">
-        <div className="business-email">
-          {" "}
-          <span className="email-Emoji" role="img">
-            {" "}
-            ✉️{" "}
-          </span>
-          <br />
-          <br />
-          {email}
+      <div className={style['contact-info']}>
+        <div className={style['business-contact']}>
+          <img className={style['icon']} src={require('../../assets/icons/email.svg')} alt="" />
+          <span>{email}</span>
         </div>
-        <div className="business-phone">
-          {" "}
-          📞
-          <br /> <br />
-          {phone}
+        <div className={style['business-contact']}>
+          <img className={style['icon']} src={require('../../assets/icons/phone.svg')} alt="" />
+          <span>{phone}</span>
         </div>
       </div>
     </div>
