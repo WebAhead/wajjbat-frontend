@@ -4,7 +4,7 @@ import axios from "axios";
 import Slider from "react-slick";
 import "./style.scss";
 import BusinessDetails from "../../components/BusinessDetails";
-const endPointUrl = process.env.REACT_APP_API_URL + "/api/businesses/1";
+import BussinessReviews from "../../components/BusinessReviews";
 
 export default function BusinessPage(props) {
   const [mainImage, setMainImage] = useState("");
@@ -12,14 +12,18 @@ export default function BusinessPage(props) {
   const [userPosition, setUserPosition] = useState({});
   const [businessData, setBusinessData] = useState([]);
 
+  const [reviews, setReveiws] = useState("");
+
   useEffect(() => {
     (async function getImages() {
-      const { data } = await axios.get(endPointUrl);
+      const { data } = await axios.get(
+        endPointUrl + "/api/businesses/" + props.match.params.id
+      );
+      setReveiws(data.reviews);
       setMainImage(data.primaryImage);
       setSubImages([...data.subImages, data.primaryImage]);
-      setBusinessData(data);
     })();
-  }, []);
+  }, [props.match.params.id]);
 
   const settings = {
     infinite: true,
