@@ -10,7 +10,8 @@
     font-style: italic;
     color: $dark-grey;
     width: 85px;
-    float: left;
+    position: absolute;
+    margin: 1px 290px;
   }
   .img-rating-container {
     display: flex;
