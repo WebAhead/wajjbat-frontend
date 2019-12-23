@@ -32,10 +32,6 @@ export default function BusinessPage(props) {
     autoplay: true
   };
 
-  // here we check if the we can get the user location using the props if not we check if
-  //we can get the user position/location from the session storage if we did not found any data about it we
-  //use Geolocation API which help us to detect the user position/location after getting/asking his permission
-
   useEffect(() => navigator.geolocation.getCurrentPosition(({ coords }) =>
     setUserPosition({ lat: coords.latitude, lng: coords.longitude })
   ), []);

@@ -11,13 +11,6 @@ export default function Homepage(props) {
   const [topRated, setTopRated] = useState([]);
   const [userPosition, setUserPosition] = useState({});
 
-  if (userPosition.lat !== undefined) {
-    // Check if the user browser support storage to save the location info in the sessionStorage
-    if (typeof Storage !== "undefined") {
-      sessionStorage.setItem("userPosition", JSON.stringify(userPosition));
-    }
-  }
-
   useEffect(() => {
     //here we get the user location  after the user approve using
     //The HTML Geolocation API which is used to locate a user's position.
