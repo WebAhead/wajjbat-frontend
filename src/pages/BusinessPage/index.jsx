@@ -7,11 +7,12 @@ import BusinessReviews from "../../components/BusinessReviews";
 import { Route, Link } from 'react-router-dom';
 import { AnimatedSwitch } from 'react-router-transition';
 import BusinessPageImageGallery from '../../components/BusinessPageImageGallery';
+import { Slide } from '@material-ui/core';
 
 export default function BusinessPage(props) {
   const [userPosition, setUserPosition] = useState({});
   const [businessData, setBusinessData] = useState({});
-
+  const [activeTab, setActiveTab] = useState('details');
   const [reviews, setReveiws] = useState("");
 
   useEffect(() => {
@@ -42,31 +43,21 @@ export default function BusinessPage(props) {
 
       <nav className="business-page-nav">
         <div className="nav-items">
-          <Link className="nav-button" to={`/business/${props.match.params.id}`}>Details</Link>
-          <Link className="nav-button" to={`/business/${props.match.params.id}/reviews`}>Reviews</Link>
+          <button className="nav-button" onClick={() => setActiveTab('details')}>Details</button>
+          <button className="nav-button" onClick={() => setActiveTab('reviews')}>Reviews</button>
         </div>
       </nav>
 
-      <AnimatedSwitch
-        atEnter={{ offset: 100 }}
-        atLeave={{}}
-        atActive={{ offset: 0 }}
-        mapStyles={styles => ({
-          transform: `translateX(${styles.offset}%)`,
-        })}
-      >
-        <Route
-          path={`/business/:id`}
-          exact
-          component={() => <BusinessDetails businessData={businessData.details} userPosition={userPosition} />}
-        />
-        <Route
-          path={`/business/:id/reviews`}
-          exact
-          component={() => <BusinessReviews reviews={reviews} />}
-        />
-
-      </AnimatedSwitch>
+      <Slide direction="left" in={activeTab === 'details'} mountOnEnter unmountOnExit>
+        <div>
+          <BusinessDetails businessData={businessData.details} userPosition={userPosition} />
+        </div>
+      </Slide>
+      <Slide direction="left" in={activeTab === 'reviews'} mountOnEnter unmountOnExit>
+        <div>
+          <BusinessReviews reviews={reviews} />
+        </div>
+      </Slide>
     </Fragment >
   );
 }
