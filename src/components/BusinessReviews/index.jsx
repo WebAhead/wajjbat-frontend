@@ -8,7 +8,7 @@ import "./styles.scss";
 export default function BusinessReviews(props) {
   const useStyles = makeStyles({
     root: {
-      width: "200px",
+      width: "80%",
       display: "flex",
       alignSelf: "center",
       margin: "5px",
@@ -36,7 +36,7 @@ export default function BusinessReviews(props) {
     });
   };
   return (
-    <div>
+    <div style={{ marginTop: '10px' }}>
       <h1 className="reviews-h1">Reviews</h1>
       <div className="rating-container">
         <p>5</p>

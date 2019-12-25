@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Slider from "react-slick";
+import style from './BusinessPageImageGallery.module.scss';
 
 export default ({ defaultMainImage, defaultSubImages }) => {
 
@@ -12,17 +13,17 @@ export default ({ defaultMainImage, defaultSubImages }) => {
         afterChange: index => {
             setMainImage(defaultSubImages[index]);
         },
-        slidesToShow: defaultSubImages.length > 3 ? 3 : 1,
+        slidesToShow: 4,
         autoplay: true
     };
 
 
     return (
-        <header className="business-page-header">
-            <div className="main-image">
+        <header className={style['business-page-header']}>
+            <div className={style['main-image']}>
                 <img src={mainImage} alt="" />
             </div>
-            <div className="sub-images">
+            <div className={style['sub-images']}>
                 <Slider {...settings}>
                     {defaultSubImages.map((subImage, index) => (
                         <img src={subImage} key={index + 1} alt="" />

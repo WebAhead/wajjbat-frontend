@@ -4,8 +4,6 @@ import axios from "axios";
 import "./style.scss";
 import BusinessDetails from "../../components/BusinessDetails";
 import BusinessReviews from "../../components/BusinessReviews";
-import { Route, Link } from 'react-router-dom';
-import { AnimatedSwitch } from 'react-router-transition';
 import BusinessPageImageGallery from '../../components/BusinessPageImageGallery';
 import { Slide } from '@material-ui/core';
 
@@ -32,7 +30,7 @@ export default function BusinessPage(props) {
 
 
   return (
-    <Fragment>
+    <div style={{ minHeight: '100vh' }}>
       {businessData.primaryImage &&
         <BusinessPageImageGallery
           defaultMainImage={businessData.primaryImage}
@@ -58,6 +56,6 @@ export default function BusinessPage(props) {
           <BusinessReviews reviews={reviews} />
         </div>
       </Slide>
-    </Fragment >
+    </div>
   );
 }
