@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from "react";
 import Select from "../../components/Select";
+import ImageInput from '../../components/ImageInput';
 import "./style.scss";
 
 //should get the data from the DB in the future
@@ -62,7 +63,12 @@ export default function AddBusiness(props) {
       <div>{/* navbar to added here */}</div>
       <header className="create-business-header">
         <div className="header-items">
-          <img src={mainImg} alt="main-img" />
+          {mainImg
+            ? <img src={mainImg} alt="main-img" />
+            : (
+              <ImageInput height="150px" onChange={(url) => setMainImg(url)} />
+            )
+          }
           <div className="sub-imgs">
             {subImgs.map((subImg, index) => (
               <img
@@ -72,7 +78,8 @@ export default function AddBusiness(props) {
                 onClick={handleSubImgClick}
               ></img>
             ))}
-            <div className="add-image">
+            <ImageInput height="40px" width="40px" onChange={(url) => setSubImgs([...subImgs, url])} />
+            {/* <div className="add-image">
               <label htmlFor="file" className="file-input-label">
                 +
               </label>
@@ -84,7 +91,7 @@ export default function AddBusiness(props) {
                 onChange={handleSubImgUpload}
                 className="file-input"
               ></input>
-            </div>
+            </div> */}
           </div>
         </div>
       </header>
