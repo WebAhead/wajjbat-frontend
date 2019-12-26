@@ -11,8 +11,10 @@ export default function Homepage(props) {
   const [topRated, setTopRated] = useState([]);
   const [userPosition, setUserPosition] = useState({});
 
-  //here we get the user location by after they approve using The HTML Geolocation API which is used to locate a user's position.
   useEffect(() => {
+    //here we get the user location  after the user approve using
+    //The HTML Geolocation API which is used to locate a user's position.
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(({ coords }) =>
         setUserPosition({ lat: coords.latitude, lng: coords.longitude })
@@ -37,9 +39,8 @@ export default function Homepage(props) {
 
   return (
     <div>
-      <SliderContainer topRated={topRated} />
-      <BusinessesList businesses={businesses} />
-      <Footer />
+      <SliderContainer topRated={topRated} userPosition={userPosition} />
+      <BusinessesList businesses={businesses} userPosition={userPosition} />
     </div>
   );
 }

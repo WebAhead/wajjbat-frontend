@@ -1,56 +1,61 @@
 import React, { useEffect, useState, Fragment } from "react";
-import axios from "axios";
-import Slider from "react-slick";
-import "./style.scss";
 
-const endPointUrl = process.env.REACT_APP_API_URL + "12curc";
+import axios from "axios";
+import "./style.scss";
+import BusinessDetails from "../../components/BusinessDetails";
+import BusinessReviews from "../../components/BusinessReviews";
+import BusinessPageImageGallery from '../../components/BusinessPageImageGallery';
+import { Slide } from '@material-ui/core';
 
 export default function BusinessPage(props) {
-  const [mainImage, setMainImage] = useState("");
-  const [subImages, setSubImages] = useState([]);
+  const [userPosition, setUserPosition] = useState({});
+  const [businessData, setBusinessData] = useState({});
+  const [activeTab, setActiveTab] = useState('details');
+  const [reviews, setReveiws] = useState("");
 
   useEffect(() => {
-    console.log("useEffect");
     (async function getImages() {
-      const { data } = await axios.get(endPointUrl);
-      setMainImage(data.images.primaryImage);
-      setSubImages([...data.images.subImages, data.images.primaryImage]);
+      const { data } = await axios.get(
+        process.env.REACT_APP_API_URL + "/api/businesses/" + props.match.params.id
+      );
+      setReveiws(data.reviews);
+      setBusinessData(data)
     })();
-  }, []);
-  console.log("subImg: ", subImages.length);
-  const settings = {
-    infinite: true,
-    arrows: false,
-    speed: 200,
-    afterChange: index => {
-      setMainImage(subImages[index]);
-    },
-    slidesToShow: subImages.length > 3 ? 3 : 1,
-    autoplay: true
-  };
+  }, [props.match.params.id]);
+
+
+  useEffect(() => navigator.geolocation.getCurrentPosition(({ coords }) =>
+    setUserPosition({ lat: coords.latitude, lng: coords.longitude })
+  ), []);
+
 
   return (
-    <Fragment>
-      <header className="business-page-header">
-        <div className="main-image">
-          <img src={mainImage} alt="" />
-        </div>
-        <div className="sub-images">
-          <Slider {...settings}>
-            {subImages.map((subImage, index) => (
-              <img src={subImage} key={index + 1} alt="" />
-            ))}
-          </Slider>
-        </div>
-      </header>
+    <div style={{ minHeight: '100vh' }}>
+      {businessData.primaryImage &&
+        <BusinessPageImageGallery
+          defaultMainImage={businessData.primaryImage}
+          defaultSubImages={[...businessData.subImages, businessData.primaryImage]}
+        />
+      }
+
 
       <nav className="business-page-nav">
         <div className="nav-items">
-          <button to="">Details</button>
-          <button to="">Menu</button>
-          <button to="">Reviews</button>
+          <button className="nav-button" onClick={() => setActiveTab('details')}>Details</button>
+          <button className="nav-button" onClick={() => setActiveTab('reviews')}>Reviews</button>
         </div>
       </nav>
-    </Fragment>
+
+      <Slide direction="left" in={activeTab === 'details'} mountOnEnter unmountOnExit>
+        <div>
+          <BusinessDetails businessData={businessData.details} userPosition={userPosition} />
+        </div>
+      </Slide>
+      <Slide direction="left" in={activeTab === 'reviews'} mountOnEnter unmountOnExit>
+        <div>
+          <BusinessReviews reviews={reviews} />
+        </div>
+      </Slide>
+    </div>
   );
 }
