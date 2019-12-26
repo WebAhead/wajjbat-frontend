@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./style.scss";
-export default function Footer() {
+export default function Footer({ lang }) {
   const [hideFooter, setHideFooter] = useState(false);
-  const [showSideBar, setShowSideBar] = useState(true);
+  const [showSideBar, setShowSideBar] = useState(false);
 
   const sideBarHandler = () => {
     setShowSideBar(!showSideBar);
@@ -21,18 +21,26 @@ export default function Footer() {
     };
   }, []);
 
+  //we use this to help us move the filter button from left to rigth
+  // according to the chosen language
+  let ltrLang = lang === "en";
+
   return (
     <div
       className="footer"
       id="footer"
-      style={{ bottom: hideFooter ? "-70px" : "0" }}
+      style={{
+        bottom: hideFooter ? "-100px" : "0",
+        left: ltrLang ? "70%" : "0%"
+      }}
     >
       <div className="filter" onClick={sideBarHandler}>
-        <h1>Filter</h1>
-      </div>
-      <div className="separator"></div>
-      <div className="sort">
-        <h1>Sort</h1>
+        <img
+          className="filterIcon"
+          src={require("./filterIcon.svg")}
+          alt=""
+          style={{ maxWidth: "40px" }}
+        />
       </div>
 
       <div
