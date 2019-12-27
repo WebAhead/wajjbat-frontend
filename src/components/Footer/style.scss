@@ -4,8 +4,11 @@
   display: flex;
   justify-content: center;
   background: $main-green;
-  width: 70px;
-  height: 70px;
+  direction: ltr;
+  box-shadow: 0 5px 10px 0px $dark-green;
+
+  width: 60px;
+  height: 60px;
   position: fixed;
   bottom: 0;
   transition: all 0.3s;

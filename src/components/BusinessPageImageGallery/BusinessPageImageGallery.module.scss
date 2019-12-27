@@ -14,7 +14,9 @@
     }
   
     .sub-images {
-      
+      direction: ltr;
+      justify-content: flex-start;
+
         img {
         max-width: 80px;
         min-width: 80px;
