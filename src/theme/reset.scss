@@ -123,19 +123,17 @@ q {
 }
 
 blockquote {
-
   &:before,
   &:after {
-    content: '';
+    content: "";
     content: none;
   }
 }
 
 q {
-
   &:before,
   &:after {
-    content: '';
+    content: "";
     content: none;
   }
 }
@@ -145,8 +143,15 @@ table {
   border-spacing: 0;
 }
 
-
 a {
   text-decoration: none;
-  color: inherit
+  color: inherit;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: "";
+  text-align-last: center;
 }

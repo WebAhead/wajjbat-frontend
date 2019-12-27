@@ -1,1 +1,5 @@
-export default { signin: "تسجيل الدخول", signup: " مستخدم جديد" };
+export default {
+  signin: "تسجيل الدخول",
+  signup: " مستخدم جديد",
+  topRated: "اعلى التقيمات"
+};

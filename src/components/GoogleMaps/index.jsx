@@ -1,6 +1,6 @@
 import React from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
-function GoogleMaps(props) {
+function GoogleMaps({ userPosition, businessLocation, google }) {
   const mapStyles = {
     position: "relative",
     margin: "auto",
@@ -9,24 +9,26 @@ function GoogleMaps(props) {
   };
 
   return (
-    <div className="businessLocationWithGoogleMaps">
+    <div style={{ minHeight: '300px' }}>
       <a
-        href={`https://www.google.com/maps/dir/?api=1&origin=${props.userPosition.lat},${props.userPosition.lng}&destination=${props.businessLocation.lat},${props.businessLocation.lng}`}
+        target="_blank"
+        href={`https://www.google.com/maps/dir/?api=1&origin=${userPosition.lat},${userPosition.lng}&destination=${businessLocation.lat},${businessLocation.lng}`}
       >
         <Map
-          google={props.google}
+          google={google}
+          containerStyle={{ position: 'relative' }}
           zoom={18}
           style={mapStyles}
           initialCenter={{
-            lat: props.userPosition.lat,
-            lng: props.userPosition.lng
+            lat: userPosition.lat,
+            lng: userPosition.lng
           }}
         >
           {/* optional in case we want to mark the position of the business*/}
           <Marker
             position={{
-              lat: props.businessLocation.lat,
-              lng: props.businessLocation.lng
+              lat: businessLocation.lat,
+              lng: businessLocation.lng
             }}
           />
         </Map>

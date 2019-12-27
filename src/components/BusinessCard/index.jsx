@@ -1,20 +1,20 @@
 import React from "react";
 import { Rating } from "@material-ui/lab";
-import "./style.scss";
+import style from "./BusinessCard.module.scss";
 
 export default function BusinessCard({ business }) {
   return (
     <React.Fragment>
-      <div className="business-card">
-        <div className="business-img">
+      <div className={style['business-card']}>
+        <div className={style['business-img']}>
           <img src={business.image} alt="alt" />
         </div>
-        <div className="business-content">
-          <p className="business-name">{business.name}</p>
-          <p className="business-description">{business.description}</p>
-          <div className="business-bottom-content">
-            <div className="business-type">{business.type}</div>
-            <div className="business-rating">
+        <div className={style['business-content']}>
+          <p className={style['business-name']}>{business.name}</p>
+          <p className={style['business-description']}>{business.description}</p>
+          <div className={style['business-bottom-content']}>
+            <div className={style['business-type']}>{business.type}</div>
+            <div className={style['business-rating']}>
               <Rating
                 name="half-rating"
                 value={business.rating}

@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import HomePage from "./pages/Home";
 import BusinessPage from "./pages/BusinessPage";
 import NavBar from "./components/NavBar";
+import Signin from "./pages/Signin/index";
 import "./App.scss";
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
         <Switch className="App">
           <Route path="/business/:id" component={BusinessPage} />
           <Route exact path="/" render={props => <HomePage {...this.props} />} />
+          <Route path="/signin" component={Signin} />
         </Switch>
       </Fragment>
     );
