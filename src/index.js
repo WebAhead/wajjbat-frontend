@@ -14,7 +14,7 @@ const AppIndex = () => {
     <IntlProvider locale={lang} messages={messages[lang]}>
       <BrowserRouter>
         <div style={{ direction: lang === "ar" ? "rtl" : "ltr", fontFamily: "Helvetica" }}>
-          <App setLang={setLang} />
+          <App setLang={setLang} lang={lang} />
         </div>
       </BrowserRouter>
     </IntlProvider>

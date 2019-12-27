@@ -13,8 +13,8 @@ class App extends Component {
         <NavBar setLang={this.props.setLang} />
         <Switch className="App">
           <Route path="/business/:id" component={BusinessPage} />
+          <Route exact path="/" render={props => <HomePage {...this.props} />} />
           <Route path="/signin" component={Signin} />
-          <Route exact path="/" render={props => <HomePage {...props} />} />
         </Switch>
       </Fragment>
     );
