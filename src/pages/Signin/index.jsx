@@ -57,6 +57,8 @@ export default function Signin() {
               callback={responseFacebook}
               autoLoad={false}
               icon="fa-facebook"
+              redirectUri={`${process.env.REACT_APP_URL}/signin`}
+
             />
             <br />
             <br />

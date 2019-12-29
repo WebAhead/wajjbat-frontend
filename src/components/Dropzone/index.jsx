@@ -1,22 +1,5 @@
-import React, { useMemo } from "react";
+import React, { useMemo, Children } from "react";
 import { useDropzone } from "react-dropzone";
-
-const baseStyle = {
-  flex: 1,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  padding: "20px",
-  borderWidth: 2,
-  borderRadius: 2,
-  borderColor: "#eeeeee",
-  borderStyle: "dashed",
-  backgroundColor: "#fafafa",
-  color: "#bdbdbd",
-  outline: "none",
-  height: "100px",
-  transition: "border .24s ease-in-out"
-};
 
 const activeStyle = {
   borderColor: "yellow"
@@ -31,6 +14,28 @@ const rejectStyle = {
 };
 
 export default function StyledDropzone(props) {
+
+
+  const baseStyle = {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "20px",
+    borderWidth: 2,
+    borderRadius: 2,
+    borderColor: "#eeeeee",
+    borderStyle: "dashed",
+    backgroundColor: "#fafafa",
+    color: "#bdbdbd",
+    height: props.height,
+    outline: "none",
+    transition: "border .24s ease-in-out",
+    ...(props.width && { width: props.width })
+  };
+
+
   const {
     getRootProps,
     getInputProps,
@@ -60,7 +65,7 @@ export default function StyledDropzone(props) {
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
         <div>{getInputProps}</div>
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        <img style={{ maxWidth: '60%', maxHeight: '60%' }} src={require('../../assets/icons/add.svg')} alt="" />
       </div>
     </div>
   );
