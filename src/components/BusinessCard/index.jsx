@@ -1,5 +1,6 @@
 import React from "react";
 import { Rating } from "@material-ui/lab";
+import { FormattedMessage } from 'react-intl';
 import style from "./BusinessCard.module.scss";
 
 export default function BusinessCard({ business }) {
@@ -13,7 +14,7 @@ export default function BusinessCard({ business }) {
           <p className={style['business-name']}>{business.name}</p>
           <p className={style['business-description']}>{business.description}</p>
           <div className={style['business-bottom-content']}>
-            <div className={style['business-type']}>{business.type}</div>
+            <div className={style['business-type']}><FormattedMessage id={business.type} />, <FormattedMessage id={business.cuisine} /></div>
             <div className={style['business-rating']}>
               <Rating
                 name="half-rating"

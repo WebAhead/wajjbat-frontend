@@ -2,14 +2,14 @@ import React, { Fragment } from "react";
 import axios from "axios";
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
+import { FormattedMessage, injectIntl } from 'react-intl';
 import "./style.scss";
 
 const endPointUrl = process.env.REACT_APP_API_URL;
 const facebookId = process.env.REACT_APP_FACEBOOK_ID;
 const googleId = process.env.REACT_APP_GOOGLE_ID;
 
-export default function Signin() {
-
+function Signin({ intl }) {
   const responseFacebook = async response => {
     const { name, email, id } = response;
     const { url } = response.picture.data;
@@ -45,10 +45,13 @@ export default function Signin() {
     }
   };
 
+  const googleMessage = intl.formatMessage({ id: 'Login with Google' })
+  const facebookMessage = intl.formatMessage({ id: 'Login with Facebook' })
+
   return (
     <Fragment>
       <div className="form-container">
-        <h1 className="form-title">Signin</h1>
+        <h1 className="form-title"><FormattedMessage id="signin" /></h1>
         <div className="signin-form">
           <form className="form-items">
             <FacebookLogin
@@ -58,16 +61,17 @@ export default function Signin() {
               autoLoad={false}
               icon="fa-facebook"
               redirectUri={`${process.env.REACT_APP_URL}/signin`}
-
+              textButton={facebookMessage}
             />
             <br />
             <br />
             <GoogleLogin
               clientId={googleId}
-              buttonText="LOGIN WITH GOOGLE"
+              // buttonText="LOGIN WITH GOOGLE"
               onSuccess={responseGoogle}
               onFailure={responseGoogle}
               autoLoad={false}
+              buttonText={googleMessage}
             />
           </form>
         </div>
@@ -75,3 +79,6 @@ export default function Signin() {
     </Fragment>
   );
 }
+
+
+export default injectIntl(Signin)

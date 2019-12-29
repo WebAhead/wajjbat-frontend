@@ -3,6 +3,7 @@ import Select from "../../components/Select";
 import ImageInput from "../../components/ImageInput";
 import InitialGoogleMaps from "../../components/InitialGoogleMaps";
 import axios from "axios";
+import { FormattedMessage, injectIntl } from 'react-intl';
 import "./style.scss";
 
 //should get the data from the DB in the future
@@ -16,7 +17,7 @@ const businessTypes = [
 
 //should get the data from the DB in the future
 const cuisines = [
-  { id: 1, value: "Italian" },
+  { id: 1, value: "Italian", },
   { id: 2, value: "Mexican" },
   { id: 3, value: "Asian" },
   { id: 4, value: "French" },
@@ -25,7 +26,7 @@ const cuisines = [
 ];
 
 const endPointUrl = process.env.REACT_APP_API_URL;
-export default function AddBusiness(props) {
+function AddBusiness({ intl }) {
   const [mainImg, setMainImg] = useState("");
   const [subImgs, setSubImgs] = useState([]);
   const [userPosition, setUserPosition] = useState({});
@@ -96,6 +97,8 @@ export default function AddBusiness(props) {
     //Redirect the user to another page
   };
 
+  const translate = (word) => intl.formatMessage({ id: word })
+
   return (
     <Fragment>
       <meta
@@ -108,8 +111,8 @@ export default function AddBusiness(props) {
           {mainImg ? (
             <img src={mainImg} alt="main-img" />
           ) : (
-            <ImageInput height="150px" onChange={url => setMainImg(url)} />
-          )}
+              <ImageInput height="150px" onChange={url => setMainImg(url)} />
+            )}
           <div className="sub-imgs">
             {subImgs.map((subImg, index) => (
               <img key={index + 1} src={subImg} alt="sub-img"></img>
@@ -133,7 +136,7 @@ export default function AddBusiness(props) {
             <input
               type="text"
               name="name"
-              placeholder="Name"
+              placeholder={translate("Name")}
               className="form-input"
               value={business.name}
               onChange={handleChange}
@@ -143,8 +146,8 @@ export default function AddBusiness(props) {
 
             <textarea
               className="large-input"
-              rows="5"
-              placeholder="Description"
+              rows="4"
+              placeholder={translate("Description")}
               name="description"
               value={business.description}
               onChange={handleChange}
@@ -154,7 +157,7 @@ export default function AddBusiness(props) {
             <Select
               items={businessTypes}
               name="type"
-              label="Type"
+              label={translate("Type")}
               className="form-input"
               onSelect={handleTypeSelect}
               value={business.type}
@@ -163,7 +166,7 @@ export default function AddBusiness(props) {
             <input
               type="text"
               name="phone"
-              placeholder="Phone"
+              placeholder={translate("Phone")}
               className="form-input"
               value={business.phone}
               onChange={handleChange}
@@ -172,7 +175,7 @@ export default function AddBusiness(props) {
             <input
               type="email"
               name="email"
-              placeholder="Email"
+              placeholder={translate("Email")}
               className="form-input"
               value={business.email}
               onChange={handleChange}
@@ -183,7 +186,7 @@ export default function AddBusiness(props) {
               type="text"
               rows="2"
               name="address"
-              placeholder="Address"
+              placeholder={translate("Address")}
               className="form-input"
               value={business.address}
               onChange={handleChange}
@@ -192,7 +195,7 @@ export default function AddBusiness(props) {
             <Select
               items={cuisines}
               name="cuisine"
-              label="Cuisine"
+              label={translate("Cuisine")}
               className="form-input"
               onSelect={handCuisineSelect}
               value={business.cuisine}
@@ -208,7 +211,7 @@ export default function AddBusiness(props) {
                   value={business.parking}
                   onChange={handleCheckBox}
                 />
-                <label htmlFor="parking">Parking</label>
+                <label htmlFor="parking"><FormattedMessage id="Parking" /></label>
               </div>
 
               <div className="checkbox-items">
@@ -220,7 +223,7 @@ export default function AddBusiness(props) {
                   value={business.smokingArea}
                   onChange={handleCheckBox}
                 />
-                <label htmlFor="smokingArea">Smoking Area</label>
+                <label htmlFor="smokingArea"><FormattedMessage id="Smoking Area" /></label>
               </div>
 
               <div className="checkbox-items">
@@ -231,11 +234,11 @@ export default function AddBusiness(props) {
                   value={business.freeWifi}
                   onChange={handleCheckBox}
                 />
-                <label htmlFor="freeWifi">Free Wifi</label>
+                <label htmlFor="freeWifi"><FormattedMessage id="Free Wifi" /></label>
               </div>
             </div>
             <button type="submit" className="submit-btn">
-              Submit
+              <FormattedMessage id="Submit" />
             </button>
             <InitialGoogleMaps userPosition={userPosition}></InitialGoogleMaps>
           </form>
@@ -244,3 +247,5 @@ export default function AddBusiness(props) {
     </Fragment>
   );
 }
+
+export default injectIntl(AddBusiness)

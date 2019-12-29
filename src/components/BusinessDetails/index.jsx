@@ -4,6 +4,7 @@ import { Rating } from "@material-ui/lab";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import PlaceFeature from "../PlaceFeature";
 import Contact from "../Contact";
+import { FormattedMessage } from 'react-intl';
 import GoogleMaps from "../../components/GoogleMaps";
 
 export default function BusinessDetails({ businessData, userPosition }) {
@@ -20,7 +21,7 @@ export default function BusinessDetails({ businessData, userPosition }) {
     <div>
       <div className={style['upper-details-container']}>
         <div className={style['business-type']}>
-          {businessData.business_type}, {businessData.cuisine}
+          <FormattedMessage id={businessData.business_type} />, <FormattedMessage id={businessData.cuisine} />
         </div>
 
         <div className={style['business-rating']}>

@@ -1,10 +1,11 @@
 import React from "react";
+import { FormattedMessage } from 'react-intl';
 import style from '../BusinessDetails/BusinessDetails.module.scss';
 
 export default function Contact({ email, phone }) {
   return (
     <div className={style['contact']}>
-      <h2 className={style['contact-title']}>Contact</h2>
+      <h2 className={style['contact-title']}><FormattedMessage id="Contact us" /></h2>
 
       <div className={style['contact-info']}>
         <div className={style['business-contact']}>

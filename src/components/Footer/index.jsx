@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import "./style.scss";
 
 import Filtering from "../Filtering";
@@ -13,7 +14,7 @@ export default function Footer({ lang, filterByType, filterByCuisine }) {
 
   useEffect(() => {
     var prevScrollPosition = window.pageYOffset;
-    window.onscroll = function() {
+    window.onscroll = function () {
       var currentScrollPosition = window.pageYOffset;
       if (prevScrollPosition > currentScrollPosition) {
         setHideFooter(false);
@@ -67,6 +68,7 @@ export default function Footer({ lang, filterByType, filterByCuisine }) {
           <Filtering
             filterByTypeHandler={filterByType}
             filterByCuisineHandler={filterByCuisine}
+            setShowSideBar={setShowSideBar}
           />
         </div>
       </div>

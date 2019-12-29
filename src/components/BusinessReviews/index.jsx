@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
+import { FormattedMessage, injectIntl } from 'react-intl';
 import axios from 'axios';
 import { Rating } from "@material-ui/lab";
 
 import ReviewCard from "../ReviewCard";
 import "./styles.scss";
 
-export default function BusinessReviews(props) {
+function BusinessReviews(props) {
   const history = useHistory();
 
   const useStyles = makeStyles({
@@ -93,9 +94,11 @@ export default function BusinessReviews(props) {
   }
 
 
+  const submitText = props.intl.formatMessage({ id: 'Submit' })
+
   return (
     <div style={{ marginTop: '10px' }}>
-      <h1 className="reviews-h1">Reviews</h1>
+      <h1 className="reviews-h1"><FormattedMessage id="Reviews" /></h1>
       <div className="rating-container">
         <p>5</p>
         <LinearProgress
@@ -158,27 +161,29 @@ export default function BusinessReviews(props) {
       </div>
       {(!startReviewForm && !isLoggedIn[0]) && (
         <div className="signin-card">
-          <span style={{ fontSize: '26px' }}>Log in to submit a review</span>
+          <span style={{ fontSize: '26px' }}><FormattedMessage id="Log in to submit a review" /></span>
           <button
             onClick={() => history.push("/signin")}
             className="submit-button"
 
           >
-            Sign in
-            </button>
+            <FormattedMessage id="signin" />
+          </button>
         </div>
       )}
 
       {(!startReviewForm && !hasReviewed && isLoggedIn[0]) && (
         <div className="signin-card">
-          <span style={{ fontSize: '26px' }}>How was {props.businessData.name} ?</span>
-          <button className="submit-review-button" onClick={() => setStartReviewForm(true)}>Submit a review</button>
+          <span style={{ fontSize: '26px' }}><FormattedMessage id="How was it ?" /></span>
+          <button className="submit-review-button" onClick={() => setStartReviewForm(true)}>
+            <FormattedMessage id="Submit a review" />
+          </button>
         </div>
       )}
 
       {startReviewForm && (
         <div className="signin-card">
-          <span style={{ fontSize: '25px', width: '100%' }}>Submit a review</span>
+          <span style={{ fontSize: '25px', width: '100%' }}><FormattedMessage id="Submit a review" /></span>
 
           <textarea
             className="large-input"
@@ -200,7 +205,7 @@ export default function BusinessReviews(props) {
           </div>
 
           <div>
-            <input onClick={submitForm} type="button" value="Submit" className="submit-button" />
+            <input onClick={submitForm} type="button" value={submitText} className="submit-button" />
           </div>
         </div>
       )}
@@ -208,3 +213,5 @@ export default function BusinessReviews(props) {
     </div>
   );
 }
+
+export default injectIntl(BusinessReviews)

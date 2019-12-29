@@ -36,6 +36,7 @@ export default function SliderContainer({ topRated }) {
               name={currentBus.name}
               rating={currentBus.rating}
               type={currentBus.type}
+              cuisine={currentBus.cuisine}
             />
           </Link>
         ))}

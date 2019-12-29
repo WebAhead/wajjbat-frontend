@@ -5,6 +5,7 @@ import "./style.scss";
 import BusinessDetails from "../../components/BusinessDetails";
 import BusinessReviews from "../../components/BusinessReviews";
 import BusinessPageImageGallery from '../../components/BusinessPageImageGallery';
+import { FormattedMessage } from 'react-intl';
 import { Slide } from '@material-ui/core';
 
 export default function BusinessPage(props) {
@@ -42,8 +43,8 @@ export default function BusinessPage(props) {
 
       <nav className="business-page-nav">
         <div className="nav-items">
-          <button className="nav-button" onClick={() => setActiveTab('details')}>Details</button>
-          <button className="nav-button" onClick={() => setActiveTab('reviews')}>Reviews</button>
+          <button className="nav-button" onClick={() => setActiveTab('details')}><FormattedMessage id="Details" /></button>
+          <button className="nav-button" onClick={() => setActiveTab('reviews')}><FormattedMessage id="Reviews" /></button>
         </div>
       </nav>
 

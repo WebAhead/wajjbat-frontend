@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./styles.scss";
 import ReviewCard from "../../components/ReviewCard/index";
+import { FormattedMessage } from 'react-intl';
 const endPointUrl = process.env.REACT_APP_API_URL;
 
 function ProfilePage(props) {
@@ -39,14 +40,14 @@ function ProfilePage(props) {
     });
   };
 
-  if (!reviews.length && !userDetails.firstname) {
-    return "dsadasasddas";
+  if (!userDetails.firstName) {
+    return "Sorry something went wrong";
   }
   return (
     <div>
       <div className="navbar-container">
-        <button>Profile</button>
-        <button>Business</button>
+        <button><FormattedMessage id="Profile" /></button>
+        <button><FormattedMessage id="Business" /></button>
       </div>
       {handleUserDetails()}
       {handleReviews()}

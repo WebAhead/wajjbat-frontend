@@ -1,7 +1,7 @@
 @import "../../theme/utils.scss";
 
 .create-business-header {
-  height: 400px;
+  height: auto;
 
 
   .header-items {
@@ -14,11 +14,10 @@
     }
 
     .sub-imgs {
-      height: 150px;
+      height: auto;
       display: flex;
       flex-wrap: wrap;
       margin: 10px 0px 0px 15px;
-      overflow: scroll;
 
       img {
         width: 60px;
@@ -58,13 +57,13 @@
     border: 2px solid #21B5A2;
     border-radius: 6px;
     box-sizing: border-box;
-    padding: .7em;
+    padding: .2em .7em;
     margin: .5em 0 .5em 0;
-    font-size: 13px
+    font-size: 18px
   }
 
   .form-input::-webkit-input-placeholder {
-    font-size: 10px;
+    font-size: 15px;
   }
 
   .large-input {
