@@ -5,6 +5,7 @@ import BusinessPage from "./pages/BusinessPage";
 import NavBar from "./components/NavBar";
 import Signin from "./pages/Signin/index";
 import ProfilePage from "./pages/ProfilePage/index";
+import AddBusiness from "./pages/AddBusiness";
 import "./App.scss";
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
           />
           <Route path="/signin" component={Signin} />
           <Route path="/profile" component={ProfilePage} />
+          <Route path="/create-business" component={AddBusiness} />
         </Switch>
       </Fragment>
     );

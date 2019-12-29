@@ -1,0 +1,6 @@
+@import "../../pages/AddBusiness/style.scss";
+
+select {
+  @extend .form-input;
+  color: grey;
+}
