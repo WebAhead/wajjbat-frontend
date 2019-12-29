@@ -10,7 +10,7 @@ export default function NavBar(props) {
   const [lang, setLang] = useState("ar");
   const handleLang = ({ target }) => setLang(target.value);
   const handleUser = () => {
-    if (document.cookie) return history.push("/profile");
+    if (document.cookie.indexOf('access_token') !== -1) return history.push("/profile");
     else return history.push("/signin");
   };
   useEffect(() => props.setLang(lang), [lang, props]);
