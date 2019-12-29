@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import { Rating } from "@material-ui/lab";
 
@@ -8,7 +9,7 @@ import ReviewCard from "../ReviewCard";
 import "./styles.scss";
 
 export default function BusinessReviews(props) {
-
+  const history = useHistory();
 
   const useStyles = makeStyles({
     root: {
@@ -22,8 +23,8 @@ export default function BusinessReviews(props) {
     colorPrimary: { backgroundColor: "#21b5a2" }
   });
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [notReviewedYet, setNotReviewedYet] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState([false]);
+  const [hasReviewed, setHasReviewed] = useState(false)
   const [startReviewForm, setStartReviewForm] = useState(false);
   const [reviewForm, setReviewForm] = useState({
     reviewBody: '',
@@ -39,11 +40,11 @@ export default function BusinessReviews(props) {
           { withCredentials: true }
         );
         if (data.id) {
-          setIsLoggedIn(true)
+          setIsLoggedIn([true, data.id])
 
-          props.review_body((item) => {
+          props.reviews.map((item) => {
             if (item.id === data.id) {
-              setNotReviewedYet(false)
+              setHasReviewed(true)
             }
           })
         }
@@ -70,6 +71,26 @@ export default function BusinessReviews(props) {
       );
     });
   };
+
+  const submitForm = async () => {
+    const newReview = {
+      ...reviewForm,
+      dateCreated: new Date().toLocaleDateString(),
+      userId: isLoggedIn[1],
+      businessId: props.businessData.id
+    }
+
+    try {
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/new-review`, newReview, {
+        withCredentials: true
+      })
+      setStartReviewForm(false)
+      setHasReviewed(true)
+      props.refresh('go')
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
 
   return (
@@ -123,7 +144,7 @@ export default function BusinessReviews(props) {
           value={50}
         />
       </div>
-      <div className="rating-container">
+      <div className="rating-container" style={{ boxShadow: '0px 5px 10px -6px #508991' }}>
         <p>1</p>
         <LinearProgress
           classes={{
@@ -135,28 +156,52 @@ export default function BusinessReviews(props) {
           value={50}
         />
       </div>
-      {(!startReviewForm && !isLoggedIn) && (
+      {(!startReviewForm && !isLoggedIn[0]) && (
         <div className="signin-card">
-          <span>Log in to submit a review</span>
+          <span style={{ fontSize: '26px' }}>Log in to submit a review</span>
+          <button
+            onClick={() => history.push("/signin")}
+            className="submit-button"
+
+          >
+            Sign in
+            </button>
         </div>
       )}
 
-      {(!startReviewForm && isLoggedIn) && (
+      {(!startReviewForm && !hasReviewed && isLoggedIn[0]) && (
         <div className="signin-card">
-          <span style={{ fontSize: '22px' }}>How was {props.businessData.name} ?</span>
+          <span style={{ fontSize: '26px' }}>How was {props.businessData.name} ?</span>
           <button className="submit-review-button" onClick={() => setStartReviewForm(true)}>Submit a review</button>
         </div>
       )}
 
       {startReviewForm && (
         <div className="signin-card">
+          <span style={{ fontSize: '25px', width: '100%' }}>Submit a review</span>
 
-          <Rating
-            name="half-rating"
-            size="large"
-            value={reviewForm.rating}
-            onChang={(event, value) => setReviewForm({ ...reviewForm, rating: value })}
-          />
+          <textarea
+            className="large-input"
+            rows="4"
+            placeholder="Description"
+            name="description"
+            value={reviewForm.reviewBody}
+            onChange={({ target }) => setReviewForm({ ...reviewForm, reviewBody: target.value })}
+            required
+          ></textarea>
+
+          <div >
+            <Rating
+              name="half-rating"
+              size="large"
+              value={reviewForm.rating}
+              onChange={(event, value) => setReviewForm({ ...reviewForm, rating: value })}
+            />
+          </div>
+
+          <div>
+            <input onClick={submitForm} type="button" value="Submit" className="submit-button" />
+          </div>
         </div>
       )}
       <div>{handleReviews()}</div>
