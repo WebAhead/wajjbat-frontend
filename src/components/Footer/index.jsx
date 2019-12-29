@@ -15,7 +15,7 @@ export default function Footer({ lang , filterByType,filterByCuisine}) {
 
   useEffect(() => {
     var prevScrollPosition = window.pageYOffset;
-    window.onscroll = function() {
+    window.onscroll = function () {
       var currentScrollPosition = window.pageYOffset;
       if (prevScrollPosition > currentScrollPosition) {
         setHideFooter(false);
@@ -46,12 +46,16 @@ export default function Footer({ lang , filterByType,filterByCuisine}) {
           className="filterIcon"
           src={require("./filterIcon.svg")}
           alt=""
-          style={{ maxWidth: "40px" }}
+          style={{ maxWidth: "30px" }}
         />
       </div>
 
-      <div className="overlay" style={{ left: showSideBar ? "0px" : "-150%" }}>
-        <div className="sideBar" id="sideBar">
+      <div
+        className="overlay"
+        onClick={sideBarHandler}
+        style={{ left: showSideBar ? "0px" : "-150%" }}
+      >
+        <div className="sideBar" id="sideBar" onClick={(e) => e.stopPropagation()}>
           <button
             className="sideBarHider"
             style={{ float: "left" }}

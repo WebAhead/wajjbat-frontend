@@ -13,7 +13,7 @@ export default ({ defaultMainImage, defaultSubImages }) => {
         afterChange: index => {
             setMainImage(defaultSubImages[index]);
         },
-        slidesToShow: 4,
+        slidesToShow: defaultSubImages.length > 4 ? 4 : defaultSubImages.length,
         autoplay: true
     };
 
@@ -23,7 +23,7 @@ export default ({ defaultMainImage, defaultSubImages }) => {
             <div className={style['main-image']}>
                 <img src={mainImage} alt="" />
             </div>
-            <div className={style['sub-images']}>
+            <div className={style['sub-images']} style={{ display: defaultSubImages.length < 4 && 'flex' }}>
                 <Slider {...settings}>
                     {defaultSubImages.map((subImage, index) => (
                         <img src={subImage} key={index + 1} alt="" />
