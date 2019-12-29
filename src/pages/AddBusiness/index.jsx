@@ -1,6 +1,8 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import Select from "../../components/Select";
-import ImageInput from '../../components/ImageInput';
+import ImageInput from "../../components/ImageInput";
+import InitialGoogleMaps from "../../components/InitialGoogleMaps";
+import axios from "axios";
 import "./style.scss";
 
 //should get the data from the DB in the future
@@ -11,9 +13,24 @@ const businessTypes = [
   { id: 4, value: "Store" },
   { id: 5, value: "Other" }
 ];
+
+//should get the data from the DB in the future
+const cuisines = [
+  { id: 1, value: "Italian" },
+  { id: 2, value: "Mexican" },
+  { id: 3, value: "Asian" },
+  { id: 4, value: "French" },
+  { id: 5, value: "Arabic" },
+  { id: 6, value: "Other" }
+];
+
+const endPointUrl = process.env.REACT_APP_API_URL;
 export default function AddBusiness(props) {
   const [mainImg, setMainImg] = useState("");
   const [subImgs, setSubImgs] = useState([]);
+  const [userPosition, setUserPosition] = useState({});
+  const [userId, setUserId] = useState("");
+
   const [business, setBusiness] = useState(prevState => {
     return {
       name: "",
@@ -29,20 +46,32 @@ export default function AddBusiness(props) {
     };
   });
 
-  const handleSubImgUpload = e => {
-    const image = URL.createObjectURL(e.target.files[0]);
-    setSubImgs([...subImgs, image]);
-  };
-  const handleSubImgClick = e => {
-    setMainImg(e.target.src);
-  };
+  useEffect(
+    () =>
+      navigator.geolocation.getCurrentPosition(({ coords }) =>
+        setUserPosition({ lat: coords.latitude, lng: coords.longitude })
+      ),
+    []
+  );
+
+  useEffect(
+    () =>
+      (async function getUserId() {
+        const { data } = await axios.get(`${endPointUrl}/api/isLoggedIn`);
+        setUserId(data.id);
+      })(),
+    []
+  );
 
   const handleChange = ({ currentTarget: input }) => {
     setBusiness({ ...business, [input.name]: input.value });
   };
 
-  const handleSelect = type => {
+  const handleTypeSelect = type => {
     setBusiness({ ...business, type });
+  };
+  const handCuisineSelect = cuisine => {
+    setBusiness({ ...business, cuisine });
   };
 
   const handleCheckBox = ({ currentTarget: input }) => {
@@ -50,8 +79,21 @@ export default function AddBusiness(props) {
       return { ...business, [input.name]: !prevState[input.name] };
     });
   };
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
+
+    const data = {
+      userId,
+      ...business,
+      subImgs,
+      primaryImage: mainImg,
+      lat: userPosition.lat,
+      lng: userPosition.lng
+    };
+
+    await axios.post(`${endPointUrl}/api/businesses`, data);
+
+    //Redirect the user to another page
   };
 
   return (
@@ -63,35 +105,20 @@ export default function AddBusiness(props) {
       <div>{/* navbar to added here */}</div>
       <header className="create-business-header">
         <div className="header-items">
-          {mainImg
-            ? <img src={mainImg} alt="main-img" />
-            : (
-              <ImageInput height="150px" onChange={(url) => setMainImg(url)} />
-            )
-          }
+          {mainImg ? (
+            <img src={mainImg} alt="main-img" />
+          ) : (
+            <ImageInput height="150px" onChange={url => setMainImg(url)} />
+          )}
           <div className="sub-imgs">
             {subImgs.map((subImg, index) => (
-              <img
-                key={index + 1}
-                src={subImg}
-                alt="sub-img"
-                onClick={handleSubImgClick}
-              ></img>
+              <img key={index + 1} src={subImg} alt="sub-img"></img>
             ))}
-            <ImageInput height="40px" width="40px" onChange={(url) => setSubImgs([...subImgs, url])} />
-            {/* <div className="add-image">
-              <label htmlFor="file" className="file-input-label">
-                +
-              </label>
-              <input
-                id="file"
-                name="file"
-                type="file"
-                style={{ display: "" }}
-                onChange={handleSubImgUpload}
-                className="file-input"
-              ></input>
-            </div> */}
+            <ImageInput
+              height="40px"
+              width="40px"
+              onChange={url => setSubImgs([...subImgs, url])}
+            />
           </div>
         </div>
       </header>
@@ -110,11 +137,12 @@ export default function AddBusiness(props) {
               className="form-input"
               value={business.name}
               onChange={handleChange}
+              minLength="6"
               required
             />
 
             <textarea
-              class="large-input"
+              className="large-input"
               rows="5"
               placeholder="Description"
               name="description"
@@ -128,7 +156,7 @@ export default function AddBusiness(props) {
               name="type"
               label="Type"
               className="form-input"
-              onSelect={handleSelect}
+              onSelect={handleTypeSelect}
               value={business.type}
             ></Select>
 
@@ -161,14 +189,15 @@ export default function AddBusiness(props) {
               onChange={handleChange}
             ></textarea>
 
-            <input
-              type="text"
+            <Select
+              items={cuisines}
               name="cuisine"
-              placeholder="Cuisine"
+              label="Cuisine"
               className="form-input"
+              onSelect={handCuisineSelect}
               value={business.cuisine}
-              onChange={handleChange}
-            />
+              required
+            ></Select>
 
             <div className="checkbox">
               <div className="checkbox-items">
@@ -185,6 +214,7 @@ export default function AddBusiness(props) {
               <div className="checkbox-items">
                 <input
                   type="checkbox"
+                  primaryImage
                   className="checkbox-input"
                   name="smokingArea"
                   value={business.smokingArea}
@@ -204,6 +234,10 @@ export default function AddBusiness(props) {
                 <label htmlFor="freeWifi">Free Wifi</label>
               </div>
             </div>
+            <button type="submit" className="submit-btn">
+              Submit
+            </button>
+            <InitialGoogleMaps userPosition={userPosition}></InitialGoogleMaps>
           </form>
         </div>
       </section>
