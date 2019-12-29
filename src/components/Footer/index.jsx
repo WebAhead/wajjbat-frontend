@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./style.scss";
-export default function Footer() {
+// import DropDownList  from "../../../node_modules/@progress/kendo-react-dropdowns";
+
+import { DropDownList } from "@progress/kendo-react-dropdowns";
+import Teste from "../Teste";
+
+export default function Footer({ lang , filterByType,filterByCuisine}) {
   const [hideFooter, setHideFooter] = useState(false);
-  const [showSideBar, setShowSideBar] = useState(true);
+  const [showSideBar, setShowSideBar] = useState(false);
 
   const sideBarHandler = () => {
     setShowSideBar(!showSideBar);
@@ -21,25 +26,31 @@ export default function Footer() {
     };
   }, []);
 
+  //we use this to help us move the filter button from left to rigth
+  // according to the chosen language
+  let ltrLang = lang === "en";
+
+  let sizes = ["X-Small", "Small", "Medium", "Large", "X-Large", "2X-Large"];
+
   return (
     <div
       className="footer"
       id="footer"
-      style={{ bottom: hideFooter ? "-70px" : "0" }}
+      style={{
+        bottom: hideFooter ? "-100px" : "0",
+        left: ltrLang ? "70%" : "0%"
+      }}
     >
       <div className="filter" onClick={sideBarHandler}>
-        <h1>Filter</h1>
-      </div>
-      <div className="separator"></div>
-      <div className="sort">
-        <h1>Sort</h1>
+        <img
+          className="filterIcon"
+          src={require("./filterIcon.svg")}
+          alt=""
+          style={{ maxWidth: "40px" }}
+        />
       </div>
 
-      <div
-        className="overlay"
-        onClick={sideBarHandler}
-        style={{ left: showSideBar ? "0px" : "-150%" }}
-      >
+      <div className="overlay" style={{ left: showSideBar ? "0px" : "-150%" }}>
         <div className="sideBar" id="sideBar">
           <button
             className="sideBarHider"
@@ -48,6 +59,15 @@ export default function Footer() {
           >
             ×
           </button>
+
+          <div className="filterByType">
+          
+       
+            <Teste filterByTypeHandler={filterByType}  filterByCuisineHandler ={filterByCuisine}/>
+
+
+            
+          </div>
         </div>
       </div>
     </div>

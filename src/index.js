@@ -6,6 +6,8 @@ import "./theme/reset.scss";
 import { IntlProvider } from "react-intl";
 import messages from "./Languages";
 
+
+
 const AppIndex = () => {
   const [lang, setLang] = useState("ar");
   useEffect(() => setLang(lang), [lang]);
@@ -14,7 +16,7 @@ const AppIndex = () => {
     <IntlProvider locale={lang} messages={messages[lang]}>
       <BrowserRouter>
         <div style={{ direction: lang === "ar" ? "rtl" : "ltr", fontFamily: "Helvetica" }}>
-          <App setLang={setLang} />
+          <App setLang={setLang} lang={lang} />
         </div>
       </BrowserRouter>
     </IntlProvider>

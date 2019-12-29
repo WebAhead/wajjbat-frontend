@@ -14,7 +14,7 @@ class App extends Component {
         <Switch className="App">
           <Route path="/business/:id" component={BusinessPage} />
           <Route path="/signin" component={Signin} />
-          <Route exact path="/" render={props => <HomePage {...props} />} />
+          <Route exact path="/" render={props => <HomePage {...this.props} />} />
         </Switch>
       </Fragment>
     );
