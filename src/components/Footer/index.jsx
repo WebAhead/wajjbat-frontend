@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./style.scss";
-export default function Footer({ lang }) {
+
+import Filtering from "../Filtering";
+
+export default function Footer({ lang, filterByType, filterByCuisine }) {
   const [hideFooter, setHideFooter] = useState(false);
   const [showSideBar, setShowSideBar] = useState(false);
 
@@ -10,7 +13,7 @@ export default function Footer({ lang }) {
 
   useEffect(() => {
     var prevScrollPosition = window.pageYOffset;
-    window.onscroll = function () {
+    window.onscroll = function() {
       var currentScrollPosition = window.pageYOffset;
       if (prevScrollPosition > currentScrollPosition) {
         setHideFooter(false);
@@ -48,7 +51,11 @@ export default function Footer({ lang }) {
         onClick={sideBarHandler}
         style={{ left: showSideBar ? "0px" : "-150%" }}
       >
-        <div className="sideBar" id="sideBar" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="sideBar"
+          id="sideBar"
+          onClick={e => e.stopPropagation()}
+        >
           <button
             className="sideBarHider"
             style={{ float: "left" }}
@@ -56,6 +63,11 @@ export default function Footer({ lang }) {
           >
             ×
           </button>
+
+          <Filtering
+            filterByTypeHandler={filterByType}
+            filterByCuisineHandler={filterByCuisine}
+          />
         </div>
       </div>
     </div>
