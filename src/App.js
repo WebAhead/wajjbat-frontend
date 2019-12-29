@@ -4,6 +4,7 @@ import HomePage from "./pages/Home";
 import BusinessPage from "./pages/BusinessPage";
 import NavBar from "./components/NavBar";
 import Signin from "./pages/Signin/index";
+import ProfilePage from "./pages/ProfilePage/index";
 import "./App.scss";
 
 class App extends Component {
@@ -13,8 +14,13 @@ class App extends Component {
         <NavBar setLang={this.props.setLang} />
         <Switch className="App">
           <Route path="/business/:id" component={BusinessPage} />
-          <Route exact path="/" render={props => <HomePage {...this.props} />} />
+          <Route
+            exact
+            path="/"
+            render={props => <HomePage {...this.props} />}
+          />
           <Route path="/signin" component={Signin} />
+          <Route path="/profile" component={ProfilePage} />
         </Switch>
       </Fragment>
     );
