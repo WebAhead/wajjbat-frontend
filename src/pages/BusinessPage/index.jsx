@@ -12,6 +12,7 @@ export default function BusinessPage(props) {
   const [businessData, setBusinessData] = useState({});
   const [activeTab, setActiveTab] = useState('details');
   const [reviews, setReveiws] = useState("");
+  const [refresh, setRefresh] = useState('')
 
   useEffect(() => {
     (async function getImages() {
@@ -21,7 +22,7 @@ export default function BusinessPage(props) {
       setReveiws(data.reviews);
       setBusinessData(data)
     })();
-  }, [props.match.params.id]);
+  }, [props.match.params.id, refresh]);
 
 
   useEffect(() => navigator.geolocation.getCurrentPosition(({ coords }) =>
@@ -53,7 +54,7 @@ export default function BusinessPage(props) {
       </Slide>
       <Slide direction="left" in={activeTab === 'reviews'} mountOnEnter unmountOnExit>
         <div>
-          <BusinessReviews reviews={reviews} />
+          <BusinessReviews refresh={setRefresh} businessData={businessData.details} reviews={reviews} />
         </div>
       </Slide>
     </div>
