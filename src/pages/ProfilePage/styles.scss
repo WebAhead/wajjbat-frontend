@@ -1,0 +1,29 @@
+@import "../../theme/colors.scss";
+.profile-container {
+  display: flex;
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  box-shadow: 0 5px 10px -6px $dark-green;
+  padding: 20px 10px;
+
+  img {
+    border-radius: 50%;
+  }
+}
+.navbar-container {
+  display: flex;
+  margin-top: 20px;
+
+  margin-bottom: 15px;
+  button {
+    width: 100%;
+    border: none;
+    background: none;
+    border: solid 1px;
+    padding: 10px;
+    font-size: 23px;
+  }
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Dropzone from "../Dropzone";
-export default function UploadInput({ onChange, onError }) {
+export default function UploadInput({ onChange, onError, height, width }) {
   const uploadFile = (file, signedRequest, url) =>
     axios
       .put(signedRequest, file, {
@@ -21,7 +21,7 @@ export default function UploadInput({ onChange, onError }) {
   const getSignedRequest = file =>
     axios
       .get(
-        `http://192.168.0.87:8000/api/sign-s3?file-name=${file.name}&file-type=${file.type}`
+        `${process.env.REACT_APP_API_URL}/api/sign-s3?file-name=${file.name}&file-type=${file.type}`
       )
       .then(res => {
         if (res.status === 200) {
@@ -34,7 +34,7 @@ export default function UploadInput({ onChange, onError }) {
 
   return (
     <div>
-      <Dropzone getSignedRequest={getSignedRequest} />
+      <Dropzone width={width} height={height} getSignedRequest={getSignedRequest} />
     </div>
   );
 }
