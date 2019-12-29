@@ -55,6 +55,8 @@ export default function Signin() {
               callback={responseFacebook}
               autoLoad={false}
               icon="fa-facebook"
+              redirectUri="https://relaxed-mcclintock-c009c1.netlify.com/signin"
+
             />
             <br />
             <br />
