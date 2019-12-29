@@ -6,6 +6,8 @@ import "./theme/reset.scss";
 import { IntlProvider } from "react-intl";
 import messages from "./Languages";
 
+
+
 const AppIndex = () => {
   const [lang, setLang] = useState("ar");
   useEffect(() => setLang(lang), [lang]);
