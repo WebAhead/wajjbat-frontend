@@ -12,3 +12,25 @@
 .colorPrimary {
   color: "black";
 }
+
+.signin-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin: 10px auto;
+  border: 2px solid $main-green;
+  padding: 5px;
+  border-radius: 6px;
+}
+
+.submit-review-button {
+  background: none;
+  font-size: 20px;
+  border: 2px solid $main-green;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+
+}

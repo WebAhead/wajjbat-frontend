@@ -53,7 +53,7 @@ export default function BusinessPage(props) {
       </Slide>
       <Slide direction="left" in={activeTab === 'reviews'} mountOnEnter unmountOnExit>
         <div>
-          <BusinessReviews reviews={reviews} />
+          <BusinessReviews businessData={businessData.details} reviews={reviews} />
         </div>
       </Slide>
     </div>

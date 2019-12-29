@@ -4,22 +4,24 @@ import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 import "./style.scss";
 
-const endPointUrl = process.env.REACT_APP_TEMP_API_URL;
+const endPointUrl = process.env.REACT_APP_API_URL;
 const facebookId = process.env.REACT_APP_FACEBOOK_ID;
 const googleId = process.env.REACT_APP_GOOGLE_ID;
 
 export default function Signin() {
+
   const responseFacebook = async response => {
-    console.log(response);
     const { name, email, id } = response;
     const { url } = response.picture.data;
 
     try {
-      await axios.post(endPointUrl + "facebook", {
+      await axios.post(endPointUrl + "/api/oauth/facebook", {
         name,
         email,
         id,
         url
+      }, {
+        withCredentials: true
       });
       window.location = "/";
     } catch (error) {
@@ -31,7 +33,7 @@ export default function Signin() {
     const { googleId: id, email, name, imageUrl: url } = response.profileObj;
 
     try {
-      await axios.post(endPointUrl + "google", {
+      await axios.post(endPointUrl + "/api/oauth/google", {
         id,
         email,
         name,
