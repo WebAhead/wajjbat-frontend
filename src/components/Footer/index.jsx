@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./style.scss";
-// import DropDownList  from "../../../node_modules/@progress/kendo-react-dropdowns";
 
-import { DropDownList } from "@progress/kendo-react-dropdowns";
-import Teste from "../Teste";
+import Filtering from "../Filtering";
 
-export default function Footer({ lang , filterByType,filterByCuisine}) {
+export default function Footer({ lang, filterByType, filterByCuisine }) {
   const [hideFooter, setHideFooter] = useState(false);
   const [showSideBar, setShowSideBar] = useState(false);
 
@@ -15,7 +13,7 @@ export default function Footer({ lang , filterByType,filterByCuisine}) {
 
   useEffect(() => {
     var prevScrollPosition = window.pageYOffset;
-    window.onscroll = function () {
+    window.onscroll = function() {
       var currentScrollPosition = window.pageYOffset;
       if (prevScrollPosition > currentScrollPosition) {
         setHideFooter(false);
@@ -29,8 +27,6 @@ export default function Footer({ lang , filterByType,filterByCuisine}) {
   //we use this to help us move the filter button from left to rigth
   // according to the chosen language
   let ltrLang = lang === "en";
-
-  let sizes = ["X-Small", "Small", "Medium", "Large", "X-Large", "2X-Large"];
 
   return (
     <div
@@ -55,7 +51,11 @@ export default function Footer({ lang , filterByType,filterByCuisine}) {
         onClick={sideBarHandler}
         style={{ left: showSideBar ? "0px" : "-150%" }}
       >
-        <div className="sideBar" id="sideBar" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="sideBar"
+          id="sideBar"
+          onClick={e => e.stopPropagation()}
+        >
           <button
             className="sideBarHider"
             style={{ float: "left" }}
@@ -64,14 +64,10 @@ export default function Footer({ lang , filterByType,filterByCuisine}) {
             ×
           </button>
 
-          <div className="filterByType">
-          
-       
-            <Teste filterByTypeHandler={filterByType}  filterByCuisineHandler ={filterByCuisine}/>
-
-
-            
-          </div>
+          <Filtering
+            filterByTypeHandler={filterByType}
+            filterByCuisineHandler={filterByCuisine}
+          />
         </div>
       </div>
     </div>
