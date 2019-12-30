@@ -68,7 +68,11 @@ export default function Homepage(props) {
   return (
     <div>
       <SliderContainer topRated={topRated} userPosition={userPosition} />
-      <BusinessesList businesses={businesses} userPosition={userPosition} />
+      <BusinessesList
+        businesses={businesses}
+        userPosition={userPosition}
+        cardWidth="85%"
+      />
       <Footer
         lang={props.lang}
         filterByType={filterBusinessesByTypeHandler}
