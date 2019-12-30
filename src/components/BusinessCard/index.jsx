@@ -18,12 +18,12 @@ export default function BusinessCard({ business, homeView = true, cardWidth }) {
           <div className={style["business-bottom-content"]}>
             {homeView ? (
               <div className={style["business-type"]}>
-                <FormattedMessage id={business.type} />,
+                <FormattedMessage id={business.type} />,{" "}
                 <FormattedMessage id={business.cuisine} />
               </div>
             ) : (
-              <div className={style["business-"]}>{business.approved}</div>
-            )}
+                <div className={style["business-"]}>{business.approved}</div>
+              )}
             <div className={style["business-rating"]}>
               {
                 <Rating

@@ -47,22 +47,18 @@ function AddBusiness({ intl }) {
     };
   });
 
-  useEffect(
-    () =>
-      navigator.geolocation.getCurrentPosition(({ coords }) =>
-        setUserPosition({ lat: coords.latitude, lng: coords.longitude })
-      ),
-    []
-  );
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(({ coords }) =>
+      setUserPosition({ lat: coords.latitude, lng: coords.longitude })
+    )
+  }, []);
 
-  useEffect(
-    () =>
-      (async function getUserId() {
-        const { data } = await axios.get(`${endPointUrl}/api/isLoggedIn`);
-        setUserId(data.id);
-      })(),
-    []
-  );
+  useEffect(() => {
+    (async function getUserId() {
+      const { data } = await axios.get(`${endPointUrl}/api/isLoggedIn`);
+      setUserId(data.id);
+    })()
+  }, []);
 
   const handleChange = ({ currentTarget: input }) => {
     setBusiness({ ...business, [input.name]: input.value });
@@ -154,14 +150,27 @@ function AddBusiness({ intl }) {
               required
             ></textarea>
 
-            <Select
-              items={businessTypes}
-              name="type"
-              label={translate("Type")}
-              className="form-input"
-              onSelect={handleTypeSelect}
-              value={business.type}
-            ></Select>
+            <div style={{ display: 'flex' }}>
+              <Select
+                items={businessTypes}
+                name="type"
+                label={translate("Type")}
+                className="form-input"
+                onSelect={handleTypeSelect}
+                value={business.type}
+              ></Select>
+              <Select
+                items={cuisines}
+                name="cuisine"
+                label={translate("Cuisine")}
+                className="form-input"
+                onSelect={handCuisineSelect}
+                value={business.cuisine}
+                required
+              ></Select>
+            </div>
+
+
 
             <input
               type="text"
@@ -182,7 +191,7 @@ function AddBusiness({ intl }) {
             />
 
             <textarea
-              class="large-input"
+              className="large-input"
               type="text"
               rows="2"
               name="address"
@@ -191,16 +200,6 @@ function AddBusiness({ intl }) {
               value={business.address}
               onChange={handleChange}
             ></textarea>
-
-            <Select
-              items={cuisines}
-              name="cuisine"
-              label={translate("Cuisine")}
-              className="form-input"
-              onSelect={handCuisineSelect}
-              value={business.cuisine}
-              required
-            ></Select>
 
             <div className="checkbox">
               <div className="checkbox-items">

@@ -64,7 +64,6 @@ export default function StyledDropzone(props) {
     <div className="dropzone-container">
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
-        <div>{getInputProps}</div>
         <img style={{ maxWidth: '60%', maxHeight: '60%' }} src={require('../../assets/icons/add.svg')} alt="" />
       </div>
     </div>

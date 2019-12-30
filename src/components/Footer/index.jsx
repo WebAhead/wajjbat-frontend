@@ -35,7 +35,6 @@ export default function Footer({ lang, filterByType, filterByCuisine }) {
       id="footer"
       style={{
         bottom: hideFooter ? "-100px" : "0",
-        left: ltrLang ? "70%" : "0%"
       }}
     >
       <div className="filter" onClick={sideBarHandler}>
@@ -50,7 +49,9 @@ export default function Footer({ lang, filterByType, filterByCuisine }) {
       <div
         className="overlay"
         onClick={sideBarHandler}
-        style={{ left: showSideBar ? "0px" : "-150%" }}
+        style={{
+          right: showSideBar ? "0px" : "-150%",
+        }}
       >
         <div
           className="sideBar"
