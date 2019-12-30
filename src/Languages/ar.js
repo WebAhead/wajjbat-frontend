@@ -38,5 +38,9 @@ export default {
   Name: 'اسم',
   Phone: 'هاتف',
   Email: 'البريد الإلكتروني',
-  Address: 'عنوان'
+  Address: 'عنوان',
+  approved: 'موافق عليه',
+  pending: 'قيد الانتظار',
+  'Add Business': 'إضافة تجارة',
+
 };

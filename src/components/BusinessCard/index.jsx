@@ -22,7 +22,7 @@ export default function BusinessCard({ business, homeView = true, cardWidth }) {
                 <FormattedMessage id={business.cuisine} />
               </div>
             ) : (
-                <div className={style["business-"]}>{business.approved}</div>
+                <div className={style["business-"]}><FormattedMessage id={business.approved} /></div>
               )}
             <div className={style["business-rating"]}>
               {

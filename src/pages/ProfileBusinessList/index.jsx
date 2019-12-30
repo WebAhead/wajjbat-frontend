@@ -47,7 +47,7 @@ export default function ProfileBusinesList(props) {
           />
         </div>
         <button className="add-business-btn" onClick={handleAddBusiness}>
-          Add Business
+          <FormattedMessage id="Add Business" />
         </button>
       </div>
     </Fragment>

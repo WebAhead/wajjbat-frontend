@@ -38,5 +38,9 @@ export default {
     Name: 'Name',
     Phone: 'Phone',
     Email: 'Email',
-    Address: 'Address'
+    Address: 'Address',
+    approved: 'approved',
+    pending: 'pending',
+    'Add Business': 'Add Business',
+
 };
