@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 import axios from "axios";
 import "./styles.scss";
 import ReviewCard from "../../components/ReviewCard/index";
-import { FormattedMessage } from 'react-intl';
 const endPointUrl = process.env.REACT_APP_API_URL;
 
 function ProfilePage(props) {
@@ -41,13 +42,22 @@ function ProfilePage(props) {
   };
 
   if (!userDetails.firstName) {
-    return "Sorry something went wrong";
+    return "Loading...";
   }
   return (
     <div>
       <div className="navbar-container">
-        <button><FormattedMessage id="Profile" /></button>
-        <button><FormattedMessage id="Business" /></button>
+        <button>
+          <Link to="/profile">
+            <FormattedMessage id="Profile" />
+          </Link>
+        </button>
+
+        <button>
+          <Link to="/profile-business-list">
+            <FormattedMessage id="Business" />
+          </Link>
+        </button>
       </div>
       {handleUserDetails()}
       {handleReviews()}
