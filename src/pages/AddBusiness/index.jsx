@@ -55,7 +55,7 @@ function AddBusiness({ intl }) {
 
   useEffect(() => {
     (async function getUserId() {
-      const { data } = await axios.get(`${endPointUrl}/api/isLoggedIn`);
+      const { data } = await axios.get(`${endPointUrl}/api/isLoggedIn`, { withCredentials: true });
       setUserId(data.id);
     })()
   }, []);
@@ -88,7 +88,7 @@ function AddBusiness({ intl }) {
       lng: userPosition.lng
     };
 
-    await axios.post(`${endPointUrl}/api/businesses`, data);
+    await axios.post(`${endPointUrl}/api/new-businesses`, data, { withCredentials: true });
 
     //Redirect the user to another page
   };
