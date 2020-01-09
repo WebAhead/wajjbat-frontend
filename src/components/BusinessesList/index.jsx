@@ -1,27 +1,25 @@
-import React from "react";
-import BusinessCard from "../BusinessCard";
-import { Link } from "react-router-dom";
-import "./style.scss";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import BusinessCard from '../Cards/BusinessCard';
+import './style.scss';
 
-export default function BusinessesList({ businesses, homeView, cardWidth }) {
-  return (
-    <React.Fragment>
-      <div className="businesses-list">
-        {businesses.map(business => (
-          <Link
-            key={business.id}
-            to={{
-              pathname: `/business/${business.id}`
-            }}
-          >
-            <BusinessCard
-              business={business}
-              homeView={homeView}
-              cardWidth={cardWidth}
-            />
-          </Link>
-        ))}
-      </div>
-    </React.Fragment>
-  );
-}
+export default ({ businesses, homeView, cardWidth }) => (
+    <>
+        <div className="businesses-list">
+            {businesses.map((business) => (
+                <Link
+                    key={business.id}
+                    to={{
+                        pathname: `/business/${business.id}`,
+                    }}
+                >
+                    <BusinessCard
+                        business={business}
+                        homeView={homeView}
+                        cardWidth={cardWidth}
+                    />
+                </Link>
+            ))}
+        </div>
+    </>
+)
