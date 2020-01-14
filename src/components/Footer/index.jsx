@@ -32,9 +32,9 @@ export default function Footer({ lang, filterByType, filterByCuisine }) {
         <div
             className="footer"
             id="footer"
-            style={{
-                bottom: hideFooter ? '-100px' : '0',
-            }}
+            // style={{
+            //     bottom: hideFooter ? '-100px' : '0',
+            // }}
         >
             <div className="filter" onClick={sideBarHandler} role="">
                 <img

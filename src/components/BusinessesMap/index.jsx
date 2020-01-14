@@ -23,6 +23,7 @@ function GoogleMaps({ userPosition, businesses, google }) {
             fullscreenControl={false}
             // panControl={false}
             streetViewControl={false}
+            options={{ gestureHandling: 'greedy' }}
         >
             <Marker
                 title="your location"
