@@ -49,7 +49,7 @@ export default function Footer({ lang, filterByType, filterByCuisine }) {
                 className="overlay"
                 onClick={sideBarHandler}
                 style={{
-                    right: showSideBar ? '0px' : '-150%',
+                    right: showSideBar ? '0px' : '-100%',
                 }}
             >
                 <div

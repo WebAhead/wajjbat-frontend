@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import './style.scss';
 
 import SliderContainer from 'components/Slider';
-import BusinessesList from 'components/BusinessesList';
+// import BusinessesList from 'components/BusinessesList';
+import BusinessesMap from 'components/BusinessesMap'
 import Footer from 'components/Footer';
 import BusinessSlide from './components/BusinessSlide';
 
@@ -70,10 +71,9 @@ export default function Homepage(props) {
                 // id for react-intl
                 title="topRated"
             />
-            <BusinessesList
+            <BusinessesMap
                 businesses={businesses}
                 userPosition={userPosition}
-                cardWidth="85%"
             />
             <Footer
                 lang={props.lang}

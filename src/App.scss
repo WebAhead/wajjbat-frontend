@@ -2,8 +2,9 @@
 @import "./theme/fonts.scss";
 
 .App {
-  h1 {
-    color: $main-green;
-    font-size: $font-size-h1;
+
+  @media screen and (min-width: 900px){
+    margin: 0 30%;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.8), 0 2px 5px 0 rgba(0,0,0,.6);
   }
 }
