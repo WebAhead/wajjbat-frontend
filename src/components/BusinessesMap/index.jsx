@@ -28,6 +28,12 @@ function BusinessMap({ userPosition, businesses }) {
             mapbox.on('load', () => {
                 setMapState(mapbox);
                 mapbox.resize();
+
+                new mapboxgl.Marker({
+                    draggable: false,
+                })
+                    .setLngLat([userPosition.lng, userPosition.lat])
+                    .addTo(mapbox);
             });
         };
 
