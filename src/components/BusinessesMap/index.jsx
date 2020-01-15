@@ -29,7 +29,6 @@ function BusinessMap({ userPosition, businesses }) {
                 .map(({ lng, lat }) => [lng, lat])
 
             mapbox.on('load', () => {
-                setMapState(mapbox);
                 mapbox.resize();
 
                 new mapboxgl.Marker()
@@ -41,6 +40,8 @@ function BusinessMap({ userPosition, businesses }) {
                         .setLngLat(coords)
                         .addTo(mapbox);
                 })
+
+                setMapState(mapbox);
             });
         };
 
