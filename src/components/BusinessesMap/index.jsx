@@ -7,6 +7,8 @@ const styles = {
     height: '60vh',
 };
 
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
+
 function BusinessMap({ userPosition, businesses }) {
     const [map, setMap] = useState(null)
     const [mapOptions, setMapOptions] = useState({
@@ -16,7 +18,6 @@ function BusinessMap({ userPosition, businesses }) {
     const mapContainer = useRef(null)
 
     useEffect(() => {
-        mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
         const initializeMap = (setMapState, mapContainerRef) => {
             const mapbox = new mapboxgl.Map({
