@@ -4,14 +4,14 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 
 const styles = {
     width: '100%',
-    height: 'calc(100vh - 80px)',
+    height: '60vh',
 };
 
 function BusinessMap({ userPosition, businesses }) {
     const [map, setMap] = useState(null)
     const [mapOptions, setMapOptions] = useState({
         center:[userPosition.lng, userPosition.lat],
-        zoom:13,
+        zoom: 8,
     })
     const mapContainer = useRef(null)
 
@@ -19,12 +19,14 @@ function BusinessMap({ userPosition, businesses }) {
         mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
         const initializeMap = (setMapState, mapContainerRef) => {
-            // add markers
             const mapbox = new mapboxgl.Map({
                 container: mapContainerRef.current,
                 style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
                 ...mapOptions,
             });
+
+            const nearby = businesses.filter(({ distance }) => distance)
+                .map(({ lng, lat }) => [lng, lat])
 
             mapbox.on('load', () => {
                 setMapState(mapbox);
@@ -33,6 +35,12 @@ function BusinessMap({ userPosition, businesses }) {
                 new mapboxgl.Marker()
                     .setLngLat([userPosition.lng, userPosition.lat])
                     .addTo(mapbox);
+
+                nearby.forEach((coords) => {
+                    new mapboxgl.Marker()
+                        .setLngLat(coords)
+                        .addTo(mapbox);
+                })
             });
         };
 

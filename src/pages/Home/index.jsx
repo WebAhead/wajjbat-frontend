@@ -29,6 +29,12 @@ export default function Homepage(props) {
 
     useEffect(() => {
         (async function getBusinesses() {
+            // if user position hasnt been fetched yet then do not
+            // get the list of businesses
+            if (!userPosition.lng) {
+                return;
+            }
+
             try {
                 const { data } = await axios.post(`${endPointUrl}/api/businesses`, {
                     lat: userPosition.lat,
@@ -71,12 +77,12 @@ export default function Homepage(props) {
                 // id for react-intl
                 title="topRated"
             />
-            {userPosition.lat && (
+            {(userPosition.lat && businesses.length) ? (
                 <BusinessesMap
                     businesses={businesses}
                     userPosition={userPosition}
                 />
-            )}
+            ) : ''}
             <Footer
                 lang={props.lang}
                 filterByType={({ value }) => setTypeFilter(value)}
