@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 const styles = {
     width: '100%',
@@ -29,9 +30,7 @@ function BusinessMap({ userPosition, businesses }) {
                 setMapState(mapbox);
                 mapbox.resize();
 
-                new mapboxgl.Marker({
-                    draggable: false,
-                })
+                new mapboxgl.Marker()
                     .setLngLat([userPosition.lng, userPosition.lat])
                     .addTo(mapbox);
             });
