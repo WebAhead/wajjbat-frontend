@@ -1,50 +1,46 @@
-import React from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import React, { useState, useRef, useEffect } from 'react';
+import mapboxgl from 'mapbox-gl';
 
-function GoogleMaps({ userPosition, businesses, google }) {
-    const mapStyles = {
-        position: 'relative',
-        margin: 'auto',
-        width: '100%',
-        height: '500px',
-    };
-    console.log(userPosition)
+const styles = {
+    width: '100%',
+    height: 'calc(100vh - 80px)',
+};
+
+function BusinessMap({ userPosition, businesses }) {
+    const [map, setMap] = useState(null)
+    const [mapOptions, setMapOptions] = useState({
+        center:[userPosition.lng, userPosition.lat],
+        zoom:13,
+    })
+    const mapContainer = useRef(null)
+
+    useEffect(() => {
+        mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
+
+        const initializeMap = (setMapState, mapContainerRef) => {
+            // add markers
+            const mapbox = new mapboxgl.Map({
+                container: mapContainerRef.current,
+                style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+                ...mapOptions,
+            });
+
+            mapbox.on('load', () => {
+                setMapState(mapbox);
+                mapbox.resize();
+            });
+        };
+
+        if (!map) initializeMap(setMap, mapContainer);
+
+    }, [map]);
+
     return (
-        <Map
-            google={google}
-            containerStyle={{ position: 'relative' }}
-            zoom={14}
-            style={mapStyles}
-            mapTypeControl={false}
-            initialCenter={{
-                lat: userPosition.lat,
-                lng: userPosition.lng,
-            }}
-            fullscreenControl={false}
-            // panControl={false}
-            streetViewControl={false}
-            options={{ gestureHandling: 'greedy' }}
-        >
-            <Marker
-                title="your location"
-                position={{
-                    lat: userPosition.lat,
-                    lng: userPosition.lng,
-                }}
-            />
-            {/* optional in case we want to mark the position of the business */}
-            {businesses.map((location) => (
-                <Marker
-                    position={{
-                        lat: location.lat,
-                        lng: location.lng,
-                    }}
-                />
-            ))}
-        </Map>
+        <div>
+            {/* eslint-disable-next-line no-return-assign */}
+            <div ref={(el) => (mapContainer.current = el)} style={styles} />
+        </div>
     );
 }
 
-export default GoogleApiWrapper({
-    apiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
-})(GoogleMaps);
+export default BusinessMap;

@@ -71,10 +71,12 @@ export default function Homepage(props) {
                 // id for react-intl
                 title="topRated"
             />
-            <BusinessesMap
-                businesses={businesses}
-                userPosition={userPosition}
-            />
+            {userPosition.lat && (
+                <BusinessesMap
+                    businesses={businesses}
+                    userPosition={userPosition}
+                />
+            )}
             <Footer
                 lang={props.lang}
                 filterByType={({ value }) => setTypeFilter(value)}
