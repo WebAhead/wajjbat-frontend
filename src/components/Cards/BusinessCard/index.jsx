@@ -22,7 +22,7 @@ export default ({ business, homeView = true, cardWidth }) => (
                         </div>
                     ) : (
                         <div className={style['business-']}>
-                            <FormattedMessage id={business.approved} />
+                            <FormattedMessage id={business.status} />
                         </div>
                     )}
                     <div className={style['business-rating']}>
