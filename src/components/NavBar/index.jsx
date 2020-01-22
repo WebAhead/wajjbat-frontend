@@ -14,7 +14,7 @@ export default function NavBar(props) {
     };
 
     const handleUser = () => {
-        if (document.cookie.indexOf('access_token') !== -1) return history.push('/profile');
+        if (document.cookie.indexOf('wajjbat_access_token') !== -1) return history.push('/profile');
         return history.push('/signin');
     };
 
