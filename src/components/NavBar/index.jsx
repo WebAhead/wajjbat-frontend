@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './style.scss';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 export default function NavBar(props) {
     const history = useHistory();
     const [lang, setLang] = useState('ar');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleLang = ({ target }) => {
         localStorage.setItem('language', target.value)
@@ -14,15 +16,30 @@ export default function NavBar(props) {
     };
 
     const handleUser = () => {
-        if (document.cookie.indexOf('wajjbat_access_token') !== -1) return history.push('/profile');
+        if (isLoggedIn) return history.push('/profile');
+
         return history.push('/signin');
     };
 
     useEffect(() => {
         const currentLang = localStorage.getItem('language') || lang;
         setLang(currentLang)
-        props.setLang(currentLang)
+        props.setLang(currentLang)(async function fetchIsLoggedIn() {
+            try {
+                const { data } = await axios.get(
+                    `${process.env.REACT_APP_API_URL}/api/isLoggedIn`,
+                    {
+                        withCredentials: true,
+                    },
+                );
 
+                if (data.id) {
+                    setIsLoggedIn(true);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }());
     }, [])
 
     useEffect(() => { props.setLang(lang) }, [lang, props]);
