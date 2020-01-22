@@ -8,38 +8,33 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 export default function NavBar(props) {
     const history = useHistory();
     const [lang, setLang] = useState('ar');
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleLang = ({ target }) => {
         localStorage.setItem('language', target.value)
         setLang(target.value)
     };
 
-    const handleUser = () => {
-        if (isLoggedIn) return history.push('/profile');
+    const handleUser = async () => {
+        try {
+            const { data } = await axios.get(
+                `${process.env.REACT_APP_API_URL}/api/isLoggedIn`,
+                {
+                    withCredentials: true,
+                },
+            );
 
-        return history.push('/signin');
+            if (data.id) return history.push('/profile');
+
+            return history.push('/signin');
+        } catch (error) {
+            console.log(error);
+            return 1;
+        }
     };
 
     useEffect(() => {
         const currentLang = localStorage.getItem('language') || lang;
         setLang(currentLang)
-        props.setLang(currentLang)(async function fetchIsLoggedIn() {
-            try {
-                const { data } = await axios.get(
-                    `${process.env.REACT_APP_API_URL}/api/isLoggedIn`,
-                    {
-                        withCredentials: true,
-                    },
-                );
-
-                if (data.id) {
-                    setIsLoggedIn(true);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        }());
     }, [])
 
     useEffect(() => { props.setLang(lang) }, [lang, props]);
@@ -61,11 +56,7 @@ export default function NavBar(props) {
 
             <div className="signUp" />
             <div className="login">
-                <button
-                    onClick={() => {
-                        handleUser();
-                    }}
-                >
+                <button onClick={() => handleUser()}>
                     <AccountCircleIcon
                         classes={{
                             root: classes.root,
