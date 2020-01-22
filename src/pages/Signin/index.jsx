@@ -59,6 +59,7 @@ function Signin({ intl }) {
                             fields="name,email,picture"
                             callback={responseFacebook}
                             autoLoad={false}
+                            disableMobileRedirect
                             icon="fa-facebook"
                             redirectUri={`${process.env.REACT_APP_URL}/signin`}
                             textButton={facebookMessage}
