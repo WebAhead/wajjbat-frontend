@@ -21,4 +21,5 @@ const AppIndex = () => {
         </IntlProvider>
     );
 };
+
 ReactDOM.render(<AppIndex />, document.getElementById('root'));

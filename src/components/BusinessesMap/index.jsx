@@ -1,40 +1,52 @@
 import React from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
-function BusiessesMap({ userPosition, businesses, google }) {
+import PopupMarker from '../../pages/Home/components/PopupMarker'
+
+export default ({ userPosition, businesses, google }) => {
     const mapStyles = {
         position: 'relative',
         margin: 'auto',
         width: '100%',
-        height: '60vh',
+        height: '90vh',
     };
 
     return (
         <div style={{ minHeight: '60vh' }}>
-            <Map
-                google={google}
-                containerStyle={{ position: 'relative' }}
-                zoom={13}
-                style={mapStyles}
-                initialCenter={{
-                    lat: userPosition.lat,
-                    lng: userPosition.lng,
-                }}
+            <LoadScript
+                id="hehe"
+                googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_KEY}
             >
-                {/* optional in case we want to mark the position of the business */}
-                {businesses.map((business) => (
+                <GoogleMap
+                    // google={google}
+                    containerStyle={{ position: 'relative' }}
+                    zoom={13}
+                    mapContainerStyle={mapStyles}
+                    center={{
+                        lat: userPosition.lat,
+                        lng: userPosition.lng,
+                    }}
+                >
                     <Marker
                         position={{
-                            lat: business.lat,
-                            lng: business.lng,
+                            lat: +userPosition.lat,
+                            lng: +userPosition.lng,
                         }}
                     />
-                ))}
-            </Map>
+
+                    {/* optional in case we want to mark the position of the business */}
+                    {businesses.map((business) => (
+                        <PopupMarker
+                            lat={+business.lat}
+                            lng={+business.lng}
+                            position={{
+                                lat: +business.lat,
+                                lng: +business.lng,
+                            }}
+                        />
+                    ))}
+                </GoogleMap>
+            </LoadScript>
         </div>
     );
 }
-
-export default GoogleApiWrapper({
-    apiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
-})(BusiessesMap);

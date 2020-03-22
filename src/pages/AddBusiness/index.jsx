@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 import Select from 'components/Forms/Select';
 import ImageInput from 'components/Forms/ImageInput';
-import InitialGoogleMaps from 'components/InitialGoogleMaps';
+import ChooseLocation from 'components/ChooseLocation';
 import './style.scss';
 
 // should get the data from the DB in the future
@@ -35,6 +35,7 @@ function AddBusiness({ intl }) {
     const [subImgs, setSubImgs] = useState([]);
     const [userPosition, setUserPosition] = useState({});
     const [userId, setUserId] = useState('');
+    const [businessLatlng, setBusinessLatlng] = useState({})
 
     const [business, setBusiness] = useState(() => ({
         name: '',
@@ -56,7 +57,11 @@ function AddBusiness({ intl }) {
     useEffect(() => {
         (async function getUserId() {
             const { data } = await axios.get(`${endPointUrl}/api/isLoggedIn`, { withCredentials: true });
-            setUserId(data.id);
+            if (!data.id) {
+                history.push('/');
+            } else {
+                setUserId(data.id);
+            }
         }())
     }, []);
 
@@ -82,21 +87,22 @@ function AddBusiness({ intl }) {
             ...business,
             subImgs,
             primaryImage: mainImg,
-            lat: userPosition.lat,
-            lng: userPosition.lng,
+            lat: businessLatlng.lat,
+            lng: businessLatlng.lng,
         };
 
         try {
             const result = await axios.post(`${endPointUrl}/api/new-businesses`, data, { withCredentials: true });
 
-            if (result.success) {
+            if (result.data.success) {
                 history.push('/profile-business-list');
             } else {
-                // handle error
+                // handle error with popup ?
             }
         } catch (err) {
+            // handle error with popup ?
             console.log(err)
-
+            history.push('/profile-business-list');
         }
 
     // Redirect the user to another page
@@ -121,6 +127,8 @@ function AddBusiness({ intl }) {
                             height="40px"
                             width="40px"
                             onChange={(url) => setSubImgs([...subImgs, url])}
+                            onChangeMultiple={(images) => setSubImgs([...subImgs, ...images])}
+                            multiple
                         />
                     </div>
                 </div>
@@ -238,10 +246,21 @@ function AddBusiness({ intl }) {
                                 <label htmlFor="freeWifi"><FormattedMessage id="Free Wifi" /></label>
                             </div>
                         </div>
+                        <div>
+                            <span style={{ color: '#726A6A', fontSize:'20px', marginBottom:'20px' }}>
+                                <FormattedMessage id="Choose location" />
+                            </span>
+                            <div>
+                                <ChooseLocation
+                                    userPosition={userPosition}
+                                    changeState={setBusinessLatlng}
+                                    latLng={businessLatlng}
+                                />
+                            </div>
+                        </div>
                         <button type="submit" className="submit-btn">
                             <FormattedMessage id="Submit" />
                         </button>
-                        <InitialGoogleMaps userPosition={userPosition} />
                     </form>
                 </div>
             </section>

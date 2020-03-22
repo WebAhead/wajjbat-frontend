@@ -99,6 +99,13 @@ function BusinessReviews(props) {
     };
 
     const submitText = props.intl.formatMessage({ id: 'Submit' });
+    const ratingCounter = {}
+    let amountOfRatings = 0
+
+    props.reviews.forEach((item) => {
+        ratingCounter[item.rating] = (ratingCounter[item.rating] || 0) + 1
+        amountOfRatings++
+    })
 
     return (
         <div style={{ marginTop: '10px' }}>
@@ -111,10 +118,10 @@ function BusinessReviews(props) {
                     classes={{
                         root: classes.root,
                         barColorPrimary: classes.barColorPrimary,
-                        colorPrimary: classes.colorPrimary,
+                        colorPrimary: 'lightgrey',
                     }}
                     variant="determinate"
-                    value={50}
+                    value={((ratingCounter['5'] || 0) / amountOfRatings) * 100}
                 />
             </div>
             <div className="rating-container">
@@ -123,10 +130,10 @@ function BusinessReviews(props) {
                     classes={{
                         root: classes.root,
                         barColorPrimary: classes.barColorPrimary,
-                        colorPrimary: classes.colorPrimary,
+                        colorPrimary: 'lightgrey',
                     }}
                     variant="determinate"
-                    value={50}
+                    value={((ratingCounter['4'] || 0) / amountOfRatings) * 100}
                 />
             </div>
             <div className="rating-container">
@@ -135,10 +142,10 @@ function BusinessReviews(props) {
                     classes={{
                         root: classes.root,
                         barColorPrimary: classes.barColorPrimary,
-                        colorPrimary: classes.colorPrimary,
+                        colorPrimary: 'lightgrey',
                     }}
                     variant="determinate"
-                    value={50}
+                    value={((ratingCounter['3'] || 0) / amountOfRatings) * 100}
                 />
             </div>
             <div className="rating-container">
@@ -147,10 +154,10 @@ function BusinessReviews(props) {
                     classes={{
                         root: classes.root,
                         barColorPrimary: classes.barColorPrimary,
-                        colorPrimary: classes.colorPrimary,
+                        colorPrimary: 'lightgrey',
                     }}
                     variant="determinate"
-                    value={50}
+                    value={((ratingCounter['2'] || 0) / amountOfRatings) * 100}
                 />
             </div>
             <div
@@ -162,10 +169,10 @@ function BusinessReviews(props) {
                     classes={{
                         root: classes.root,
                         barColorPrimary: classes.barColorPrimary,
-                        colorPrimary: classes.colorPrimary,
+                        colorPrimary: 'lightgrey',
                     }}
                     variant="determinate"
-                    value={50}
+                    value={((ratingCounter['1'] || 0) / amountOfRatings) * 100}
                 />
             </div>
             {!startReviewForm && !isLoggedIn[0] && (

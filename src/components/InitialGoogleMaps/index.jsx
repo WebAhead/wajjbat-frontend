@@ -1,5 +1,5 @@
 import React from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import {GoogleMap withGoogleMap, Marker } from '@react-google-maps/api';
 
 function InitialGoogleMaps({ userPosition, google }) {
     const mapStyles = {
@@ -39,6 +39,6 @@ function InitialGoogleMaps({ userPosition, google }) {
     );
 }
 
-export default GoogleApiWrapper({
+export default withGoogleMap({
     apiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
 })(InitialGoogleMaps);

@@ -28,13 +28,13 @@ function ProfilePage(props) {
     return (
         <div>
             <div className="navbar-container">
-                <button>
+                <button className="navButton">
                     <Link to="/profile">
                         <FormattedMessage id="Profile" />
                     </Link>
                 </button>
 
-                <button>
+                <button className="navButton">
                     <Link to="/profile-business-list">
                         <FormattedMessage id="Business" />
                     </Link>

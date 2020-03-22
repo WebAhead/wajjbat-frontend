@@ -40,6 +40,7 @@ export default function Homepage(props) {
                     lat: userPosition.lat,
                     lng: userPosition.lng,
                 });
+
                 setBusinesses(data.businesses);
                 setOriginalBusinesses(data.businesses);
                 setTopRated(data.topRated);

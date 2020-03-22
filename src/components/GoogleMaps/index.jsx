@@ -1,5 +1,5 @@
 import React from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 function GoogleMaps({ userPosition, businessLocation, google }) {
     const mapStyles = {
@@ -15,29 +15,31 @@ function GoogleMaps({ userPosition, businessLocation, google }) {
                 target="_blank"
                 href={`https://www.google.com/maps/dir/?api=1&origin=${userPosition.lat},${userPosition.lng}&destination=${businessLocation.lat},${businessLocation.lng}`}
             >
-                <Map
-                    google={google}
-                    containerStyle={{ position: 'relative' }}
-                    zoom={18}
-                    style={mapStyles}
-                    initialCenter={{
-                        lat: userPosition.lat,
-                        lng: userPosition.lng,
-                    }}
+                <LoadScript
+                    googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_KEY}
                 >
-                    {/* optional in case we want to mark the position of the business */}
-                    <Marker
-                        position={{
-                            lat: businessLocation.lat,
-                            lng: businessLocation.lng,
+                    <GoogleMap
+                        google={google}
+                        containerStyle={{ position: 'relative' }}
+                        zoom={18}
+                        style={mapStyles}
+                        initialCenter={{
+                            lat: userPosition.lat,
+                            lng: userPosition.lng,
                         }}
-                    />
-                </Map>
+                    >
+                        {/* optional in case we want to mark the position of the business */}
+                        <Marker
+                            position={{
+                                lat: businessLocation.lat,
+                                lng: businessLocation.lng,
+                            }}
+                        />
+                    </GoogleMap>
+                </LoadScript>
             </a>
         </div>
     );
 }
 
-export default GoogleApiWrapper({
-    apiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
-})(GoogleMaps);
+export default GoogleMaps;

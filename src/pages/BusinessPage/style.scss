@@ -8,7 +8,7 @@
     display: flex;
     justify-content: space-between;
     padding: 1em;
-    margin: 0 40px;
+    margin: 0 20px;
 
     .nav-button {
       border: 2px solid $main-green;
@@ -17,6 +17,8 @@
       border-radius: 6px;
       background: none;
       outline: 0;
+      min-width: 45%;
+      width: 45%;
     }
   }
 

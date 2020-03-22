@@ -45,7 +45,15 @@ export default function StyledDropzone(props) {
     } = useDropzone({
         accept: 'image/*',
         onDrop: (files) => {
-            if (Array.isArray(files) && files.length) { props.getSignedRequest(files[0]); }
+            if (Array.isArray(files) && files.length) {
+                if (props.multiple) {
+                    props.getSignedRequest(files);
+                } else {
+
+                    props.getSignedRequest(files[0]);
+                }
+
+            }
         },
     });
 

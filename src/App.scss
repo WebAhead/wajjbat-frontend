@@ -3,6 +3,7 @@
 
 .App {
 
+  min-height: 100vh;
   @media screen and (min-width: 1000px){
     margin: auto;
     max-width: 50%;
