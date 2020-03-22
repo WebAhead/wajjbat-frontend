@@ -106,12 +106,3 @@ npm start
         - User's reviews
     - Can anyone view?
 
-## Sprint 1 sub-teams
-- Front-End
-    - Hosen
-    - Omri
-    - Faris
-- Back-End
-    - Moshe
-    - Mohammed
-- CRM
