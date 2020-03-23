@@ -11,6 +11,7 @@ const googleId = process.env.REACT_APP_GOOGLE_ID;
 
 function Signin({ intl }) {
     const responseFacebook = async (response) => {
+        if(!response.id) return;
         const { name, email, id } = response;
         const { url } = response.picture.data;
 
@@ -30,6 +31,7 @@ function Signin({ intl }) {
     };
 
     const responseGoogle = async (response) => {
+        if(!response.googleId) return;
         const { googleId: id, email, name, imageUrl: url } = response.profileObj;
         try {
             await axios.post(`${endPointUrl }/api/oauth/google`, {
