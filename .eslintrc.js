@@ -1,19 +1,19 @@
 module.exports = {
   root: true,
-  extends: ['airbnb'],
-  plugins: ['import', 'react', 'jsx-a11y'],
+  extends: ['airbnb', 'prettier'],
+  plugins: ['import', 'react', 'jsx-a11y', 'prettier'],
   parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
-      legacyDecorators: true
+      legacyDecorators: true,
     },
     sourceType: 'module',
-    ecmaVersion: 2017
+    ecmaVersion: 2017,
   },
   env: {
     browser: true,
     node: true,
-    es6: true
+    es6: true,
   },
   rules: {
     semi: 'off',
@@ -25,9 +25,10 @@ module.exports = {
       'warn',
       4,
       {
-        SwitchCase: 1
-      }
+        SwitchCase: 1,
+      },
     ],
+    'prettier/prettier': 'error',
     'key-spacing': 'off',
     'lines-between-class-members': 'warn',
     'max-len': 'off',
@@ -43,9 +44,9 @@ module.exports = {
         ignoreEOLComments: true,
         exceptions: {
           AssignmentExpression: true,
-          VariableDeclarator: true
-        }
-      }
+          VariableDeclarator: true,
+        },
+      },
     ],
     'no-multiple-empty-lines': 'warn',
     'no-console': 'off',
@@ -61,28 +62,29 @@ module.exports = {
       'warn',
       {
         ignoreRestSiblings: true,
-        varsIgnorePattern: '[Ss]tyles'
-      }
+        varsIgnorePattern: '[Ss]tyles',
+      },
     ],
     'object-curly-newline': [
       'warn',
       {
         multiline: true,
-        consistent: true
-      }
+        consistent: true,
+      },
     ],
     'object-shorthand': 'off',
     'operator-linebreak': 'warn',
     'padded-blocks': [
       'warn',
       {
-        classes: 'always'
-      }
+        classes: 'always',
+      },
     ],
     'prefer-arrow-callback': 'off',
     'prefer-destructuring': 'off',
     'prefer-rest-params': 'off',
     'quote-props': ['warn', 'consistent'],
+    'jsx-quotes': ['error', 'prefer-double'],
     radix: 'off',
     'sort-imports': 'off',
     'template-curly-spacing': 'off',
@@ -104,8 +106,8 @@ module.exports = {
         afterOpening: 'never',
         beforeClosing: 'never',
         beforeSelfClosing: 'always',
-        closingSlash: 'never'
-      }
+        closingSlash: 'never',
+      },
     ],
     'react/jsx-wrap-multilines': 'warn',
     'react/no-access-state-in-setstate': 'warn',
@@ -116,9 +118,9 @@ module.exports = {
     'react/prop-types': [
       'warn',
       {
-        skipUndeclared: true
-      }
+        skipUndeclared: true,
+      },
     ],
-    'react/sort-comp': 'warn'
-  }
+    'react/sort-comp': 'warn',
+  },
 };

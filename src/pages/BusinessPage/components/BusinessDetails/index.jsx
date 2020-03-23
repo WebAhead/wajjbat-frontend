@@ -27,7 +27,7 @@ export default function BusinessDetails({ businessData, userPosition }) {
                 <div className={style['business-rating']}>
                     <Rating
                         name="half-rating"
-                        value={businessData.rating}
+                        value={+businessData.rating}
                         precision={0.5}
                         readOnly
                         size="small"

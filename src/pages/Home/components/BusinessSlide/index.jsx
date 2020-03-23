@@ -3,6 +3,9 @@ import { Rating } from '@material-ui/lab';
 import './style.scss';
 import { FormattedMessage } from 'react-intl';
 
+
+
+
 export default (props) => (
     <div className="container">
         <img className="business-img" src={props.image} alt="" />
