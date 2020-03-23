@@ -13,6 +13,18 @@
     margin-bottom: 10px;
   }
 
+  .business-rating{
+    display: flex;
+    align-items: center;
+  }
+
+  .reviewrs-count{
+    font-size: 12px;
+    margin-left: 5px;
+    color: $main-grey;
+    font-weight: bold;
+  }
+
 }
 
   .business-name,

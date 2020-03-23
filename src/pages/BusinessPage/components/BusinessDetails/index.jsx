@@ -25,6 +25,7 @@ export default function BusinessDetails({ businessData, userPosition }) {
                 </div>
 
                 <div className={style['business-rating']}>
+                    <span className={style['reviewrs-count']}>Based on {businessData.reviews.length}  reviews</span>
                     <Rating
                         name="half-rating"
                         value={businessData.rating}
@@ -32,6 +33,7 @@ export default function BusinessDetails({ businessData, userPosition }) {
                         readOnly
                         size="small"
                     />
+
                 </div>
             </div>
             <p className={style['business-name']}>{businessData.name}</p>
