@@ -16,7 +16,7 @@ export default (props) => (
             <div className="rating">
                 <Rating
                     name="half-rating"
-                    value={props.rating}
+                    value={+props.rating}
                     precision={0.5}
                     readOnly
                     size="small"

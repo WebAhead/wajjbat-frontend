@@ -31,13 +31,14 @@ function Signin({ intl }) {
 
     const responseGoogle = async (response) => {
         const { googleId: id, email, name, imageUrl: url } = response.profileObj;
-
         try {
             await axios.post(`${endPointUrl }/api/oauth/google`, {
                 id,
                 email,
                 name,
                 url,
+            }, {
+                withCredentials: true,
             });
             window.location = '/';
         } catch (error) {
