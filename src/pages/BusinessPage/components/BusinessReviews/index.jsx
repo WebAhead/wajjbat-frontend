@@ -102,12 +102,14 @@ function BusinessReviews(props) {
 
     return (
         <div style={{ marginTop: '10px' }}>
-            <h1 className="reviews-h1">
-                <FormattedMessage id="Reviews" />
-            </h1>
-            <p>
-                <FormattedMessage id="Reviews amount template" values={{reviews : props.reviews.length}} />
-            </p>
+            <div className="reviews-container">
+                <h1 className="reviews-h1">
+                    <FormattedMessage id="Reviews" />
+                </h1>
+                <p className="reviews-container-p">
+                    <FormattedMessage id="Reviews amount template" values={{reviews : props.reviews.length}} />
+                </p>
+            </div>
             <div className="rating-container">
                 <p>5</p>
                 <LinearProgress
