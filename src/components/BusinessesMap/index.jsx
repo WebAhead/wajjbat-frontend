@@ -3,7 +3,7 @@ import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 import PopupMarker from '../../pages/Home/components/PopupMarker'
 
-export default ({ userPosition, businesses, google }) => {
+export default ({ userPosition, businesses, google ,history}) => {
     const mapStyles = {
         position: 'relative',
         margin: 'auto',
@@ -28,6 +28,7 @@ export default ({ userPosition, businesses, google }) => {
                     }}
                 >
                     <Marker
+                        name={'User location'}
                         position={{
                             lat: +userPosition.lat,
                             lng: +userPosition.lng,
@@ -37,6 +38,8 @@ export default ({ userPosition, businesses, google }) => {
                     {/* optional in case we want to mark the position of the business */}
                     {businesses.map((business) => (
                         <PopupMarker
+                            history={history}
+                            business={business}
                             lat={+business.lat}
                             lng={+business.lng}
                             position={{
