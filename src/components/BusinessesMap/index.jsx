@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 import PopupMarker from '../../pages/Home/components/PopupMarker';
@@ -10,8 +10,6 @@ export default ({ userPosition, businesses, google }) => {
         width: '100%',
         height: '90vh'
     };
-
-    console.log('Map is rendering!');
 
     return (
         <div style={{ minHeight: '60vh' }}>
@@ -41,6 +39,7 @@ export default ({ userPosition, businesses, google }) => {
                         <PopupMarker
                             lat={+business.lat}
                             lng={+business.lng}
+                            business={business}
                             position={{
                                 lat: +business.lat,
                                 lng: +business.lng
