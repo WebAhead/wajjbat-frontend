@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './style.scss';
 
 import SliderContainer from 'components/Slider';
@@ -18,7 +18,7 @@ export default function Homepage(props) {
     const [originalBusinesses, setOriginalBusinesses] = useState([]);
     const [type, setTypeFilter] = useState('All');
     const [cuisine, setCusineFilter] = useState('All');
-
+    const history = useHistory();
     useEffect(() => {
     // here we get the user location  after the user approve using
     // The HTML Geolocation API which is used to locate a user's position.
@@ -91,6 +91,7 @@ export default function Homepage(props) {
                 <BusinessesMap
                     businesses={businesses}
                     userPosition={userPosition}
+                    history={history}
                 />
             ) : ''}
             <Footer
