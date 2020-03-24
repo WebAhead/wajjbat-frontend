@@ -28,7 +28,6 @@ module.exports = {
         SwitchCase: 1,
       },
     ],
-    'prettier/prettier': 'error',
     'key-spacing': 'off',
     'lines-between-class-members': 'warn',
     'max-len': 'off',
