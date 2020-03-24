@@ -37,16 +37,13 @@ function BusinessReviews(props) {
     useEffect(() => {
         (async function fetchIsLoggedIn() {
             try {
-                const { data } = await axios.get(
-                    `${process.env.REACT_APP_API_URL}/api/isLoggedIn`,
-                    {
-                        withCredentials: true,
-                    },
-                );
+                const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/isLoggedIn`, {
+                    withCredentials: true,
+                });
                 if (data.id) {
                     setIsLoggedIn([true, data.id]);
 
-                    props.reviews.map((item) => {
+                    props.reviews.map(item => {
                         if (item.id === data.id) {
                             setHasReviewed(true);
                         }
@@ -55,7 +52,7 @@ function BusinessReviews(props) {
             } catch (error) {
                 console.log(error);
             }
-        }());
+        })();
     }, []);
 
     const handleReviews = () => {
@@ -63,7 +60,7 @@ function BusinessReviews(props) {
             return '';
         }
 
-        return props.reviews.map((currentReview) => (
+        return props.reviews.map(currentReview => (
             <ReviewCard
                 rating={currentReview.rating}
                 fullname={currentReview.fullname}
@@ -83,13 +80,9 @@ function BusinessReviews(props) {
         };
 
         try {
-            await axios.post(
-                `${process.env.REACT_APP_API_URL}/api/new-review`,
-                newReview,
-                {
-                    withCredentials: true,
-                },
-            );
+            await axios.post(`${process.env.REACT_APP_API_URL}/api/new-review`, newReview, {
+                withCredentials: true,
+            });
             setStartReviewForm(false);
             setHasReviewed(true);
             props.refresh('go');
@@ -99,19 +92,24 @@ function BusinessReviews(props) {
     };
 
     const submitText = props.intl.formatMessage({ id: 'Submit' });
-    const ratingCounter = {}
-    let amountOfRatings = 0
+    const ratingCounter = {};
+    let amountOfRatings = 0;
 
-    props.reviews.forEach((item) => {
-        ratingCounter[item.rating] = (ratingCounter[item.rating] || 0) + 1
-        amountOfRatings++
-    })
+    props.reviews.forEach(item => {
+        ratingCounter[item.rating] = (ratingCounter[item.rating] || 0) + 1;
+        amountOfRatings++;
+    });
 
     return (
         <div style={{ marginTop: '10px' }}>
-            <h1 className="reviews-h1">
-                <FormattedMessage id="Reviews" />
-            </h1>
+            <div className="reviews-container">
+                <h1 className="reviews-h1">
+                    <FormattedMessage id="Reviews" />
+                </h1>
+                <p className="reviews-container-p">
+                    <FormattedMessage id="Reviews amount template" values={{reviews : props.reviews.length}} />
+                </p>
+            </div>
             <div className="rating-container">
                 <p>5</p>
                 <LinearProgress
@@ -160,10 +158,7 @@ function BusinessReviews(props) {
                     value={((ratingCounter['2'] || 0) / amountOfRatings) * 100}
                 />
             </div>
-            <div
-                className="rating-container"
-                style={{ boxShadow: '0px 5px 10px -6px #508991' }}
-            >
+            <div className="rating-container" style={{ boxShadow: '0px 5px 10px -6px #508991' }}>
                 <p>1</p>
                 <LinearProgress
                     classes={{
@@ -180,10 +175,7 @@ function BusinessReviews(props) {
                     <span style={{ fontSize: '26px' }}>
                         <FormattedMessage id="Log in to submit a review" />
                     </span>
-                    <button
-                        onClick={() => history.push('/signin')}
-                        className="submit-button"
-                    >
+                    <button onClick={() => history.push('/signin')} className="submit-button">
                         <FormattedMessage id="signin" />
                     </button>
                 </div>
@@ -194,10 +186,7 @@ function BusinessReviews(props) {
                     <span style={{ fontSize: '26px' }}>
                         <FormattedMessage id="How was it ?" />
                     </span>
-                    <button
-                        className="submit-review-button"
-                        onClick={() => setStartReviewForm(true)}
-                    >
+                    <button className="submit-review-button" onClick={() => setStartReviewForm(true)}>
                         <FormattedMessage id="Submit a review" />
                     </button>
                 </div>
