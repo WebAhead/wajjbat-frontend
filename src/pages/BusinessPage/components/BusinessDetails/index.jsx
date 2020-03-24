@@ -32,6 +32,7 @@ export default function BusinessDetails({ businessData, userPosition }) {
                         readOnly
                         size="small"
                     />
+
                 </div>
             </div>
             <p className={style['business-name']}>{businessData.name}</p>
