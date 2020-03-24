@@ -9,88 +9,95 @@ import HomeIcon from '@material-ui/icons/Home';
 import Cookies from 'universal-cookie';
 
 export default function NavBar(props) {
-  const history = useHistory();
-  const [lang, setLang] = useState('ar');
+    const history = useHistory();
+    const [lang, setLang] = useState('ar');
+    const [logged, setLogged] = useState(false);
 
-  const handleLang = ({ target }) => {
-    localStorage.setItem('language', target.value);
-    setLang(target.value);
-  };
+    const handleLang = ({ target }) => {
+        localStorage.setItem('language', target.value);
+        setLang(target.value);
+    };
 
-  const handleLogout = () => {
-    const cookies = new Cookies();
-    cookies.remove('wajjbat_access_token');
-    history.push('/');
-  };
+    const handleLogout = () => {
+        setLogged(false);
+        const cookies = new Cookies();
+        cookies.remove('wajjbat_access_token');
+        history.push('/');
+    };
 
-  const handleUser = async () => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/isLoggedIn`,
-        {
-          withCredentials: true,
-        },
-      );
+    const handleUser = () => {
+        if (logged) return history.push('/profile');
 
-      if (data.id) return history.push('/profile');
+        return history.push('/signin');
+    };
 
-      return history.push('/signin');
-    } catch (error) {
-      console.log(error);
-      return 1;
-    }
-  };
+    useEffect(async () => {
+        const currentLang = localStorage.getItem('language') || lang;
+        setLang(currentLang);
+        try {
+            const { data } = await axios.get(
+                `${process.env.REACT_APP_API_URL}/api/isLoggedIn`,
+                {
+                    withCredentials: true,
+                },
+            );
 
-  useEffect(() => {
-    const currentLang = localStorage.getItem('language') || lang;
-    setLang(currentLang);
-  }, []);
+            if (data.id)
+                setLogged(true);
+            return 1;
+        } catch (error) {
+            console.log(error);
+            return 1;
+        }
+    }, []);
 
-  useEffect(() => {
-    props.setLang(lang);
-  }, [lang, props]);
+    useEffect(() => {
+        props.setLang(lang);
+    }, [lang, props]);
 
-  const useStyles = makeStyles({
-    root: { color: '#21b5a2', height: '40px', width: '40px' },
-  });
+    const useStyles = makeStyles({
+        root: { color: '#21b5a2', height: '40px', width: '40px' },
+    });
 
-  const classes = useStyles();
+    const classes = useStyles();
 
-  return (
-    <div className="navBar">
-      <div className="changeLanguage">
-        <select className="select" onChange={handleLang} value={lang}>
-          <option value="ar">ar</option>
-          <option value="en">en</option>
-        </select>
-      </div>
+    return (
+        <div className="navBar">
+            <div className="changeLanguage">
+                <select className="select" onChange={handleLang} value={lang}>
+                    <option value="ar">ar</option>
+                    <option value="en">en</option>
+                </select>
+            </div>
 
-      {/* <div className="signUp" /> */}
+            {/* <div className="signUp" /> */}
 
-      <div className="login">
-        <button onClick={() => handleUser()}>
-          <AccountCircleIcon
-            classes={{
-              root: classes.root,
-            }}
-          />
-        </button>
-
-        <button className="home-btn" onClick={() => history.push('/')}>
-          <HomeIcon
-            classes={{
-              root: classes.root,
-            }}
-          />
-        </button>
-        <button onClick={() => handleLogout()}>
-          <ExitToAppOutlinedIcon
-            classes={{
-              root: classes.root,
-            }}
-          />
-        </button>
-      </div>
-    </div>
-  );
+            <div className="login">
+                <button className="home-btn" onClick={() => history.push('/')}>
+                    <HomeIcon
+                        classes={{
+                            root: classes.root,
+                        }}
+                    />
+                </button>
+                <button onClick={() => handleUser()}>
+                    <AccountCircleIcon
+                        classes={{
+                            root: classes.root,
+                        }}
+                    />
+                </button>
+                {(logged)
+                    && (
+                        <button onClick={() => handleLogout()}>
+                            <ExitToAppOutlinedIcon
+                                classes={{
+                                    root: classes.root,
+                                }}
+                            />
+                        </button>
+                    )}
+            </div>
+        </div>
+    );
 }
