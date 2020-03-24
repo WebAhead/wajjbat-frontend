@@ -28,7 +28,7 @@ export default function BusinessDetails({ businessData, userPosition }) {
                     <span className={style['reviewrs-count']}>Based on {businessData.reviews.length}  reviews</span>
                     <Rating
                         name="half-rating"
-                        value={businessData.rating}
+                        value={+businessData.rating}
                         precision={0.5}
                         readOnly
                         size="small"

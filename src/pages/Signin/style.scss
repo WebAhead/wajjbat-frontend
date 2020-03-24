@@ -14,3 +14,15 @@
     background: blue;
   }
 }
+
+.logout-btn {
+  background: none;
+  border: none;
+  align-self: flex-end;
+  margin-left: 3rem;
+
+}
+
+.logout-btn:focus {
+  outline: 0;
+}

@@ -35,7 +35,7 @@ function AddBusiness({ intl }) {
     const [subImgs, setSubImgs] = useState([]);
     const [userPosition, setUserPosition] = useState({});
     const [userId, setUserId] = useState('');
-    const [businessLatlng, setBusinessLatlng] = useState({})
+    const [businessLatlng, setBusinessLatlng] = useState({});
 
     const [business, setBusiness] = useState(() => ({
         name: '',
@@ -51,18 +51,21 @@ function AddBusiness({ intl }) {
     }));
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition(({ coords }) => setUserPosition({ lat: coords.latitude, lng: coords.longitude }))
+        navigator.geolocation.getCurrentPosition(({ coords }) => setUserPosition({ lat: coords.latitude, lng: coords.longitude })
+        );
     }, []);
 
     useEffect(() => {
         (async function getUserId() {
-            const { data } = await axios.get(`${endPointUrl}/api/isLoggedIn`, { withCredentials: true });
+            const { data } = await axios.get(`${endPointUrl}/api/isLoggedIn`, {
+                withCredentials: true,
+            });
             if (!data.id) {
                 history.push('/');
             } else {
                 setUserId(data.id);
             }
-        }())
+        })();
     }, []);
 
     const handleChange = ({ currentTarget: input }) => {
@@ -77,7 +80,10 @@ function AddBusiness({ intl }) {
     };
 
     const handleCheckBox = ({ currentTarget: input }) => {
-        setBusiness((prevState) => ({ ...business, [input.name]: !prevState[input.name] }));
+        setBusiness((prevState) => ({
+            ...business,
+            [input.name]: !prevState[input.name],
+        }));
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -92,7 +98,11 @@ function AddBusiness({ intl }) {
         };
 
         try {
-            const result = await axios.post(`${endPointUrl}/api/new-businesses`, data, { withCredentials: true });
+            const result = await axios.post(
+                `${endPointUrl}/api/new-businesses`,
+                data,
+                { withCredentials: true }
+            );
 
             if (result.data.success) {
                 history.push('/profile-business-list');
@@ -101,14 +111,14 @@ function AddBusiness({ intl }) {
             }
         } catch (err) {
             // handle error with popup ?
-            console.log(err)
+            console.log(err);
             history.push('/profile-business-list');
         }
 
     // Redirect the user to another page
     };
 
-    const translate = (word) => intl.formatMessage({ id: word })
+    const translate = (word) => intl.formatMessage({ id: word });
 
     return (
         <>
@@ -182,7 +192,6 @@ function AddBusiness({ intl }) {
                             />
                         </div>
 
-
                         <input
                             type="text"
                             name="phone"
@@ -220,7 +229,9 @@ function AddBusiness({ intl }) {
                                     value={business.parking}
                                     onChange={handleCheckBox}
                                 />
-                                <label htmlFor="parking"><FormattedMessage id="Parking" /></label>
+                                <label htmlFor="parking">
+                                    <FormattedMessage id="Parking" />
+                                </label>
                             </div>
 
                             <div className="checkbox-items">
@@ -232,7 +243,9 @@ function AddBusiness({ intl }) {
                                     value={business.smokingArea}
                                     onChange={handleCheckBox}
                                 />
-                                <label htmlFor="smokingArea"><FormattedMessage id="Smoking Area" /></label>
+                                <label htmlFor="smokingArea">
+                                    <FormattedMessage id="Smoking Area" />
+                                </label>
                             </div>
 
                             <div className="checkbox-items">
@@ -243,11 +256,19 @@ function AddBusiness({ intl }) {
                                     value={business.freeWifi}
                                     onChange={handleCheckBox}
                                 />
-                                <label htmlFor="freeWifi"><FormattedMessage id="Free Wifi" /></label>
+                                <label htmlFor="freeWifi">
+                                    <FormattedMessage id="Free Wifi" />
+                                </label>
                             </div>
                         </div>
                         <div>
-                            <span style={{ color: '#726A6A', fontSize:'20px', marginBottom:'20px' }}>
+                            <span
+                                style={{
+                                    color: '#726A6A',
+                                    fontSize: '20px',
+                                    marginBottom: '20px',
+                                }}
+                            >
                                 <FormattedMessage id="Choose location" />
                             </span>
                             <div>
@@ -268,4 +289,4 @@ function AddBusiness({ intl }) {
     );
 }
 
-export default injectIntl(AddBusiness)
+export default injectIntl(AddBusiness);

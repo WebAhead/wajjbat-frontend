@@ -3,6 +3,9 @@ import { Rating } from '@material-ui/lab';
 import './style.scss';
 import { FormattedMessage } from 'react-intl';
 
+
+
+
 export default (props) => (
     <div className="container">
         <img className="business-img" src={props.image} alt="" />
@@ -16,7 +19,7 @@ export default (props) => (
             <div className="rating">
                 <Rating
                     name="half-rating"
-                    value={props.rating}
+                    value={+props.rating}
                     precision={0.5}
                     readOnly
                     size="small"
