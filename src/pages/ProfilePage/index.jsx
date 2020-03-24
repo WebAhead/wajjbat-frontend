@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import axios from 'axios';
 import './styles.scss';
@@ -10,7 +10,8 @@ const endPointUrl = process.env.REACT_APP_API_URL;
 function ProfilePage(props) {
     const [reviews, setReviews] = useState('');
     const [userDetails, setUserDetails] = useState({});
-
+    const [err, setErr] = useState(null);
+    const history = useHistory();
     useEffect(() => {
         axios
             .get(`${endPointUrl}/api/getUserReviews`, { withCredentials: 'true' })
@@ -18,8 +19,15 @@ function ProfilePage(props) {
                 setReviews(res.data.reviews);
                 setUserDetails({ ...res.data.userDetails });
             })
-            .catch((error) => error);
+            .catch((error) => {
+                setErr(error);
+                return error;
+            });
     }, []);
+
+    if (err) {
+        if (err.response.status === 403) history.push('/signin');
+    }
 
     if (!userDetails.firstName) {
         return 'Loading...';
