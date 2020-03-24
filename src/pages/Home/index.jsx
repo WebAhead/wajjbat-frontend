@@ -23,7 +23,16 @@ export default function Homepage(props) {
     // here we get the user location  after the user approve using
     // The HTML Geolocation API which is used to locate a user's position.
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(({ coords }) => setUserPosition({ lat: coords.latitude, lng: coords.longitude }));
+            setUserPosition({
+                lat: 32.817216400,
+                lng: 34.991226200
+            });
+            navigator.geolocation.getCurrentPosition(({ coords }) => {
+                setUserPosition({
+                    lat: coords.latitude,
+                    lng: coords.longitude
+                });
+            });
         }
     }, []);
 

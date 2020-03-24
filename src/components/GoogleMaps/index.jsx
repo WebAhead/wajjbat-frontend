@@ -6,7 +6,7 @@ function GoogleMaps({ userPosition, businessLocation, google }) {
         position: 'relative',
         margin: 'auto',
         width: '100%',
-        height: '300px',
+        height: '300px'
     };
 
     return (
@@ -15,9 +15,7 @@ function GoogleMaps({ userPosition, businessLocation, google }) {
                 target="_blank"
                 href={`https://www.google.com/maps/dir/?api=1&origin=${userPosition.lat},${userPosition.lng}&destination=${businessLocation.lat},${businessLocation.lng}`}
             >
-                <LoadScript
-                    googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_KEY}
-                >
+                <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_KEY}>
                     <GoogleMap
                         google={google}
                         containerStyle={{ position: 'relative' }}
@@ -25,14 +23,14 @@ function GoogleMaps({ userPosition, businessLocation, google }) {
                         style={mapStyles}
                         initialCenter={{
                             lat: userPosition.lat,
-                            lng: userPosition.lng,
+                            lng: userPosition.lng
                         }}
                     >
                         {/* optional in case we want to mark the position of the business */}
                         <Marker
                             position={{
                                 lat: businessLocation.lat,
-                                lng: businessLocation.lng,
+                                lng: businessLocation.lng
                             }}
                         />
                     </GoogleMap>

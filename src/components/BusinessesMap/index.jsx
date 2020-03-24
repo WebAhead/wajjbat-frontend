@@ -1,15 +1,17 @@
 import React from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
-import PopupMarker from '../../pages/Home/components/PopupMarker'
+import PopupMarker from '../../pages/Home/components/PopupMarker';
 
 export default ({ userPosition, businesses, google }) => {
     const mapStyles = {
         position: 'relative',
         margin: 'auto',
         width: '100%',
-        height: '90vh',
+        height: '90vh'
     };
+
+    console.log('Map is rendering!');
 
     return (
         <div style={{ minHeight: '60vh' }}>
@@ -23,25 +25,25 @@ export default ({ userPosition, businesses, google }) => {
                     zoom={13}
                     mapContainerStyle={mapStyles}
                     center={{
-                        lat: userPosition.lat,
-                        lng: userPosition.lng,
+                        lat: +userPosition.lat,
+                        lng: +userPosition.lng
                     }}
                 >
                     <Marker
                         position={{
                             lat: +userPosition.lat,
-                            lng: +userPosition.lng,
+                            lng: +userPosition.lng
                         }}
                     />
 
                     {/* optional in case we want to mark the position of the business */}
-                    {businesses.map((business) => (
+                    {businesses.map(business => (
                         <PopupMarker
                             lat={+business.lat}
                             lng={+business.lng}
                             position={{
                                 lat: +business.lat,
-                                lng: +business.lng,
+                                lng: +business.lng
                             }}
                         />
                     ))}
@@ -49,4 +51,4 @@ export default ({ userPosition, businesses, google }) => {
             </LoadScript>
         </div>
     );
-}
+};
