@@ -59,6 +59,7 @@ function ProfilePage(props) {
                     rating={currentReview.rating}
                     review_body={currentReview.reviewbody}
                     dateCreated={currentReview.reviewdate}
+                    disableLink
                 />
             ))}
         </div>

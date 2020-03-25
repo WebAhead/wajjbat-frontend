@@ -1,0 +1,36 @@
+.reviewer-container{
+    
+    .reviewer-details{
+    display: flex;
+    align-items: center;
+    }   
+
+    .name-email{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .name-email h1{
+        text-transform: uppercase;
+    }
+
+    .reviewer-pic{
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+    }
+
+
+    .reviews-list{
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .reviews-list li{
+        margin: 25px;
+      }
+}
+
