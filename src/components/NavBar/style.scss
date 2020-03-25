@@ -22,9 +22,8 @@ button:hover {
 
   .changeLanguage {
     @extend box;
-    width: 65px;
-    height: 45px;
-    margin: auto 10px;
+    width: 38px;
+    height: 35px;
 
     .select {
       background: none;
@@ -42,11 +41,12 @@ button:hover {
   }
 
   .login {
-    width: 100%;
-    height: 45px;
+    width: 38%;
+    height: 60%;
     margin: auto 1vw;
     display: flex;
     justify-content: space-around;
+    align-self: center;
   }
 
   button:focus {
@@ -56,10 +56,14 @@ button:hover {
   button {
     background: none;
     border: none;
-    // padding: 1rem;
-    margin-right: 1rem;
-    margin-left: 0.7rem;
   }
 
-  .home-btn {}
+  
+  .logo-img{
+    height: 44%;
+    padding: 0.5rem;
+    align-self: center;
+  }
+
+
 }
