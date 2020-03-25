@@ -1,15 +1,18 @@
 import React from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-
+import path from 'path';
 import PopupMarker from '../../pages/Home/components/PopupMarker'
 
 export default ({ userPosition, businesses, google ,history}) => {
+    const [currentMarker, setCurrentMarker] = React.useState(false);
+    
     const mapStyles = {
         position: 'relative',
         margin: 'auto',
         width: '100%',
         height: '90vh',
     };
+    
 
     return (
         <div style={{ minHeight: '60vh' }}>
@@ -28,11 +31,12 @@ export default ({ userPosition, businesses, google ,history}) => {
                     }}
                 >
                     <Marker
-                        name={'User location'}
+                        name="User location"
                         position={{
                             lat: +userPosition.lat,
                             lng: +userPosition.lng,
                         }}
+                        icon={path.join(__dirname,'user-location.png')}
                     />
 
                     {/* optional in case we want to mark the position of the business */}
@@ -46,6 +50,8 @@ export default ({ userPosition, businesses, google ,history}) => {
                                 lat: +business.lat,
                                 lng: +business.lng,
                             }}
+                            setCurrentMarker={setCurrentMarker}
+                            currentMarker={currentMarker}
                         />
                     ))}
                 </GoogleMap>

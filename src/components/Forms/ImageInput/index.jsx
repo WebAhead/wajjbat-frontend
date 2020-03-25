@@ -11,7 +11,6 @@ export default function UploadInput({ onChange, onError, height, width, multiple
         })
         .then((res) => {
             if (res.status === 200) {
-                console.log(1)
 
                 if (multiple) {
                     return url
