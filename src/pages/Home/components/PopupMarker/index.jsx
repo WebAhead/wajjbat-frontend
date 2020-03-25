@@ -7,7 +7,6 @@ import './style.scss';
 export default ({ lat, lng, business, history }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log(business);
 
   return (
     <Marker
