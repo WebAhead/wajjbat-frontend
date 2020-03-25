@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Marker, InfoWindow, InfoBox } from '@react-google-maps/api';
 import { Rating } from '@material-ui/lab';
-
+import path, { dirname } from 'path';
 import './style.scss';
 
 export default ({ lat, lng, business, history }) => {
@@ -15,6 +15,8 @@ export default ({ lat, lng, business, history }) => {
       onClick={() => {
         setIsOpen(!isOpen);
       }}
+      icon={path.join(__dirname,'restaurant-pin-32.png')}
+
     >
       {isOpen && (
         <InfoBox
