@@ -16,14 +16,13 @@ button:hover {
     border: 2px solid $main-green;
     box-sizing: border-box;
     border-radius: 6px;
-    margin-top: auto;
-    margin-bottom: auto;
   }
 
   .changeLanguage {
     @extend box;
-    width: 38px;
+    min-width: 40px;
     height: 35px;
+    margin: auto 10px;
 
     .select {
       background: none;
