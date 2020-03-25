@@ -42,8 +42,7 @@ export default function NavBar(props) {
                 },
             );
 
-            if (data.id)
-                setLogged(true);
+            if (data.id) setLogged(true);
             return 1;
         } catch (error) {
             console.log(error);
@@ -63,23 +62,21 @@ export default function NavBar(props) {
 
     return (
         <div className="navBar">
-            <div className="changeLanguage">
-                <select className="select" onChange={handleLang} value={lang}>
-                    <option value="ar">ar</option>
-                    <option value="en">en</option>
-                </select>
-            </div>
-
-            {/* <div className="signUp" /> */}
+            <img
+                onClick={() => history.push('/')}
+                className="logo-img"
+                src={require('../../assets/icons/logo-3.png')}
+                alt="Logo image"
+            />
 
             <div className="login">
-                <button className="home-btn" onClick={() => history.push('/')}>
-                    <HomeIcon
-                        classes={{
-                            root: classes.root,
-                        }}
-                    />
-                </button>
+
+                <div className="changeLanguage">
+                    <select className="select" onChange={handleLang} value={lang}>
+                        <option value="ar">ar</option>
+                        <option value="en">en</option>
+                    </select>
+                </div>
                 <button onClick={() => handleUser()}>
                     <AccountCircleIcon
                         classes={{
@@ -87,16 +84,15 @@ export default function NavBar(props) {
                         }}
                     />
                 </button>
-                {(logged)
-                    && (
-                        <button onClick={() => handleLogout()}>
-                            <ExitToAppOutlinedIcon
-                                classes={{
-                                    root: classes.root,
-                                }}
-                            />
-                        </button>
-                    )}
+                {logged && (
+                    <button onClick={() => handleLogout()}>
+                        <ExitToAppOutlinedIcon
+                            classes={{
+                                root: classes.root,
+                            }}
+                        />
+                    </button>
+                )}
             </div>
         </div>
     );
