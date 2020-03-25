@@ -1,5 +1,5 @@
 import React from 'react';
-import {GoogleMap withGoogleMap, Marker } from '@react-google-maps/api';
+import {GoogleMap, withGoogleMap, Marker } from '@react-google-maps/api';
 
 function InitialGoogleMaps({ userPosition, google }) {
     const mapStyles = {
