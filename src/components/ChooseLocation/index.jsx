@@ -8,7 +8,6 @@ function ChooseLocation({ userPosition, google, setBusinessLatlng, latLng }) {
     width: '100%',
     height: '40vh',
   };
-  console.log(`user pos is : ${userPosition.lat}`);
   return (
     <div style={{ minHeight: '40vh' }}>
       <LoadScript
