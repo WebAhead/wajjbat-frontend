@@ -76,8 +76,7 @@
 
   button:hover {
     background-color: #508991;
-    font-weight: 800;
-    cursor: pointer;
+    // font-weight: 800; Causes button to grow 3x out of bounds
   }
 
   .grow {

@@ -18,8 +18,9 @@ export default ({ lat, lng, business, history, setCurrentMarker, currentMarker }
             {currentMarker === business.id && (
                 <InfoBox
                     position={{
-                        lat: lat,
-                        lng: lng - 0.02222,
+                        lat,
+                        lng,
+                        // lng: lng - 0.02222, Causes problems especially zooming in and out while popup is open
                     }}
                     options={{
                         closeBoxMargin: true
