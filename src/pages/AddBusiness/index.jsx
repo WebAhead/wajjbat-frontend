@@ -121,7 +121,6 @@ function AddBusiness({ intl }) {
       lat: businessLatlng.lat,
       lng: businessLatlng.lng,
     };
-    console.log(data);
     try {
       const result = await axios.post(
         `${endPointUrl}/api/new-businesses`,
