@@ -16,14 +16,12 @@ button:hover {
     border: 2px solid $main-green;
     box-sizing: border-box;
     border-radius: 6px;
-    margin-top: auto;
-    margin-bottom: auto;
   }
 
   .changeLanguage {
     @extend box;
-    width: 65px;
-    height: 45px;
+    min-width: 40px;
+    height: 35px;
     margin: auto 10px;
 
     .select {
@@ -42,11 +40,12 @@ button:hover {
   }
 
   .login {
-    width: 100%;
-    height: 45px;
+    width: 38%;
+    height: 60%;
     margin: auto 1vw;
     display: flex;
     justify-content: space-around;
+    align-self: center;
   }
 
   button:focus {
@@ -56,10 +55,15 @@ button:hover {
   button {
     background: none;
     border: none;
-    // padding: 1rem;
-    margin-right: 1rem;
-    margin-left: 0.7rem;
   }
 
-  .home-btn {}
+  
+  .logo-img{
+    height: 44%;
+    padding: 0.5rem;
+    align-self: center;
+    cursor: pointer;
+  }
+
+
 }

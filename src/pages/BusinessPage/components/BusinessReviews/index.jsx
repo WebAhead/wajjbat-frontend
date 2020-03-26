@@ -59,7 +59,7 @@ function BusinessReviews(props) {
         if (!props.reviews.length) {
             return '';
         }
-
+ 
         return props.reviews.map(currentReview => (
             <ReviewCard
                 rating={currentReview.rating}
@@ -67,6 +67,7 @@ function BusinessReviews(props) {
                 profile_image={currentReview.profile_image}
                 dateCreated={currentReview.created_at.split('T')[0]}
                 review_body={currentReview.review_body}
+                reviewerid={currentReview.reviewer_id}
             />
         ));
     };
