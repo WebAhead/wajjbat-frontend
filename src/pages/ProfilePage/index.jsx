@@ -55,11 +55,11 @@ function ProfilePage(props) {
             </div>
             {reviews.map((currentReview) => (
                 <ReviewCard
-                    fullname={currentReview.businessname}
-                    rating={currentReview.rating}
+                    active
+                    fullname={currentReview.businessname} 
                     review_body={currentReview.reviewbody}
+                    rating={currentReview.rating}
                     dateCreated={currentReview.reviewdate}
-                    disableLink
                 />
             ))}
         </div>
