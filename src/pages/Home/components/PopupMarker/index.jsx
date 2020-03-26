@@ -1,26 +1,28 @@
 import React, { useState } from 'react';
 import { Marker, InfoWindow, InfoBox } from '@react-google-maps/api';
 import { Rating } from '@material-ui/lab';
-
+import { FormattedMessage } from 'react-intl';
+import path, { dirname } from 'path';
 import './style.scss';
 
-export default ({ lat, lng, business, history }) => {
+export default ({ lat, lng, business, history, setCurrentMarker, currentMarker }) => {
     const [isOpen, setIsOpen] = useState(false);
-
-    console.log(business);
 
     return (
         <Marker
             position={{ lat, lng }}
-            onClick={() => {
-                setIsOpen(!isOpen);
-            }}
+            onClick={() => setCurrentMarker(business.id)}
+            icon={path.join(__dirname,'restaurant-pin-32.png')}
+
         >
-            {isOpen && (
+            {currentMarker === business.id && (
                 <InfoBox
                     position={{
                         lat: lat,
-                        lng: lng,
+                        lng: lng - 0.02222,
+                    }}
+                    options={{
+                        closeBoxMargin: true
                     }}
                     onCloseClick={() => setIsOpen(false)}
                 >
@@ -46,23 +48,13 @@ export default ({ lat, lng, business, history }) => {
                                         {business.name}
                                     </a>
                                 </li>
-                                <li className="rating">
-                                    <Rating
-                                        name="half-rating"
-                                        value={+business.rating}
-                                        precision={0.5}
-                                        readOnly
-                                        size="small"
-                                    />
-                                </li>
-                                <li className="business-info-text">{business.cuisine}</li>
-                                <li className="business-info-text">{business.type}</li>
+                                <h5 className="type">
+                                    <FormattedMessage id={business.type} />, <FormattedMessage id={business.cuisine} />
+                                </h5>
+                                <a style={{marginTop:'auto', marginBottom:'5px'}} href={`/business/${business.id}`}>
+                                    <button className="grow">Go to business</button>
+                                </a>
                             </ul>
-                        </div>
-                        <div className="popup-footer">
-                            <a className="business-link" href={`/business/${business.id}`}>
-                                <button className="grow">Go to business</button>
-                            </a>
                         </div>
                     </div>
                 </InfoBox>
