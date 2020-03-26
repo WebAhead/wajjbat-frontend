@@ -1,0 +1,19 @@
+@import "theme/colors.scss";
+
+.search-form {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 0.3rem;
+
+  input {
+    width: 80%;
+    border: solid 1px #21b5a2;
+    border-radius: 0.5rem;
+    padding-left: 0.5rem;
+    outline: none;
+    font-size: medium;
+    font-weight: 500;
+  }
+}

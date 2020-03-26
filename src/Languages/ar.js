@@ -2,6 +2,7 @@ export default {
     'signin': 'تسجيل الدخول',
     'signup': ' مستخدم جديد',
     'topRated': 'اعلى التقيمات',
+    'searchResults': 'سيرتش ريزولتس',
     'Restaurant': 'مطعم',
     'Cafe': 'مقهى',
     'Bar': 'بار',

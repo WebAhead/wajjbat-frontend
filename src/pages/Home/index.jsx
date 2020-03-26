@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import './style.scss';
 
+import SearchBar from 'components/SearchBar';
 import SliderContainer from 'components/Slider';
 // import BusinessesList from 'components/BusinessesList';
 import BusinessesMap from 'components/BusinessesMap'
@@ -13,6 +14,7 @@ const endPointUrl = process.env.REACT_APP_API_URL;
 
 export default function Homepage(props) {
     const [businesses, setBusinesses] = useState([]);
+    const [sliderData, setSliderData] = useState([]);
     const [topRated, setTopRated] = useState([]);
     const [userPosition, setUserPosition] = useState({});
     const [originalBusinesses, setOriginalBusinesses] = useState([]);
@@ -49,7 +51,7 @@ export default function Homepage(props) {
                     lat: userPosition.lat,
                     lng: userPosition.lng,
                 });
-
+                
                 setBusinesses(data.businesses);
                 setOriginalBusinesses(data.businesses);
                 setTopRated(data.topRated);
@@ -69,8 +71,12 @@ export default function Homepage(props) {
 
     return (
         <div>
+            <SearchBar
+                businesses={businesses}
+                setSliderData={setSliderData}
+            />
             <SliderContainer
-                data={topRated}
+                data={sliderData.length === 0 ? topRated : sliderData}
                 render={(business, index) => (
                     <Link
                         key={index}
@@ -85,7 +91,7 @@ export default function Homepage(props) {
                     </Link>
                 )}
                 // id for react-intl
-                title="topRated"
+                title={sliderData.length === 0 ? ('topRated') : ('searchResults')}
             />
             {(userPosition.lat && businesses.length) ? (
                 <BusinessesMap
