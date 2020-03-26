@@ -31,35 +31,34 @@ export default ({ lat, lng, business, history, setCurrentMarker, currentMarker }
                     }}
                 >
                     <div className="popup-window">
-                        <div className="popup-info">
-                            <a
-                                onClick={() => history.push(`/business/${business.id}`)}
-                                className="business-image-link"
-                                href={`/business/${business.id}`}
-                            >
-                                <img
-                                    className="business-image"
-                                    src={business.image}
-                                    alt="businessimage"
-                                />
-                            </a>
-                            <ul className="business-info">
-                                <li>
-                                    <a
-                                        className="business-name"
-                                        href={`/business/${business.id}`}
-                                    >
-                                        {business.name}
-                                    </a>
-                                </li>
-                                <h5 className="type">
-                                    <FormattedMessage id={business.type} />, <FormattedMessage id={business.cuisine} />
-                                </h5>
-                                <a style={{marginTop:'auto', marginBottom:'5px'}} href={`/business/${business.id}`}>
-                                    <button className="grow">Go to business</button>
+                        <a 
+                            className="business-image"
+                            onClick={() => history.push(`/business/${business.id}`)}
+                            onKeyDown={() => 1}
+                            href={`/business/${business.id}`}
+                        >
+                            <img
+                                className="business-image"
+                                src={business.image}
+                                alt="businessimage"
+                            />
+                        </a>
+                        <ul className="business-info">
+                            <li>
+                                <a
+                                    className="business-name"
+                                    href={`/business/${business.id}`}
+                                >
+                                    {business.name}
                                 </a>
-                            </ul>
-                        </div>
+                            </li>
+                            <h5 className="type">
+                                <FormattedMessage id={business.type} />, <FormattedMessage id={business.cuisine} />
+                            </h5>
+                            <a style={{marginTop:'auto', marginBottom:'5px'}} href={`/business/${business.id}`}>
+                                <button className="grow">Go to business</button>
+                            </a>
+                        </ul>
                     </div>
                 </InfoWindow>
             )}
