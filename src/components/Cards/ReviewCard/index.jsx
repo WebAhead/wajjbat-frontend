@@ -11,10 +11,15 @@ export default props =>{
     return(
         <div className={style['review-card']}>
             <div className={style['upper-review-card']}>
-                <div className={style['profile-details']}>
  
-                    {props.active ? props.fullname
-                        : (
+                {props.active   
+                    ? (
+                        <div className={style['profile-details']}>
+                            <span className={style['profile-fullname']}>{props.fullname}</span>
+                        </div>
+                    )           
+                    : (
+                        <div className={style['profile-details']}>
                             <Link
                                 key={props.reviewerid}
                                 to={{
@@ -25,8 +30,8 @@ export default props =>{
                                 <img className={style['profile-image']} src={props.profile_image} alt="" />
                                 <span className={style['profile-fullname']}>{props.fullname}</span>
                             </Link>
-                        )}
-                </div>
+                        </div>
+                    )}
                 <span>{props.dateCreated}</span>
             </div>
             <div className={style['middle-review-card']}>{props.review_body}</div>

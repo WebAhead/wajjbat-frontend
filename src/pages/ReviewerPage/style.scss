@@ -1,36 +1,43 @@
+@import "theme/colors.scss";
+
 .reviewer-container{
-    
-    .reviewer-details{
-    display: flex;
-    align-items: center;
-    }   
 
-    .name-email{
+    .profile-container {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
         align-items: center;
-    }
-
-    .name-email h1{
-        text-transform: uppercase;
-    }
-
-    .reviewer-pic{
-        height: 150px;
-        width: 150px;
-        border-radius: 50%;
-    }
-
-
-    .reviews-list{
-        list-style: none;
         display: flex;
-        flex-direction: column;
-    }
+        justify-content: center;
+        margin-bottom: 30px;
+        margin-top: 20px;
+        box-shadow: 0 5px 10px -6px $dark-green;
+        padding: 20px 10px;
+        max-width: 90%;
+        margin: auto;
 
-    .reviews-list li{
-        margin: 25px;
+        .profile-container-headers{
+            display: flex;
+            flex-direction: column;
+             justify-content: space-evenly;
+            height: 70px;
+            margin-left: 10px;
+        }
+      
+        img {
+          border-radius: 50%;
+          height: 90px;
+          width: 90px;
+        }
+
+        h2{
+            text-transform: uppercase;
+        }
       }
+
+      @media screen and (max-width:400px) {
+        .profile-container-headers{
+            font-size: 14px;
+        }
+      }
+
 }
 
