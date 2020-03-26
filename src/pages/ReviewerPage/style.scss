@@ -1,0 +1,49 @@
+@import "theme/colors.scss";
+
+
+.emptyBusinessDetails {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.reviewer-container{
+
+    .profile-container {
+        display: flex;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+        margin-top: 20px;
+        box-shadow: 0 5px 10px -6px $dark-green;
+        padding: 20px 10px;
+        max-width: 90%;
+        margin: auto;
+
+        .profile-container-headers{
+            display: flex;
+            flex-direction: column;
+             justify-content: space-evenly;
+            height: 70px;
+            margin-left: 10px;
+        }
+      
+        img {
+          border-radius: 50%;
+          height: 90px;
+          width: 90px;
+        }
+
+        h2{
+            text-transform: uppercase;
+        }
+      }
+
+      @media screen and (max-width:400px) {
+        .profile-container-headers{
+            font-size: 14px;
+        }
+      }
+
+}
+
