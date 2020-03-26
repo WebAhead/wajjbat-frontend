@@ -16,7 +16,7 @@ export default ({ lat, lng, business, history, setCurrentMarker, currentMarker }
 
         >
             {currentMarker === business.id && (
-                <InfoBox
+                <InfoWindow
                     position={{
                         lat,
                         lng,
@@ -25,7 +25,10 @@ export default ({ lat, lng, business, history, setCurrentMarker, currentMarker }
                     options={{
                         closeBoxMargin: true
                     }}
-                    onCloseClick={() => setIsOpen(false)}
+                    onCloseClick={() => {
+                        setIsOpen(false);
+                        setCurrentMarker(false);
+                    }}
                 >
                     <div className="popup-window">
                         <div className="popup-info">
@@ -58,7 +61,7 @@ export default ({ lat, lng, business, history, setCurrentMarker, currentMarker }
                             </ul>
                         </div>
                     </div>
-                </InfoBox>
+                </InfoWindow>
             )}
         </Marker>
     );
