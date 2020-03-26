@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
 import './styles.scss';
 import ReviewCard from 'components/Cards/ReviewCard';
@@ -30,8 +31,11 @@ function ProfilePage(props) {
     }
 
     if (!userDetails.firstName) {
-        return 'Loading...';
-    }
+        return (
+            <div className="emptyBusinessDetails">
+                <CircularProgress disableShrink />
+            </div>
+        ); }
 
     return (
         <div>

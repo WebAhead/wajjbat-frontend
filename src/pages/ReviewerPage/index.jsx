@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 import ReviewCard from 'components/Cards/ReviewCard'
 import './style.scss';
 
@@ -28,7 +28,11 @@ export default props => {
     },[])
 
     if(!reviewerDetails || !reviews){
-        return <h2>Loading....</h2>
+        return (
+            <div className="emptyBusinessDetails">
+                <CircularProgress disableShrink />
+            </div>
+        );
     }
 
     return (
