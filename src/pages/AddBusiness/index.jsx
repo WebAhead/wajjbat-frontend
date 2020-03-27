@@ -110,7 +110,8 @@ function AddBusiness({ intl }) {
             [input.name]: !prevState[input.name],
         }));
     };
-    const handleSubmit = async e => {
+
+  const handleSubmit = async e => {
         e.preventDefault();
 
         const data = {
