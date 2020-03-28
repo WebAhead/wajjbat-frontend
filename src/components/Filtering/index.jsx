@@ -36,7 +36,7 @@ function Filtering({
         value,
     }));
 
-    const [inputRadius, setInputRadius] = useState(0.5);
+    const [inputRadius, setInputRadius] = useState(3.5);
 
     const radiusChange = e => {
         setInputRadius(e.target.value);

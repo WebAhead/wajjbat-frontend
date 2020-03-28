@@ -1,10 +1,12 @@
-import React from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import React, {useState, useEffect } from 'react';
+import { GoogleMap, LoadScript, Marker, Circle } from '@react-google-maps/api';
 import path from 'path';
 import PopupMarker from '../../pages/Home/components/PopupMarker'
 
-export default ({ userPosition, businesses, google ,history}) => {
-    const [currentMarker, setCurrentMarker] = React.useState(false);
+
+export default ({ userPosition, businesses, google ,history, radius}) => {
+    const [currentMarker, setCurrentMarker] = useState(false);
+    const [zoom, setZoom] = useState(13.1);
     
     const mapStyles = {
         position: 'relative',
@@ -12,7 +14,15 @@ export default ({ userPosition, businesses, google ,history}) => {
         width: '100%',
         height: '90vh',
     };
-    
+    // Bellow I'm trying to determine the right zoom to fit the chosen radius
+    // ITS STILL INCORRECT
+    useEffect(()=>{
+        setZoom(zoom=>(
+            Math.log(80000/(+radius)**2)/Math.log(2)
+        ));
+        console.log(`For radius ${radius} the zoom is : `)
+        console.log(zoom);
+    },[radius]);
 
     return (
         <div style={{ minHeight: '60vh' }}>
@@ -23,13 +33,38 @@ export default ({ userPosition, businesses, google ,history}) => {
                 <GoogleMap
                     // google={google}
                     containerStyle={{ position: 'relative' }}
-                    zoom={13}
+                    zoom={zoom}
                     mapContainerStyle={mapStyles}
                     center={{
                         lat: userPosition.lat,
                         lng: userPosition.lng,
                     }}
+                    // fitBounds={
+                    //     {
+                    //         lat: userPosition.lat + +radius*1000/110.574,
+                    //         lng: userPosition.lng + +radius/110.574,
+                    //     }
+                    // }
                 >
+                    
+                    <Circle
+                        center={{
+                            lat:userPosition.lat,
+                            lng:userPosition.lng
+                        }}
+                        radius={+radius*1000}
+                        options={
+                            {
+                                strokeColor:'#21B5A2',
+                                strokeOpacity:0.7,
+                                strokeWeight:2,
+                                fillColor:'#21B5A2',
+                                fillOpacity:0.2,
+                            }
+                        }
+                        
+
+                    />
                     <Marker
                         name="User location"
                         position={{
