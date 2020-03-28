@@ -18,6 +18,7 @@ export default function Homepage(props) {
     const [originalBusinesses, setOriginalBusinesses] = useState([]);
     const [type, setTypeFilter] = useState('All');
     const [cuisine, setCusineFilter] = useState('All');
+    const [radius, setRadiusFilter] = useState(0.5);
     const history = useHistory();
     useEffect(() => {
     // here we get the user location  after the user approve using
@@ -67,6 +68,9 @@ export default function Homepage(props) {
     ),
     [type, cuisine]);
 
+    useEffect(()=>{
+        console.log(radius);
+    },[radius])
     return (
         <div>
             <SliderContainer
@@ -92,12 +96,14 @@ export default function Homepage(props) {
                     businesses={businesses}
                     userPosition={userPosition}
                     history={history}
+                    radius={radius}
                 />
             ) : ''}
             <Footer
                 lang={props.lang}
                 filterByType={({ value }) => setTypeFilter(value)}
                 filterByCuisine={({ value }) => setCusineFilter(value)}
+                filterByRadius={({ value }) => setRadiusFilter(value)}
             />
         </div>
     );

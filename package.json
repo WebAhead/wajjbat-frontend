@@ -36,7 +36,6 @@
         "eject": "react-scripts eject",
         "lint": "eslint ./src",
         "start-sw": "http-server ./build"
-
     },
     "eslintConfig": {
         "extends": "react-app"
