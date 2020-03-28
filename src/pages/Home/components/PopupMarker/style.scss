@@ -4,88 +4,59 @@
 
 .popup-window {
   box-sizing: border-box;
-  width: 25em;
-  height: 10em;
   display: flex;
-  flex-direction: column;
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
-  border: gray 1px solid;
   animation: 0.1s ease-in-out 0s 1 scaleOut;
 
-  .popup-info {
-    width: 98%;
-    height: 95%;
-    display: flex;
-    margin: auto;
-    align-items: center;
-
-    .business-image-link {
-      min-width: 40%;
-      max-width: 40%;
-      height: 100%;
-
-      .business-image {
-        width: 100%;
-        height: 100%;
-        min-width: 112px;
-        border-radius: 5px;
-      }
-    }
-
-    .business-info {
-      align-self: flex-start;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      margin: 0 5px;
-
-      .business-name {
-        width: 50%;
-        font-size: 1.2rem;
-        margin-bottom: 1rem;
-        color: #235a78;
-      }
-
-      li {
-        padding: 2px;
-        margin: 1px;
-      }
-
-      .type {
-        margin: 5px;
-        color: $dark-grey;
-        font-style: italic;
-        font-size: 14px;
-      }
-    }
-  }
-
-  button {
-    padding: 8px 14px;
-    background-color: #21b5a2;
+  .business-image {
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
-    border: none;
-    color: white;
-    text-align: center;
-    font-weight: 600;
-    margin-top: auto;
-  }
-
-  button:hover {
-    background-color: #508991;
-    font-weight: 800;
     cursor: pointer;
+    min-height: 90px;
   }
 
-  .grow {
-    transition: all 0.2s ease-in-out;
-  }
+  .business-info {
+    align-self: flex-start;
+    height: 100%;
+    width: 100%;
+    max-width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 5px;
 
-  .grow:hover {
-    transform: scale(1.1) perspective(10px);
+    .business-name {
+      width: 50%;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #235a78;
+    }
+
+    li {
+      padding: 2px;
+      margin: 1px;
+    }
+
+    .type {
+      margin: 5px;
+      color: $dark-grey;
+      font-style: italic;
+      font-size: 14px;
+    }
+    
+    .business-link {
+      padding: 8px 14px;
+      background-color: #21b5a2;
+      border-radius: 5px;
+      border: none;
+      min-width: 50px;
+      color: white;
+      text-align: center;
+      font-weight: 600;
+      margin-top: auto;
+    }
   }
 }
 
