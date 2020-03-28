@@ -13,7 +13,6 @@ export default ({ lat, lng, business, history, setCurrentMarker, currentMarker }
             position={{ lat, lng }}
             onClick={() => setCurrentMarker(business.id)}
             icon={path.join(__dirname,'restaurant-pin-32.png')}
-
         >
             {currentMarker === business.id && (
                 <InfoWindow
@@ -22,9 +21,7 @@ export default ({ lat, lng, business, history, setCurrentMarker, currentMarker }
                         lng,
                         // lng: lng - 0.02222, Causes problems especially zooming in and out while popup is open
                     }}
-                    options={{
-                        closeBoxMargin: true
-                    }}
+
                     onCloseClick={() => {
                         setIsOpen(false);
                         setCurrentMarker(false);
@@ -55,8 +52,11 @@ export default ({ lat, lng, business, history, setCurrentMarker, currentMarker }
                             <h5 className="type">
                                 <FormattedMessage id={business.type} />, <FormattedMessage id={business.cuisine} />
                             </h5>
-                            <a style={{marginTop:'auto', marginBottom:'5px'}} href={`/business/${business.id}`}>
-                                <button className="grow">Go to business</button>
+                            <a 
+                                className="business-link"
+                                href={`/business/${business.id}`}
+                            >
+                                Go to business
                             </a>
                         </ul>
                     </div>
