@@ -36,13 +36,10 @@ function Filtering({
         value,
     }));
 
-    const [inputRadius, setInputRadius] = useState(3.5);
+    const [inputRadius, setInputRadius] = useState(2.5);
 
     const radiusChange = e => {
         setInputRadius(e.target.value);
-        filterByRadiusHandler({
-            value: e.target.value,
-        });
     };
     return (
         <div className="filters">
@@ -92,7 +89,7 @@ function Filtering({
                         id="points"
                         name="points"
                         min="0.5"
-                        max="30"
+                        max="5"
                         step="0.5"
                         value={`${inputRadius}`}
                     />
@@ -101,7 +98,10 @@ function Filtering({
                 <div className="buttonContainer">
                     <button
                         className="actionButton"
-                        onClick={() => setShowSideBar(false)}
+                        onClick={() => {
+                            setShowSideBar(false);
+                            filterByRadiusHandler({ value: inputRadius });
+                        }}
                     >
                         <FormattedMessage id="See reults" />
                     </button>

@@ -5,7 +5,7 @@ import PopupMarker from '../../pages/Home/components/PopupMarker';
 
 export default ({ userPosition, businesses, history, radius }) => {
     const [currentMarker, setCurrentMarker] = useState(false);
-    const [zoom, setZoom] = useState(13.1);
+    const [zoom, setZoom] = useState(14);
 
     const mapStyles = {
         position: 'relative',
@@ -17,7 +17,13 @@ export default ({ userPosition, businesses, history, radius }) => {
     // ITS STILL INCORRECT
     // eslint-disable-next-line
     useEffect(() => {
-        setZoom(() => Math.log(80000 / (+radius) ** 2) / Math.log(2));
+        if(radius)
+            setZoom(() =>{
+                let calcFormula = Math.log(80000 / (+radius) ** 2) / Math.log(2) ;
+                if(radius<=2) calcFormula-=1;
+                if(radius<1) calcFormula-=1;
+                return calcFormula;
+            });
     }, [radius]);
 
     return (
@@ -42,20 +48,23 @@ export default ({ userPosition, businesses, history, radius }) => {
                     //     }
                     // }
                 >
-                    <Circle
-                        center={{
-                            lat: userPosition.lat,
-                            lng: userPosition.lng,
-                        }}
-                        radius={+radius * 1000}
-                        options={{
-                            strokeColor: '#21B5A2',
-                            strokeOpacity: 0.7,
-                            strokeWeight: 2,
-                            fillColor: '#21B5A2',
-                            fillOpacity: 0.2,
-                        }}
-                    />
+                    {radius && (
+                        <Circle
+                            center={{
+                                lat: userPosition.lat,
+                                lng: userPosition.lng,
+                            }}
+                            radius={+radius * 1000}
+                            options={{
+                                strokeColor: '#21B5A2',
+                                strokeOpacity: 0.5,
+                                strokeWeight: 2,
+                                fillColor: '#21B5A2',
+                                fillOpacity: 0.1,
+                            }}
+                        />
+                    )}
+
                     <Marker
                         name="User location"
                         position={{
