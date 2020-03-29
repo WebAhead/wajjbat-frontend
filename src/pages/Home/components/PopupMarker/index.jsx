@@ -7,6 +7,7 @@ import './style.scss';
 
 export default ({ lat, lng, business, history, setCurrentMarker, currentMarker }) => {
     const [isOpen, setIsOpen] = useState(false);
+    console.log(window.innerWidth)
 
     return (
         <Marker
@@ -29,7 +30,7 @@ export default ({ lat, lng, business, history, setCurrentMarker, currentMarker }
                 >
                     <div className="popup-window">
                         <a 
-                            className="business-image"
+                            className="business-image-wrapper"
                             onClick={() => history.push(`/business/${business.id}`)}
                             onKeyDown={() => 1}
                             href={`/business/${business.id}`}
@@ -52,12 +53,14 @@ export default ({ lat, lng, business, history, setCurrentMarker, currentMarker }
                             <h5 className="type">
                                 <FormattedMessage id={business.type} />, <FormattedMessage id={business.cuisine} />
                             </h5>
-                            <a 
-                                className="business-link"
-                                href={`/business/${business.id}`}
-                            >
+                            {window.innerWidth > 660 && (
+                                <a 
+                                    className="business-link"
+                                    href={`/business/${business.id}`}
+                                >
                                 Go to business
-                            </a>
+                                </a>
+                            )}
                         </ul>
                     </div>
                 </InfoWindow>
