@@ -7,7 +7,6 @@ import './style.scss';
 
 export default ({ lat, lng, business, history, setCurrentMarker, currentMarker }) => {
     const [isOpen, setIsOpen] = useState(false);
-    console.log(window.innerWidth)
 
     return (
         <Marker
