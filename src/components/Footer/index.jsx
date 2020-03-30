@@ -4,7 +4,7 @@ import './style.scss';
 
 import Filtering from '../Filtering';
 
-export default function Footer({ lang, filterByType, filterByCuisine }) {
+export default function Footer({ lang, filterByType, filterByCuisine, filterByRadius }) {
     const [hideFooter, setHideFooter] = useState(false);
     const [showSideBar, setShowSideBar] = useState(false);
 
@@ -14,7 +14,7 @@ export default function Footer({ lang, filterByType, filterByCuisine }) {
 
     useEffect(() => {
         let prevScrollPosition = window.pageYOffset;
-        window.onscroll =  () => {
+        window.onscroll = () => {
             const currentScrollPosition = window.pageYOffset;
             if (prevScrollPosition > currentScrollPosition) {
                 // if he scrolls up show the filter icon
@@ -26,7 +26,6 @@ export default function Footer({ lang, filterByType, filterByCuisine }) {
             prevScrollPosition = currentScrollPosition;
         };
     }, []);
-
 
     return (
         <div
@@ -55,7 +54,7 @@ export default function Footer({ lang, filterByType, filterByCuisine }) {
                 <div
                     className="sideBar"
                     id="sideBar"
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={e => e.stopPropagation()}
                 >
                     <button
                         className="sideBarHider"
@@ -68,6 +67,7 @@ export default function Footer({ lang, filterByType, filterByCuisine }) {
                     <Filtering
                         filterByTypeHandler={filterByType}
                         filterByCuisineHandler={filterByCuisine}
+                        filterByRadiusHandler={filterByRadius}
                         setShowSideBar={setShowSideBar}
                     />
                 </div>
