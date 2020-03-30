@@ -23,7 +23,7 @@ export default function SearchBar({ businesses, setSearchData }) {
                 onChange={event => setQuery(event.target.value)}
                 type="text"
                 autoComplete="off"
-                placeholder="Business name, type or cuisine"
+                placeholder="Search by name, type or cuisine"
             />
         </form>
     );

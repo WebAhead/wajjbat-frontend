@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import './style.scss';
 
-import SearchBar from 'components/SearchBar';
 import SliderContainer from 'components/Slider';
 // import BusinessesList from 'components/BusinessesList';
 import BusinessesMap from 'components/BusinessesMap'
@@ -89,17 +88,15 @@ export default function Homepage(props) {
                 // id for react-intl
                 title="topRated"
             />
-            <SearchBar
-                businesses={businesses}
-                setSearchData={setSearchData}
-            />
-            {(userPosition.lat && businesses.length) && (
+            {(userPosition.lat && businesses.length) ? (
                 <BusinessesMap
                     businesses={searchData.length === 0 ? businesses : searchData}
                     userPosition={userPosition}
                     history={history}
+                    setSearchData={setSearchData}
+                    originalBusinesses={businesses}
                 />
-            )}
+            ): ''}
             <Footer
                 lang={props.lang}
                 filterByType={({ value }) => setTypeFilter(value)}

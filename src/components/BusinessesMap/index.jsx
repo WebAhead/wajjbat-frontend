@@ -1,9 +1,10 @@
 import React from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import path from 'path';
+import SearchBar from 'components/SearchBar';
 import PopupMarker from '../../pages/Home/components/PopupMarker'
 
-export default ({ userPosition, businesses, google ,history}) => {
+export default ({ userPosition, businesses, google ,history, setSearchData, originalBusinesses}) => {
     const [currentMarker, setCurrentMarker] = React.useState(false);
     
     const mapStyles = {
@@ -15,7 +16,11 @@ export default ({ userPosition, businesses, google ,history}) => {
     
 
     return (
-        <div style={{ minHeight: '60vh' }}>
+        <div style={{ minHeight: '60vh', position: 'relative' }}>
+            <SearchBar
+                businesses={originalBusinesses}
+                setSearchData={setSearchData}
+            />
             <LoadScript
                 id="hehe"
                 googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_KEY}
