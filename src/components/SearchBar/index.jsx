@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './style.scss';
 
-export default function SearchBar({ businesses, setSliderData }) {
+export default function SearchBar({ businesses, setSearchData }) {
     const [query, setQuery] = useState('');
 
     useEffect(() => {
-        if (query === '') return setSliderData([]);
-        return setSliderData(
+        if (query === '') return setSearchData([]);
+        return setSearchData(
             businesses.filter(business => {
                 return (
                     business.name.toLowerCase().includes(query.toLowerCase())
