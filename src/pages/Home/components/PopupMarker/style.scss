@@ -8,6 +8,7 @@
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
   animation: 0.1s ease-in-out 0s 1 scaleOut;
+  direction: ltr;
 
   .business-image {
     width: 100%;
@@ -45,7 +46,7 @@
       font-style: italic;
       font-size: 14px;
     }
-    
+
     .business-link {
       padding: 8px 14px;
       background-color: #21b5a2;
@@ -66,5 +67,56 @@
   }
   100% {
     transform: scaleY(1);
+  }
+}
+
+
+@media (min-width: 250px) {
+  .popup-window {
+    max-width: 50vw;
+    min-width: 40vw;
+    flex-direction: column;
+    max-height: 90%;
+
+    .business-info {
+      margin: auto;
+    } 
+
+    .business-image {
+      max-height: 120px;
+      margin: auto;
+    }
+
+  }
+}
+
+
+@media (min-width: 550px) {
+  .popup-window {
+    max-width: 50vw;
+    flex-direction: row;
+
+
+    .business-image-wrapper {
+      max-width: 50%;
+    }
+  }
+}
+
+@media (min-width: 900px) {
+  .popup-window {
+    max-width: 25vw;
+    min-width: unset;
+  }
+}
+
+
+@media (min-width: 1281px) {
+  .popup-window {
+    max-width: 18vw;
+
+    .business-image-wrapper {
+      max-width: 40%;
+    }
   }
 }
