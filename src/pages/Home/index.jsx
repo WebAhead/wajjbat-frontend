@@ -14,7 +14,7 @@ const endPointUrl = process.env.REACT_APP_API_URL;
 
 export default function Homepage(props) {
     const [businesses, setBusinesses] = useState([]);
-    const [sliderData, setSliderData] = useState([]);
+    const [searchData, setSearchData] = useState([]);
     const [topRated, setTopRated] = useState([]);
     const [userPosition, setUserPosition] = useState({});
     const [originalBusinesses, setOriginalBusinesses] = useState([]);
@@ -73,10 +73,10 @@ export default function Homepage(props) {
         <div>
             <SearchBar
                 businesses={businesses}
-                setSliderData={setSliderData}
+                setSearchData={setSearchData}
             />
             <SliderContainer
-                data={sliderData.length === 0 ? topRated : sliderData}
+                data={searchData.length === 0 ? topRated : searchData}
                 render={(business, index) => (
                     <Link
                         key={index}
@@ -91,15 +91,15 @@ export default function Homepage(props) {
                     </Link>
                 )}
                 // id for react-intl
-                title={sliderData.length === 0 ? ('topRated') : ('searchResults')}
+                title={searchData.length === 0 ? ('topRated') : ('searchResults')}
             />
-            {(userPosition.lat && businesses.length) ? (
+            {(userPosition.lat && businesses.length) && (
                 <BusinessesMap
-                    businesses={businesses}
+                    businesses={searchData.length === 0 ? businesses : searchData}
                     userPosition={userPosition}
                     history={history}
                 />
-            ) : ''}
+            )}
             <Footer
                 lang={props.lang}
                 filterByType={({ value }) => setTypeFilter(value)}
