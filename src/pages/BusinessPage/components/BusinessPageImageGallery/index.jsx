@@ -21,7 +21,7 @@ export default ({ defaultMainImage, defaultSubImages }) => {
     return (
         <header className={style['business-page-header']}>
             <div className={style['main-image']}>
-                <img src={mainImage} alt="" />
+                <img src={mainImage} alt="Business image" />
             </div>
             <div className={style['sub-images']} style={{ display: defaultSubImages.length < 4 && 'flex' }}>
                 <Slider {...settings}>

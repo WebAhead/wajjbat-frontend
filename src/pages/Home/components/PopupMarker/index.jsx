@@ -13,51 +13,56 @@ export default ({ lat, lng, business, history, setCurrentMarker, currentMarker }
             position={{ lat, lng }}
             onClick={() => setCurrentMarker(business.id)}
             icon={path.join(__dirname,'restaurant-pin-32.png')}
-
         >
             {currentMarker === business.id && (
-                <InfoBox
+                <InfoWindow
                     position={{
-                        lat: lat,
-                        lng: lng - 0.02222,
+                        lat,
+                        lng,
+                        // lng: lng - 0.02222, Causes problems especially zooming in and out while popup is open
                     }}
-                    options={{
-                        closeBoxMargin: true
+
+                    onCloseClick={() => {
+                        setIsOpen(false);
+                        setCurrentMarker(false);
                     }}
-                    onCloseClick={() => setIsOpen(false)}
                 >
                     <div className="popup-window">
-                        <div className="popup-info">
-                            <a
-                                onClick={() => history.push(`/business/${business.id}`)}
-                                className="business-image-link"
-                                href={`/business/${business.id}`}
-                            >
-                                <img
-                                    className="business-image"
-                                    src={business.image}
-                                    alt="businessimage"
-                                />
-                            </a>
-                            <ul className="business-info">
-                                <li>
-                                    <a
-                                        className="business-name"
-                                        href={`/business/${business.id}`}
-                                    >
-                                        {business.name}
-                                    </a>
-                                </li>
-                                <h5 className="type">
-                                    <FormattedMessage id={business.type} />, <FormattedMessage id={business.cuisine} />
-                                </h5>
-                                <a style={{marginTop:'auto', marginBottom:'5px'}} href={`/business/${business.id}`}>
-                                    <button className="grow">Go to business</button>
+                        <a 
+                            className="business-image-wrapper"
+                            onClick={() => history.push(`/business/${business.id}`)}
+                            onKeyDown={() => 1}
+                            href={`/business/${business.id}`}
+                        >
+                            <img
+                                className="business-image"
+                                src={business.image}
+                                alt="businessimage"
+                            />
+                        </a>
+                        <ul className="business-info">
+                            <li>
+                                <a
+                                    className="business-name"
+                                    href={`/business/${business.id}`}
+                                >
+                                    {business.name}
                                 </a>
-                            </ul>
-                        </div>
+                            </li>
+                            <h5 className="type">
+                                <FormattedMessage id={business.type} />, <FormattedMessage id={business.cuisine} />
+                            </h5>
+                            {window.innerWidth > 660 && (
+                                <a 
+                                    className="business-link"
+                                    href={`/business/${business.id}`}
+                                >
+                                Go to business
+                                </a>
+                            )}
+                        </ul>
                     </div>
-                </InfoBox>
+                </InfoWindow>
             )}
         </Marker>
     );

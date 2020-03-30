@@ -44,5 +44,5 @@ export default {
     'pending': 'pending',
     'Add Business': 'Add Business',
     'Choose location': 'Choose location',
-    'Reviews amount template':'Based on {reviews} reviews.'
+    'Reviews amount template':'Based on {reviews} reviews'
 };
