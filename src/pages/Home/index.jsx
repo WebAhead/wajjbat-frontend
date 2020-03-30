@@ -71,12 +71,8 @@ export default function Homepage(props) {
 
     return (
         <div>
-            <SearchBar
-                businesses={businesses}
-                setSearchData={setSearchData}
-            />
             <SliderContainer
-                data={searchData.length === 0 ? topRated : searchData}
+                data={topRated}
                 render={(business, index) => (
                     <Link
                         key={index}
@@ -91,7 +87,11 @@ export default function Homepage(props) {
                     </Link>
                 )}
                 // id for react-intl
-                title={searchData.length === 0 ? ('topRated') : ('searchResults')}
+                title="topRated"
+            />
+            <SearchBar
+                businesses={businesses}
+                setSearchData={setSearchData}
             />
             {(userPosition.lat && businesses.length) && (
                 <BusinessesMap
