@@ -50,5 +50,6 @@ export default {
     'Edit': 'Edit',
     'Back': 'Back',
     'Promotions': 'Promotions'
+    'business followers': '{followers} followers'
 
 };

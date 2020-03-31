@@ -49,5 +49,6 @@ export default {
     'Edit': 'تعديل',
     'Back': 'رجوع',
     'Promotions': 'الترقيه',
+    'business followers': '{followers} متابعين',
     'searchPlaceholder': 'بحث حسب الاسم, النوع أو اسلوب المطبخ'
 };

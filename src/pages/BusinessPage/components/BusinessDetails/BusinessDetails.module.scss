@@ -15,7 +15,22 @@
 
   .business-rating{
     display: flex;
+    align-items: center;
+    justify-content: space-evenly;
   }
+
+  .followers-by-business{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 5px;
+   }
+
+   .followers-amount{
+     font-size: 12px;
+     color: $main-grey;
+     letter-spacing: 1.5px;
+     }
   
 }
 
