@@ -8,6 +8,8 @@ import ProfilePage from './pages/ProfilePage/index';
 import AddBusiness from './pages/AddBusiness';
 import ProfileBusinesList from './pages/ProfileBusinessList';
 import ReviewerPage from './pages/ReviewerPage';
+import FollowersPage from './pages/FollowersPage';
+
 import './App.scss';
 
 export default props => (
@@ -21,6 +23,7 @@ export default props => (
             <Route path="/profile-business-list" component={ProfileBusinesList} />
             <Route path="/create-business" component={AddBusiness} />
             <Route path="/reviewer/:fullname/:reviewerid" component={ReviewerPage} />
+            <Route path="/followers/:businessid" component={FollowersPage} />
         </Switch>
     </div>
 );
