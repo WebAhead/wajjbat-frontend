@@ -2,21 +2,31 @@
 
 .search-form {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
-  width: 70%;
-  margin: 0.3rem 0;
   position: absolute;
-  top: 4.5px;
-  left: 0;
+  width: 80%;
+  margin: 0.5rem 0.5rem;
   z-index: 999;
 
   input {
-    width: 80%;
+    width: 100%;
     border: solid 1px #21b5a2;
-    border-radius: 5px;
-    padding: 4px 10px;
+    border-radius: 4px;
+    padding: 0 10px;
     outline: none;
-    font-size: 15px;
+    font-size: 19px;
   }
+}
+
+.gm-style-mtc {
+  display: none !important;
+}
+
+.gm-svpc {
+  display: none !important;
+}
+
+.gm-bundled-control {
+  bottom: 15rem !important;
 }
