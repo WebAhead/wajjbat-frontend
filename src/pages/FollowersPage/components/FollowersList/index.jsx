@@ -3,7 +3,8 @@ import { makeStyles, List , ListItem , ListItemText , ListItemAvatar, Avatar, Di
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '85%',
+        width: '90%',
+        margin: 'auto',
         maxWidth: 960,
         backgroundColor: theme.palette.background.paper,
     },
