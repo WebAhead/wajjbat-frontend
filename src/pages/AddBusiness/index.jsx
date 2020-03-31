@@ -28,7 +28,7 @@ const cuisines = [
 
 const endPointUrl = process.env.REACT_APP_API_URL;
 
-function AddBusiness({ intl }) {
+function AddBusiness({ intl,editing={} }) {
     const history = useHistory();
 
     const [mainImg, setMainImg] = useState('');
@@ -38,18 +38,18 @@ function AddBusiness({ intl }) {
     const [businessLatlng, setBusinessLatlng] = useState({});
 
     const [business, setBusiness] = useState(() => ({
-        name: '',
-        description: '',
-        phone: '',
-        email: '',
-        cuisine: '',
-        address: '',
-        type: '',
-        parking: false,
-        smokingArea: false,
-        freeWifi: false,
+        name: editing.name || '',
+        description: editing.description ||'',
+        phone: editing.phone || '',
+        email: editing.email ||'',
+        cuisine: editing.cuisine ||'',
+        address: editing.address ||'',
+        type: editing.type ||'',
+        parking: editing.parking ||false,
+        smokingArea: editing.smokingArea ||false,
+        freeWifi: editing.freeWifi ||false,
     }));
-
+console.log(business);
     // useEffect(() => {
     //     navigator.geolocation.getCurrentPosition(({ coords }) => setUserPosition({ lat: coords.latitude, lng: coords.longitude })
     //     );
