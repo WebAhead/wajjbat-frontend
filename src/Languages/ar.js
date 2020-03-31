@@ -44,5 +44,9 @@ export default {
     'pending': 'قيد الانتظار',
     'Add Business': 'إضافة تجارة',
     'Choose location': 'اختار موقع',
-    'Reviews amount template':'بالاعتماد على تقييم {reviews} مستخدم'
+    'Reviews amount template':'بالاعتماد على تقييم {reviews} مستخدم',
+    'Distance': 'المسافه',
+    'Edit': 'تعديل',
+    'Back': 'رجوع',
+    'Promotions': 'الترقيه'
 };

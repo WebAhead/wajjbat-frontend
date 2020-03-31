@@ -1,3 +1,33 @@
+@import "theme/colors.scss";
+
 .businesses-list {
   margin-top: 3em;
+}
+.selected-business-container {
+  .business-control-navbar {
+    padding: 0.7rem;
+    width: 87%;
+    display: flex;
+    justify-content: space-around;
+    margin: 8px auto;
+    box-shadow: 0 5px 10px -6px $dark-green;
+    border: 1px  solid $main-green;
+    border-radius: 3px;
+
+  }
+  button:focus {
+    outline: 0;
+  }
+
+  button {
+    background: none;
+    border: none;
+  }
+
+  .business-control-btn,.business-control-back-btn{
+    background-color: #21b5a2;
+    color: white;
+    font-size: 1.1rem;
+    border-radius: 5px;
+  }
 }
