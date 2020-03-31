@@ -1,7 +1,8 @@
 export default {
     'signin': 'Sign in',
     'signup': 'Sign Up',
-    'topRated': 'Top rated',
+    'topRated': 'Top Rated',
+    'searchResults': 'Search Results',
     'Restaurant': 'Restaurant',
     'Cafe': 'Cafe',
     'Bar': 'Bar',

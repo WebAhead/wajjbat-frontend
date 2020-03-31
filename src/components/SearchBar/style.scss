@@ -1,0 +1,32 @@
+@import "theme/colors.scss";
+
+.search-form {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  width: 80%;
+  margin: 0.5rem 0.5rem;
+  z-index: 999;
+
+  input {
+    width: 100%;
+    border: solid 1px #21b5a2;
+    border-radius: 4px;
+    padding: 0 10px;
+    outline: none;
+    font-size: 19px;
+  }
+}
+
+.gm-style-mtc {
+  display: none !important;
+}
+
+.gm-svpc {
+  display: none !important;
+}
+
+.gm-bundled-control {
+  bottom: 15rem !important;
+}
