@@ -1,22 +1,16 @@
 @import "theme/colors.scss";
 
-.search-form {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+input {
   position: absolute;
-  width: 80%;
-  margin: 0.5rem 0.5rem;
+  width: 70%;
+  border: solid 1px #21b5a2;
+  border-radius: 4px;
+  padding: 0 10px;
+  margin: 0.5rem;
+  left: 0;
+  outline: none;
+  font-size: 19px;
   z-index: 999;
-
-  input {
-    width: 100%;
-    border: solid 1px #21b5a2;
-    border-radius: 4px;
-    padding: 0 10px;
-    outline: none;
-    font-size: 19px;
-  }
 }
 
 .gm-style-mtc {
