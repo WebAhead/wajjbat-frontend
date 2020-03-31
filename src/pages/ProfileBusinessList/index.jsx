@@ -11,7 +11,10 @@ export default function ProfileBusinesList(props) {
     const [selectedBusiness, setSelectedBusiness] = useState(null);
     const [editBusiness, setEditBusiness] = useState(null);
 
-    
+    const handleNav = () =>{
+        setSelectedBusiness(null);
+        setEditBusiness(null);
+    }
 
     useEffect(() => {
         (async function getBusinesses() {
@@ -36,7 +39,7 @@ export default function ProfileBusinesList(props) {
                     </Link>
                 </button>
 
-                <button className="navButton">
+                <button onClick={handleNav} className="navButton">
                     <Link to="/profile-business-list">
                         <FormattedMessage id="Business" />
                     </Link>

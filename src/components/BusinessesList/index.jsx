@@ -19,7 +19,7 @@ export default ({ businesses, homeView, cardWidth,selectedBusiness, setSelectedB
       <div className="selected-business-container">
         <div className="business-control-navbar">
           <button
-            onClick={() => setEditBusiness(selectedBusiness)}
+            onClick={() => setEditBusiness(true)}
             className="business-control-btn"
           >
             {' '}
@@ -35,9 +35,9 @@ export default ({ businesses, homeView, cardWidth,selectedBusiness, setSelectedB
             <FormattedMessage id="Back" />
           </button>
         </div>
-       {editBusiness && <AddBusiness/>}
+       {editBusiness && <AddBusiness editing={selectedBusiness}/>}
 
-        {!editBusiness && <BusinessPage match={{ params: { id: selectedBusiness } }} />}
+        {!editBusiness && <BusinessPage match={{ params: { id: selectedBusiness.id } }} />}
       </div>
     );
   }
@@ -46,7 +46,7 @@ export default ({ businesses, homeView, cardWidth,selectedBusiness, setSelectedB
     <>
       <div className="businesses-list">
         {businesses.map(business => (
-          <div onClick={() => setSelectedBusiness('' + business.id)}>
+          <div onClick={() => setSelectedBusiness(business)}>
             <BusinessCard
               business={business}
               homeView={homeView}
