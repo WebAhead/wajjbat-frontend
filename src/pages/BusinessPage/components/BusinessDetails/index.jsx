@@ -38,7 +38,7 @@ export default function BusinessDetails({ businessData, userPosition }) {
 
                                 <FormattedMessage
                                     id="business followers"
-                                    values={{ followers: 15 }}
+                                    values={{ followers: businessData.followers.count }}
                                 />
                             </span>
                         </div>

@@ -45,5 +45,5 @@ export default {
     'Add Business': 'إضافة تجارة',
     'Choose location': 'اختار موقع',
     'Reviews amount template':'بالاعتماد على تقييم {reviews} مستخدم',
-    'business followers': '{followers} متابع'
+    'business followers': '{followers} متابعين'
 };
