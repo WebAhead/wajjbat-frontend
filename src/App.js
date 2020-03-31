@@ -11,16 +11,16 @@ import ReviewerPage from './pages/ReviewerPage';
 import './App.scss';
 
 export default props => (
-    <div className="App">
-        <NavBar setLang={props.setLang} />
-        <Switch className="App">
-            <Route path="/business/:id" component={BusinessPage} />
-            <Route exact path="/" render={() => <HomePage {...props} />} />
-            <Route path="/signin" component={Signin} />
-            <Route path="/profile" component={ProfilePage} />
-            <Route path="/profile-business-list" component={ProfileBusinesList} />
-            <Route path="/create-business" component={AddBusiness} />
-            <Route path="/reviewer/:fullname/:reviewerid" component={ReviewerPage} />
-        </Switch>
-    </div>
+  <div className="App">
+    <NavBar setLang={props.setLang} />
+    <Switch className="App">
+      <Route path="/business/:id" component={BusinessPage} />
+      <Route exact path="/" render={() => <HomePage {...props} />} />
+      <Route path="/signin" component={Signin} />
+      <Route path="/profile" component={ProfilePage} />
+      <Route path="/profile-business-list" component={ProfileBusinesList} />
+      <Route path="/create-business" component={AddBusiness} />
+      <Route path="/reviewer/:fullname/:reviewerid" component={ReviewerPage} />
+    </Switch>
+  </div>
 );

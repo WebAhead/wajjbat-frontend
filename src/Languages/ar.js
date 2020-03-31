@@ -10,7 +10,7 @@ export default {
     'Other': 'اخر',
     'Italian': 'ايطالي',
     'Mexican': 'مكسيكي',
-    'Asian': 'آسيوي',
+    'Asian': 'اسيوي',
     'French': 'فرنسي',
     'Arabic': 'عربي',
     'Filter By': 'تصنيف حسب',
@@ -48,5 +48,6 @@ export default {
     'Distance': 'المسافه',
     'Edit': 'تعديل',
     'Back': 'رجوع',
-    'Promotions': 'الترقيه'
+    'Promotions': 'الترقيه',
+    'searchPlaceholder': 'بحث حسب الاسم, النوع أو اسلوب المطبخ'
 };
