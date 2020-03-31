@@ -34,6 +34,8 @@ function ChooseLocation({ userPosition, google, setBusinessLatlng, latLng }) {
               lng: +userPosition.lng,
             }}
             icon={path.join(__dirname, 'user-location.png')}
+            clickable={false}
+            zIndex={0}
           />
 
           <Marker
@@ -43,7 +45,9 @@ function ChooseLocation({ userPosition, google, setBusinessLatlng, latLng }) {
                 lng: event.latLng.lng(),
               });
             }}
+            clickable={true}
             draggable={true}
+            zIndex={1}
             position={
               latLng.lat
                 ? latLng
@@ -52,6 +56,7 @@ function ChooseLocation({ userPosition, google, setBusinessLatlng, latLng }) {
                     lng: userPosition.lng,
                   }
             }
+            
           />
         </GoogleMap>
       </LoadScript>
