@@ -8,6 +8,10 @@ import './style.scss';
 const endPointUrl = process.env.REACT_APP_API_URL;
 export default function ProfileBusinesList(props) {
     const [businesses, setBusinesses] = useState([]);
+    const [selectedBusiness, setSelectedBusiness] = useState(null);
+    const [editBusiness, setEditBusiness] = useState(null);
+
+    
 
     useEffect(() => {
         (async function getBusinesses() {
@@ -44,11 +48,16 @@ export default function ProfileBusinesList(props) {
                         businesses={businesses}
                         homeView={false}
                         cardWidth="100%"
+                        selectedBusiness={selectedBusiness}
+                        setSelectedBusiness={setSelectedBusiness}
+                        editBusiness={editBusiness}
+                        setEditBusiness={setEditBusiness}
                     />
                 </div>
+                {!selectedBusiness &&
                 <button className="add-business-btn" onClick={handleAddBusiness}>
                     <FormattedMessage id="Add Business" />
-                </button>
+                </button>}
             </div>
         </>
     );
