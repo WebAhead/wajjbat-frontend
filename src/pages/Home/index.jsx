@@ -13,6 +13,7 @@ const endPointUrl = process.env.REACT_APP_API_URL;
 
 export default function Homepage(props) {
     const [businesses, setBusinesses] = useState([]);
+    const [searchData, setSearchData] = useState([]);
     const [topRated, setTopRated] = useState([]);
     const [userPosition, setUserPosition] = useState({});
     const [originalBusinesses, setOriginalBusinesses] = useState([]);
@@ -50,7 +51,7 @@ export default function Homepage(props) {
                     lat: userPosition.lat,
                     lng: userPosition.lng,
                 });
-
+                
                 setBusinesses(data.businesses);
                 setOriginalBusinesses(data.businesses);
                 setTopRated(data.topRated);
@@ -91,12 +92,14 @@ export default function Homepage(props) {
             />
             {(userPosition.lat && businesses.length) ? (
                 <BusinessesMap
-                    businesses={businesses}
+                    businesses={searchData.length === 0 ? businesses : searchData}
                     userPosition={userPosition}
                     history={history}
+                    setSearchData={setSearchData}
+                    originalBusinesses={businesses}
                     radius={radius}
                 />
-            ) : ''}
+            ): ''}
             <Footer
                 lang={props.lang}
                 filterByType={({ value }) => setTypeFilter(value)}

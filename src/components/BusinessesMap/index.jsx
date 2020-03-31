@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker, Circle } from '@react-google-maps/api';
 import path from 'path';
+import SearchBar from 'components/SearchBar';
+
 import PopupMarker from '../../pages/Home/components/PopupMarker';
 
-export default ({ userPosition, businesses, history, radius }) => {
+export default ({ userPosition, businesses, history, radius, originalBusinesses, setSearchData }) => {
     const [currentMarker, setCurrentMarker] = useState(false);
     const [zoom, setZoom] = useState(14);
 
@@ -27,13 +29,16 @@ export default ({ userPosition, businesses, history, radius }) => {
     }, [radius]);
 
     return (
-        <div style={{ minHeight: '60vh' }}>
+        <div style={{ minHeight: '60vh', position: 'relative' }}>
+            <SearchBar
+                businesses={originalBusinesses}
+                setSearchData={setSearchData}
+            />
             <LoadScript
                 id="hehe"
                 googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_KEY}
             >
                 <GoogleMap
-                    // google={google}
                     containerStyle={{ position: 'relative' }}
                     zoom={zoom}
                     mapContainerStyle={mapStyles}
@@ -41,6 +46,7 @@ export default ({ userPosition, businesses, history, radius }) => {
                         lat: userPosition.lat,
                         lng: userPosition.lng,
                     }}
+                    disableDefaultUI="true"
                     // fitBounds={
                     //     {
                     //         lat: userPosition.lat + +radius*1000/110.574,
