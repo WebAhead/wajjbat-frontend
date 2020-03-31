@@ -10,7 +10,7 @@ export default {
     'Other': 'اخر',
     'Italian': 'ايطالي',
     'Mexican': 'مكسيكي',
-    'Asian': 'آسيوي',
+    'Asian': 'اسيوي',
     'French': 'فرنسي',
     'Arabic': 'عربي',
     'Filter By': 'تصنيف حسب',
@@ -44,5 +44,6 @@ export default {
     'pending': 'قيد الانتظار',
     'Add Business': 'إضافة تجارة',
     'Choose location': 'اختار موقع',
-    'Reviews amount template':'بالاعتماد على تقييم {reviews} مستخدم'
+    'Reviews amount template':'بالاعتماد على تقييم {reviews} مستخدم',
+    'searchPlaceholder': 'بحث حسب الاسم, النوع أو اسلوب المطبخ'
 };
