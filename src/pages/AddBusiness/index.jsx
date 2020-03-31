@@ -49,7 +49,7 @@ function AddBusiness({ intl,editing={} }) {
         smokingArea: editing.smokingArea ||false,
         freeWifi: editing.freeWifi ||false,
     }));
-
+console.log(business);
     // useEffect(() => {
     //     navigator.geolocation.getCurrentPosition(({ coords }) => setUserPosition({ lat: coords.latitude, lng: coords.longitude })
     //     );
