@@ -39,10 +39,10 @@ export default props => {
 
         <div className="reviewer-container">
             <div className="profile-container">
-                <img src={reviewerDetails.profile_image} alt="" />
+                <img src={reviewerDetails[0].profile_image} alt="reviewer profile" />
                 <div className="profile-container-headers">
-                    <h2>{reviewerDetails.first_name} {reviewerDetails.last_name}</h2>
-                    <h5>{reviewerDetails.email}</h5>
+                    <h2>{reviewerDetails[0].first_name} {reviewerDetails[0].last_name}</h2>
+                    <h5>{reviewerDetails[0].email}</h5>
                 </div>
             </div>
             <ul className="reviews-list">
