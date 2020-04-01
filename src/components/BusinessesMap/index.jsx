@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker, Circle } from '@react-google-maps/api';
 import path from 'path';
 import SearchBar from 'components/SearchBar';
+import './style.scss';
 
 import PopupMarker from '../../pages/Home/components/PopupMarker';
 
@@ -30,10 +31,12 @@ export default ({ userPosition, businesses, history, radius, originalBusinesses,
 
     return (
         <div style={{ minHeight: '60vh', position: 'relative' }}>
-            <SearchBar
-                businesses={originalBusinesses}
-                setSearchData={setSearchData}
-            />
+            <div className="mapSearchWrapper">
+                <SearchBar
+                    businesses={originalBusinesses}
+                    setSearchData={setSearchData}
+                />
+            </div>
             <LoadScript
                 id="hehe"
                 googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_KEY}
