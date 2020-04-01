@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles, List , ListItem , ListItemText , ListItemAvatar, Avatar, Divider} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -10,12 +12,52 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function InsetDividers() {
+const endPointUrl = process.env.REACT_APP_API_URL;
 
+export default function InsetDividers({businessid}) {
+    
     const classes = useStyles();
+    const [followersInfo, setFollowersInfo] = useState(null);
+
+    useEffect(() => {
+        (async function getFollowers() {
+            try {
+                const { data } = await axios.get(`${endPointUrl}/api/followers/${businessid}`);
+                setFollowersInfo(data.followers);
+                console.log(data);
+                
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }());
+    },[])
+
+    if(!followersInfo){
+        return (
+            <div className="emptyBusinessDetails">
+                <CircularProgress disableShrink />
+            </div>
+        );
+    }
 
     return (
         <List className={classes.root}>
+
+            {followersInfo.map(follower => (
+                <div>
+                    <ListItem>
+                        <ListItemAvatar>
+                            <Avatar src="https://creativeartworksblog.files.wordpress.com/2019/02/horseanddog-jeffjett.jpeg?w=754&h=754" />
+                        </ListItemAvatar>
+                        <ListItemText primary={`Mahmod Mhamed ID ${follower.id}`} secondary={`Since: ${follower.created_at.split('T')[0]}`} />
+                    </ListItem>
+                    <Divider variant="inset" component="li" />
+                </div>
+            )
+            )}
+
+
             <ListItem>
                 <ListItemAvatar>
                     <Avatar src="https://creativeartworksblog.files.wordpress.com/2019/02/horseanddog-jeffjett.jpeg?w=754&h=754" />
