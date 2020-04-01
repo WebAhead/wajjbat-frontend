@@ -4,6 +4,7 @@ export default {
     'topRated': 'Top Rated',
     'searchResults': 'Search Results',
     'Restaurant': 'Restaurant',
+    'restaurant': 'Restaurant',
     'searchPlaceholder': 'Search by name, type or cuisine',
     'Cafe': 'Cafe',
     'Bar': 'Bar',

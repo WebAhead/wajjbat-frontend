@@ -4,6 +4,7 @@ export default {
     'topRated': 'اعلى التقيمات',
     'searchResults': 'نتائج البحث',
     'Restaurant': 'مطعم',
+    'restaurant': 'مطعم',
     'Cafe': 'مقهى',
     'Bar': 'بار',
     'Store': 'دكانة',
