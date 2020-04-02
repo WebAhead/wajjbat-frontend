@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import Signin from 'pages/Signin';
 import './style.scss';
 import Cookies from 'universal-cookie';
 import { useHistory } from 'react-router-dom';
+import ExitToApp from '@material-ui/icons/ExitToApp';
 
-export default function MenuSideBar({ setMenuShowSideBar, showMenuSideBar, logged, setLogged }) {
+export default function MenuSideBar({ setMenuShowSideBar, showMenuSideBar, logged, setLogged, lang, handleLang }) {
   const [hideProfile, setHideProfile] = useState(false);
   const history = useHistory();
 
   const menuSideBarHandler = () => {
     setMenuShowSideBar(!showMenuSideBar);
-  };
-
-  const handleUser = () => {
-    console.log('inside handle user');
   };
 
   const handleProfile = () => {
@@ -48,28 +46,47 @@ export default function MenuSideBar({ setMenuShowSideBar, showMenuSideBar, logge
           <div className="items">
             {!logged && (
               <div className="menuItem">
-                <a href="/signin">sign in</a>
+                <a href="/signin">
+                  <FormattedMessage id="signin" />
+                </a>
               </div>
             )}
             {logged && (
               <div className="menuItem">
                 <a href="" onClick={handleProfile}>
-                  profile
+                  <FormattedMessage id="Profile" />
                 </a>
               </div>
             )}
             {logged && (
               <div className="menuItem">
                 <a href="" onClick={handlebusinesses}>
-                  businesses
+                  <FormattedMessage id="Business" />
                 </a>
               </div>
             )}
+            <div className="menuItem">
+              <a
+                href=""
+                style={{ color: lang === 'en' ? '#21b5a2' : '', fontSize: lang === 'en' ? '30px' : '' }}
+                value="en"
+                onClick={() => handleLang('en')}
+              >
+                en
+              </a>{' '}
+              /{' '}
+              <a href="" style={{ color: lang === 'ar' ? '#21b5a2' : '', fontSize: lang === 'ar' ? '30px' : '' }} onClick={() => handleLang('ar')}>
+                ar
+              </a>
+            </div>
             {logged && (
               <div className="menuItem">
-                <a href="" onClick={handleLogout}>
-                  logout
-                </a>
+                <div className="exit">
+                  <ExitToApp />
+                  <a href="" onClick={handleLogout}>
+                    <FormattedMessage id="Logout" />
+                  </a>
+                </div>
               </div>
             )}
           </div>
