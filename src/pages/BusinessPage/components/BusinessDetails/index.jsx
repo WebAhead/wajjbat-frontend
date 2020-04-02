@@ -6,6 +6,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import { FormattedMessage } from 'react-intl';
 import style from './BusinessDetails.module.scss';
 import PlaceFeature from '../PlaceFeature';
+import FollowButton from '../FollowButton'
 import Contact from '../Contact';
 import BusinessPageMap from '../BusinessPageMap/index';
 
@@ -27,7 +28,6 @@ export default function BusinessDetails({ businessData, userPosition }) {
                 </div>
 
                 <div className={style['business-rating']}>
-
                     <Link to={{ pathname: `/followers/${businessData.id}` }}>
                         <div className={style['followers-by-business']}>
                             <GroupIcon
@@ -35,7 +35,6 @@ export default function BusinessDetails({ businessData, userPosition }) {
                                 fontSize="small"
                             />
                             <span className={style['followers-amount']}>
-
                                 <FormattedMessage
                                     id="business followers"
                                     values={{ followers: businessData.followers.count }}
@@ -70,6 +69,10 @@ export default function BusinessDetails({ businessData, userPosition }) {
 
             <div className={style['contact-container']}>
                 <Contact email={businessData.email} phone={businessData.phone} />
+            </div>
+
+            <div className={style['follow-btn']}>
+                <FollowButton />
             </div>
 
             <div className={style.address}>
