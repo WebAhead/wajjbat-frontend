@@ -63,6 +63,12 @@
   }
 
   .exit {
+    display: flex;
+    justify-content: center;
     align-items: center;
+  }
+
+  .exit-icon {
+    margin: 10px 10px 0 10px;
   }
 }
