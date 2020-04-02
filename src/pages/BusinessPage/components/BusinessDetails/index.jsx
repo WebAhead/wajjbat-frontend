@@ -6,27 +6,19 @@ import GroupIcon from '@material-ui/icons/Group';
 import { FormattedMessage } from 'react-intl';
 import style from './BusinessDetails.module.scss';
 import PlaceFeature from '../PlaceFeature';
+import FollowButton from '../FollowButton'
 import Contact from '../Contact';
 import BusinessPageMap from '../BusinessPageMap/index';
-import Axios from 'axios';
 
 export default function BusinessDetails({ businessData, userPosition }) {
-    const [follow, setFollow] = React.useState(true);
-    let user = true;
-    //get if user
-    //get if follows follow=true
+    const user = true;
+    // get if user
     if (businessData === undefined) {
         return (
             <div className={style.emptyBusinessDetails}>
                 <CircularProgress disableShrink />
             </div>
         );
-    }
-    async function followUnfollow() {
-        if (follow)
-            await Axios.post(`${process.env.REACT_APP_API_URL}/api/unfollow/`, { userId: 4, businessId: businessData.id })
-        else
-            await Axios.post(`${process.env.REACT_APP_API_URL}/api/follow/`, { userId: 4, businessId: businessData.id })
     }
 
     return (
@@ -38,12 +30,6 @@ export default function BusinessDetails({ businessData, userPosition }) {
                 </div>
 
                 <div className={style['business-rating']}>
-                    {user ?
-                        (<button type="submit" className="follow" onClick={followUnfollow} >
-                            {follow ? "unfollow" : "follow"}
-                        </button>) : ""}
-
-
                     <Link to={{ pathname: `/followers/${businessData.id}` }}>
                         <div className={style['followers-by-business']}>
 
@@ -53,7 +39,6 @@ export default function BusinessDetails({ businessData, userPosition }) {
                             />
 
                             <span className={style['followers-amount']}>
-
                                 <FormattedMessage
                                     id="business followers"
                                     values={{ followers: businessData.followers.count }}
@@ -90,6 +75,13 @@ export default function BusinessDetails({ businessData, userPosition }) {
                 <Contact email={businessData.email} phone={businessData.phone} />
             </div>
 
+            { user ? (
+                <div className={style['follow-btn']}>
+                    <FollowButton />
+                </div>
+            )
+                : ''}
+
             <div className={style.address}>
                 <div className={style['business-address']}>{businessData.address}</div>
             </div>
@@ -101,6 +93,6 @@ export default function BusinessDetails({ businessData, userPosition }) {
                     lng: businessData.lng,
                 }}
             />
-        </div >
+        </div>
     );
 }

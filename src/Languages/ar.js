@@ -47,5 +47,8 @@ export default {
     'Choose location': 'اختار موقع',
     'Reviews amount template':'بالاعتماد على تقييم {reviews} مستخدم',
     'business followers': '{followers} متابعين',
-    'searchPlaceholder': 'بحث حسب الاسم, النوع أو اسلوب المطبخ'
+    'searchPlaceholder': 'بحث حسب الاسم, النوع أو اسلوب المطبخ',
+    'Follow': 'تابع',
+    'Unfollow': 'ازالة المتابعة'
+
 };
