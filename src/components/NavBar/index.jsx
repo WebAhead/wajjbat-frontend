@@ -18,25 +18,48 @@ export default function NavBar(props) {
     setLang(value);
   };
 
-  useEffect(() => {
-    (async function isLoggedIn() {
-      const currentLang = localStorage.getItem('language') || lang;
-      setLang(currentLang);
-      try {
-        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/isLoggedIn`, {
-          withCredentials: true
-        });
+    useEffect(() => {
+        (async function checkLogin() {
+            const currentLang = localStorage.getItem('language') || lang;
+            setLang(currentLang);
+            try {
+                const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/isLoggedIn`, {
+                    withCredentials: true
+                });
 
-        if (data.id) setLogged(true);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+                if (data.id) setLogged(true);
+            } catch (error) {
+                console.log(error);
+            }
+        }());
+    }, []);
 
-  useEffect(() => {
-    props.setLang(lang);
-  }, [lang, props]);
+    useEffect(() => {
+        (async function logout() {
+            if (!logged) {
+
+                try {
+                    const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/logout`, {
+                        withCredentials: true
+                    });
+                
+                    if (data.status) setLogged(false);
+                    return 1;
+                } catch (error) {
+                    console.log(error);
+                    return 1;
+                }
+            }
+
+            return 1
+
+        }());
+
+    }, [logged])
+
+    useEffect(() => {
+        props.setLang(lang);
+    }, [lang, props]);
 
   const useStyles = makeStyles({
     root: { color: '#21b5a2', height: '40px', width: '40px' }
