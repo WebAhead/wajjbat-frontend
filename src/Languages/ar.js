@@ -52,6 +52,6 @@ export default {
     'Promotions': 'الترقيه',
     'searchPlaceholder': 'بحث حسب الاسم, النوع أو اسلوب المطبخ',
     'business followers': '{followers} متابعين',
-    'Logout': 'الخروج'
+    'Logout': 'الخروج',
 
 };

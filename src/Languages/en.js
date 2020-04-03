@@ -52,5 +52,5 @@ export default {
     'Back': 'Back',
     'Promotions': 'Promotions',
     'business followers': '{followers} followers',
-    'Logout': 'Logout'
+    'Logout': 'Logout',
 };
