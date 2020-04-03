@@ -30,9 +30,9 @@ const endPointUrl = process.env.REACT_APP_API_URL;
 
 function AddBusiness({ intl, editing = {} }) {
   const history = useHistory();
-
-  const [mainImg, setMainImg] = useState('');
-  const [subImgs, setSubImgs] = useState([]);
+console.log(editing);
+  const [mainImg, setMainImg] = useState(editing.image || '');
+  const [subImgs, setSubImgs] = useState(editing.images || []);
   const [userPosition, setUserPosition] = useState({});
   const [userId, setUserId] = useState('');
   const [businessLatlng, setBusinessLatlng] = useState({});
@@ -300,10 +300,14 @@ function AddBusiness({ intl, editing = {} }) {
               setBusinessLatlng={setBusinessLatlng}
               latLng={businessLatlng}
             />
-
+            {!editing.name &&
             <button type="submit" className="submit-btn">
               <FormattedMessage id="Submit" />
-            </button>
+            </button>}
+            {editing.name &&
+            <button type="submit" className="submit-btn">
+              <FormattedMessage id="Edit" />
+            </button>}
           </form>
         </div>
       </section>
