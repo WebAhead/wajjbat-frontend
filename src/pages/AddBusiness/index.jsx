@@ -264,7 +264,7 @@ function AddBusiness({ intl, editing = {} }) {
                   name="smokingArea"
                   value={business.smokingArea}
                   onChange={handleCheckBox}
-                  checked={business.parking}
+                  checked={business.smokingArea}
                 />
                 <label htmlFor="smokingArea">
                   <FormattedMessage id="Smoking Area" />
@@ -278,7 +278,7 @@ function AddBusiness({ intl, editing = {} }) {
                   name="freeWifi"
                   value={business.freeWifi}
                   onChange={handleCheckBox}
-                  checked={business.parking}
+                  checked={business.freeWifi}
                 />
                 <label htmlFor="freeWifi">
                   <FormattedMessage id="Free Wifi" />
