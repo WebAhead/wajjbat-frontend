@@ -46,8 +46,8 @@ function AddBusiness({ intl, editing = {} }) {
     address: editing.address || '',
     type: editing.type || '',
     parking: editing.parking || false,
-    smokingArea: editing.smokingArea || false,
-    freeWifi: editing.freeWifi || false,
+    smokingArea: editing.smokingarea || false,
+    freeWifi: editing.freewifi || false,
   }));
 
   useEffect(() => {
