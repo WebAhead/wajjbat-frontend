@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState} from 'react';
 import BusinessCard from '../Cards/BusinessCard';
 import BusinessPage from '../../pages/BusinessPage';
 import './style.scss';
@@ -42,8 +41,7 @@ export default ({
             <FormattedMessage id="Back" />
           </button>
         </div>
-        {console.log('selected is ', selectedBusiness)}
-        {editBusiness && (
+        {editBusiness && selectedBusiness && (
           <EditBusiness
             setBusinessData={setBusinessData}
             businessData={businessData}
@@ -51,7 +49,7 @@ export default ({
           />
         )}
 
-        {!editBusiness && (
+        {!editBusiness && selectedBusiness && (
           <BusinessPage match={{ params: { id: selectedBusiness.id } }} />
         )}
       </div>
@@ -60,17 +58,17 @@ export default ({
 
   return (
     <>
-      <div className="businesses-list">
+      <ul className="businesses-list">
         {businesses.map(business => (
-          <div onClick={() => setSelectedBusiness(business)}>
+          <li key={business.id} onClick={() => setSelectedBusiness(business)}>
             <BusinessCard
               business={business}
               homeView={homeView}
               cardWidth={cardWidth}
             />
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </>
   );
 };

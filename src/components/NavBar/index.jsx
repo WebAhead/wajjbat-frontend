@@ -19,7 +19,8 @@ export default function NavBar(props) {
   };
 
     useEffect(() => {
-        (async function checkLogin() {
+
+        async function checkLogin() {
             const currentLang = localStorage.getItem('language') || lang;
             setLang(currentLang);
             try {
@@ -31,11 +32,12 @@ export default function NavBar(props) {
             } catch (error) {
                 console.log(error);
             }
-        }());
+        };
+        checkLogin();
     }, []);
 
     useEffect(() => {
-        (async function logout() {
+        async function logout() {
             if (!logged) {
 
                 try {
@@ -53,7 +55,8 @@ export default function NavBar(props) {
 
             return 1
 
-        }());
+        };
+        logout();
 
     }, [logged])
 

@@ -17,13 +17,14 @@ export default function ProfileBusinesList(props) {
     }
 
     useEffect(() => {
-        (async function getBusinesses() {
+        async function getBusinesses() {
             const { data } = await axios.get(`${endPointUrl}/api/business-list`, {
                 withCredentials: true,
             });
 
             setBusinesses(data);
-        }());
+        };
+        getBusinesses();
     }, []);
 
     const handleAddBusiness = () => {
