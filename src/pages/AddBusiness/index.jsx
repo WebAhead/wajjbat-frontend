@@ -30,12 +30,15 @@ const endPointUrl = process.env.REACT_APP_API_URL;
 
 function AddBusiness({ intl, editing = {} }) {
   const history = useHistory();
-console.log(editing);
+  console.log(editing);
   const [mainImg, setMainImg] = useState(editing.image || '');
   const [subImgs, setSubImgs] = useState(editing.images || []);
   const [userPosition, setUserPosition] = useState({});
   const [userId, setUserId] = useState('');
   const [businessLatlng, setBusinessLatlng] = useState({});
+  const [missingType, setMissingType] = useState(false);
+  const [missingCuisine, setMissingCuisine] = useState(false);
+  const [missingImage, setMissingImage] = useState(false);
 
   const [business, setBusiness] = useState(() => ({
     name: editing.name || '',
@@ -107,9 +110,23 @@ console.log(editing);
     }));
   };
 
+  const checkInput = async () => {
+    if (!business.type || !business.type.length) {
+      setMissingType(true);
+    } else setMissingType(false);
+
+    if (!business.cuisine || !business.cuisine.length) {
+      setMissingCuisine(true);
+    } else setMissingCuisine(false);
+    if (!business.mainImg|| !mainImg.length) {
+        setMissingImage(true);
+      } else setMissingImage(false);
+  };
   const handleSubmit = async e => {
     e.preventDefault();
-
+    await checkInput();
+    if (!business.cuisine || !business.cuisine.length || !business.type || !business.type.length) return;
+    if(missingCuisine || missingType) return;
     const data = {
       userId,
       ...business,
@@ -200,7 +217,8 @@ console.log(editing);
                 label={translate('Type')}
                 className="form-input"
                 onSelect={handleTypeSelect}
-                value={business.type}
+                value={business.type.length ? business.type : null}
+                required
               />
               <Select
                 items={cuisines}
@@ -220,6 +238,7 @@ console.log(editing);
               className="form-input"
               value={business.phone}
               onChange={handleChange}
+              required
             />
 
             <input
@@ -229,6 +248,7 @@ console.log(editing);
               className="form-input"
               value={business.email}
               onChange={handleChange}
+              required
             />
 
             <textarea
@@ -239,6 +259,7 @@ console.log(editing);
               placeholder={translate('Address')}
               value={business.address}
               onChange={handleChange}
+              required
             />
 
             <div className="checkbox">
@@ -300,14 +321,26 @@ console.log(editing);
               setBusinessLatlng={setBusinessLatlng}
               latLng={businessLatlng}
             />
-            {!editing.name &&
-            <button type="submit" className="submit-btn">
-              <FormattedMessage id="Submit" />
-            </button>}
-            {editing.name &&
-            <button type="submit" className="submit-btn">
-              <FormattedMessage id="Edit" />
-            </button>}
+            {missingType && (
+              <span className="error-msg">Please select business type.</span>
+            )}
+            {missingCuisine && (
+              <span className="error-msg">Please select business cusine.</span>
+            )}
+              {missingImage && (
+              <span className="error-msg">Please upload at least one primary image.</span>
+            )}
+
+            {!editing.name && (
+              <button type="submit" className="submit-btn">
+                <FormattedMessage id="Submit" />
+              </button>
+            )}
+            {editing.name && (
+              <button type="submit" className="submit-btn">
+                <FormattedMessage id="Edit" />
+              </button>
+            )}
           </form>
         </div>
       </section>

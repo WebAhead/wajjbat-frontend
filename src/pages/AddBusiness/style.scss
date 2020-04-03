@@ -1,8 +1,7 @@
-@import "theme/utils.scss";
+@import 'theme/utils.scss';
 
 .create-business-header {
   height: auto;
-
 
   .header-items {
     display: flex;
@@ -23,7 +22,7 @@
         width: 60px;
         height: 60px;
         border-radius: 6px;
-        margin: 5px
+        margin: 5px;
       }
 
       .file-input {
@@ -36,7 +35,7 @@
         height: 57px;
         border: 2px solid #787373;
         border-radius: 6px;
-        background: #FFFFFF;
+        background: #ffffff;
         font-size: 2.5em;
         margin: 5px;
         color: grey;
@@ -47,19 +46,22 @@
 }
 
 .add-business-form {
-
   .form-container {
     margin-top: 1em;
+    .error-msg {
+      color: red;
+      margin:0.3rem;
+    }
   }
 
   .form-input {
-    background: #FFFFFF;
+    background: #ffffff;
     border: 0;
-    border-bottom: 2px solid #21B5A2;
+    border-bottom: 2px solid #21b5a2;
     // border-radius: 6px;
     box-sizing: border-box;
-    padding: .2em .7em;
-    margin: .5em 0 .5em 0;
+    padding: 0.2em 0.7em;
+    margin: 0.5em 0 0.5em 0;
     font-size: 18px;
     flex-grow: 1;
   }
@@ -74,10 +76,10 @@
 
   .submit-btn {
     color: #ffffff;
-    background: #21B5A2;
-    padding: .5em;
-    margin: .5em 0 .5em 0;
-    border: 2px solid #21B5A2;
+    background: #21b5a2;
+    padding: 0.5em;
+    margin: 0.5em 0 0.5em 0;
+    border: 2px solid #21b5a2;
     border-radius: 6px;
     font-size: 1em;
     font-weight: bold;
@@ -88,28 +90,26 @@
     flex-wrap: wrap;
     justify-content: space-between;
     flex: 0 50%;
-    margin: .3em 0 .3em 0;
-
+    margin: 0.3em 0 0.3em 0;
 
     .checkbox-items {
       display: flex;
-
 
       .checkbox-input {
         @extend .form-input;
         height: 30px;
         width: 30px;
-        margin-right: .4em;
-        border: 2px solid #21B5A2;
+        margin-right: 0.4em;
+        border: 2px solid #21b5a2;
         border-radius: 6px;
         background: #ffffff;
       }
 
       label {
         font-size: 20px;
-        color: #726A6A;
+        color: #726a6a;
         text-align: center;
-        margin-top: .3em;
+        margin-top: 0.3em;
       }
     }
   }
