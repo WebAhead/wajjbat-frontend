@@ -3,7 +3,7 @@ import AddBusiness from '../../pages/AddBusiness';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
 
-export default ({ editingBusiness, businessData, setBusinessData }) => {
+export default ({ editingBusiness, setEditBusiness, businessData, setBusinessData }) => {
   const [err, setErr] = useState(false);
 
   useEffect(()=>{
@@ -37,6 +37,6 @@ export default ({ editingBusiness, businessData, setBusinessData }) => {
       </div>
     );
   } else {
-    return <AddBusiness editing={businessData.details} />;
+    return <AddBusiness setEditBusiness={setEditBusiness} editing={businessData.details} />;
   }
 };

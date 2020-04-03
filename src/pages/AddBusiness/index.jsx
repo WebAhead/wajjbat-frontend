@@ -28,19 +28,20 @@ const cuisines = [
 
 const endPointUrl = process.env.REACT_APP_API_URL;
 
-function AddBusiness({ intl, editing = {} }) {
+function AddBusiness({ intl, editing = {}, setEditBusiness }) {
   const history = useHistory();
-  console.log(editing);
   const [mainImg, setMainImg] = useState(editing.image || '');
-  const [subImgs, setSubImgs] = useState(editing.images || []);
+  const [subImgs, setSubImgs] = useState([...editing.images] || []);
   const [userPosition, setUserPosition] = useState({});
   const [userId, setUserId] = useState('');
   const [businessLatlng, setBusinessLatlng] = useState({});
   const [missingType, setMissingType] = useState(false);
   const [missingCuisine, setMissingCuisine] = useState(false);
   const [missingImage, setMissingImage] = useState(false);
+  const [reqErr, setReqErr] = useState(false);
 
   const [business, setBusiness] = useState(() => ({
+    id: editing.id || null,
     name: editing.name || '',
     description: editing.description || '',
     phone: editing.phone || '',
@@ -118,15 +119,21 @@ function AddBusiness({ intl, editing = {} }) {
     if (!business.cuisine || !business.cuisine.length) {
       setMissingCuisine(true);
     } else setMissingCuisine(false);
-    if (!business.mainImg|| !mainImg.length) {
-        setMissingImage(true);
-      } else setMissingImage(false);
+    if (!mainImg.length) {
+      setMissingImage(true);
+    } else setMissingImage(false);
   };
   const handleSubmit = async e => {
     e.preventDefault();
     await checkInput();
-    if (!business.cuisine || !business.cuisine.length || !business.type || !business.type.length) return;
-    if(missingCuisine || missingType) return;
+    if (
+      !business.cuisine ||
+      !business.cuisine.length ||
+      !business.type ||
+      !business.type.length
+    )
+      return;
+    if (missingCuisine || missingType) return;
     const data = {
       userId,
       ...business,
@@ -136,20 +143,21 @@ function AddBusiness({ intl, editing = {} }) {
       lng: businessLatlng.lng,
     };
     try {
-      const result = await axios.post(
-        `${endPointUrl}/api/new-businesses`,
-        data,
-        { withCredentials: true },
-      );
-
+      let apiUrl = `${endPointUrl}/api/new-businesses`;
+      if (editing.name) apiUrl = `${endPointUrl}/api/update-business`;
+      const result = await axios.post(apiUrl, data, { withCredentials: true });
       if (result.data.success) {
+        if (editing.name) {
+          setEditBusiness(null);
+          return;
+        }
         history.push('/profile-business-list');
       } else {
         // handle error with popup ?
       }
     } catch (err) {
       // handle error with popup ?
-      console.log(err);
+      setReqErr(err);
       history.push('/profile-business-list');
     }
 
@@ -327,10 +335,19 @@ function AddBusiness({ intl, editing = {} }) {
             {missingCuisine && (
               <span className="error-msg">Please select business cusine.</span>
             )}
-              {missingImage && (
-              <span className="error-msg">Please upload at least one primary image.</span>
+            {missingImage && (
+              <span className="error-msg">
+                Please upload at least one primary image.
+              </span>
             )}
 
+            {reqErr && (
+              <span className="error-msg">
+                Unexpected error while handling the request,please try again
+                later.
+              </span>
+            )}
+            
             {!editing.name && (
               <button type="submit" className="submit-btn">
                 <FormattedMessage id="Submit" />

@@ -45,6 +45,7 @@ export default ({
           <EditBusiness
             setBusinessData={setBusinessData}
             businessData={businessData}
+            setEditBusiness={setEditBusiness}
             editingBusiness={selectedBusiness}
           />
         )}
