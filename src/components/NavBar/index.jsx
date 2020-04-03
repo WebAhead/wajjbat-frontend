@@ -3,11 +3,8 @@ import './style.scss';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
+import Search from '@material-ui/icons/Search';
 import Menu from '@material-ui/icons/Menu';
-import HomeIcon from '@material-ui/icons/Home';
-import Cookies from 'universal-cookie';
 import MenuSideBar from '../MenuSideBar';
 
 export default function NavBar(props) {
@@ -16,30 +13,53 @@ export default function NavBar(props) {
   const [logged, setLogged] = useState(false);
   const [showMenuSideBar, setMenuShowSideBar] = useState(false);
 
-  const handleLang = ({ target }) => {
-    localStorage.setItem('language', target.value);
-    setLang(target.value);
+  const handleLang = value => {
+    localStorage.setItem('language', value);
+    setLang(value);
   };
 
-  useEffect(async () => {
-    const currentLang = localStorage.getItem('language') || lang;
-    setLang(currentLang);
-    try {
-      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/isLoggedIn`, {
-        withCredentials: true
-      });
+    useEffect(() => {
+        (async function checkLogin() {
+            const currentLang = localStorage.getItem('language') || lang;
+            setLang(currentLang);
+            try {
+                const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/isLoggedIn`, {
+                    withCredentials: true
+                });
 
-      if (data.id) setLogged(true);
-      return 1;
-    } catch (error) {
-      console.log(error);
-      return 1;
-    }
-  }, []);
+                if (data.id) setLogged(true);
+            } catch (error) {
+                console.log(error);
+            }
+        }());
+    }, []);
 
-  useEffect(() => {
-    props.setLang(lang);
-  }, [lang, props]);
+    useEffect(() => {
+        (async function logout() {
+            if (!logged) {
+
+                try {
+                    const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/logout`, {
+                        withCredentials: true
+                    });
+                
+                    if (data.status) setLogged(false);
+                    return 1;
+                } catch (error) {
+                    console.log(error);
+                    return 1;
+                }
+            }
+
+            return 1
+
+        }());
+
+    }, [logged])
+
+    useEffect(() => {
+        props.setLang(lang);
+    }, [lang, props]);
 
   const useStyles = makeStyles({
     root: { color: '#21b5a2', height: '40px', width: '40px' }
@@ -52,12 +72,13 @@ export default function NavBar(props) {
       <img onClick={() => history.push('/')} className="logo-img" src={require('../../assets/icons/logo-3.png')} alt="Logo image" />
 
       <div className="login">
-        <div className="changeLanguage">
-          <select className="select" onChange={handleLang} value={lang}>
-            <option value="ar">ar</option>
-            <option value="en">en</option>
-          </select>
-        </div>
+        <button onClick={() => history.push('/search')}>
+          <Search
+            classes={{
+              root: classes.root
+            }}
+          />
+        </button>
         <button onClick={() => setMenuShowSideBar(!showMenuSideBar)}>
           <Menu
             classes={{
@@ -67,7 +88,14 @@ export default function NavBar(props) {
         </button>
       </div>
       <div>
-        <MenuSideBar setMenuShowSideBar={setMenuShowSideBar} showMenuSideBar={showMenuSideBar} logged={logged} setLogged={setLogged} />
+        <MenuSideBar
+          setMenuShowSideBar={setMenuShowSideBar}
+          showMenuSideBar={showMenuSideBar}
+          logged={logged}
+          setLogged={setLogged}
+          lang={lang}
+          handleLang={handleLang}
+        />
       </div>
     </div>
   );

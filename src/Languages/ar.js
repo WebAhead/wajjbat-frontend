@@ -4,6 +4,7 @@ export default {
     'topRated': 'اعلى التقيمات',
     'searchResults': 'نتائج البحث',
     'Restaurant': 'مطعم',
+    'restaurant': 'مطعم',
     'Cafe': 'مقهى',
     'Bar': 'بار',
     'Store': 'دكانة',
@@ -49,5 +50,8 @@ export default {
     'Edit': 'تعديل',
     'Back': 'رجوع',
     'Promotions': 'الترقيه',
-    'searchPlaceholder': 'بحث حسب الاسم, النوع أو اسلوب المطبخ'
+    'searchPlaceholder': 'بحث حسب الاسم, النوع أو اسلوب المطبخ',
+    'business followers': '{followers} متابعين',
+    'Logout': 'الخروج'
+
 };

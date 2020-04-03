@@ -4,6 +4,7 @@ export default {
     'topRated': 'Top Rated',
     'searchResults': 'Search Results',
     'Restaurant': 'Restaurant',
+    'restaurant': 'Restaurant',
     'searchPlaceholder': 'Search by name, type or cuisine',
     'Cafe': 'Cafe',
     'Bar': 'Bar',
@@ -49,6 +50,7 @@ export default {
     'Distance': 'Distance',
     'Edit': 'Edit',
     'Back': 'Back',
-    'Promotions': 'Promotions'
-
+    'Promotions': 'Promotions',
+    'business followers': '{followers} followers',
+    'Logout': 'Logout'
 };

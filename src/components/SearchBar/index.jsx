@@ -6,6 +6,16 @@ export default function SearchBar({ businesses, setSearchData }) {
     const [query, setQuery] = useState('');
     const intl = useIntl();
 
+    const inputStyles = {
+        'box-sizing': 'border-box',
+        'width': '100%',
+        'border': 'solid 1px #21b5a2',
+        'border-radius': '4px',
+        'padding': '0 10px',
+        'outline': 'none',
+        'font-size': '19px',
+    };
+
     useEffect(() => {
         if (query === '') return setSearchData([]);
 
@@ -45,6 +55,7 @@ export default function SearchBar({ businesses, setSearchData }) {
 
     return (
         <input
+            style={inputStyles}
             onChange={event => setQuery(event.target.value)}
             type="text"
             autoComplete="off"
