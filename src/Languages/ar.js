@@ -45,8 +45,13 @@ export default {
     'pending': 'قيد الانتظار',
     'Add Business': 'إضافة تجارة',
     'Choose location': 'اختار موقع',
-    'Reviews amount template': 'بالاعتماد على تقييم {reviews} مستخدم',
-    'business followers': '{followers} متابعين',
+    'Reviews amount template':'بالاعتماد على تقييم {reviews} مستخدم',
+    'Distance': 'المسافه',
+    'Edit': 'تعديل',
+    'Back': 'رجوع',
+    'Promotions': 'الترقيه',
     'searchPlaceholder': 'بحث حسب الاسم, النوع أو اسلوب المطبخ',
-    'Logout': 'الخروج'
+    'business followers': '{followers} متابعين',
+    'Logout': 'الخروج',
+
 };

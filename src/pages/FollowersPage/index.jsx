@@ -12,7 +12,7 @@ export default (props) => {
     const businessid = props.match.params.businessid;
 
     useEffect(() => {
-        (async function getFollowers() {
+        async function getFollowers() {
             try {
                 const { data } = await axios.get(`${endPointUrl}/api/followers/${businessid}`);
                 setBusinessFollowersData(data.followers);                              
@@ -20,7 +20,8 @@ export default (props) => {
             catch (error) {
                 console.log(error);
             }
-        }());
+        };
+        getFollowers();
     },[])
 
     if(!businessFollowersData){

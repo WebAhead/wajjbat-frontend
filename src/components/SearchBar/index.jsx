@@ -7,13 +7,13 @@ export default function SearchBar({ businesses, setSearchData }) {
     const intl = useIntl();
 
     const inputStyles = {
-        'box-sizing': 'border-box',
+        'boxSizing': 'border-box',
         'width': '100%',
         'border': 'solid 1px #21b5a2',
-        'border-radius': '4px',
+        'borderRadius': '4px',
         'padding': '0 10px',
         'outline': 'none',
-        'font-size': '19px',
+        'fontSize': '19px',
     };
 
     useEffect(() => {

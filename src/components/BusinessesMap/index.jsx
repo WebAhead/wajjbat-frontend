@@ -50,12 +50,6 @@ export default ({ userPosition, businesses, history, radius, originalBusinesses,
                         lng: userPosition.lng,
                     }}
                     disableDefaultUI="true"
-                    // fitBounds={
-                    //     {
-                    //         lat: userPosition.lat + +radius*1000/110.574,
-                    //         lng: userPosition.lng + +radius/110.574,
-                    //     }
-                    // }
                 >
                     {radius && (
                         <Circle
@@ -84,8 +78,11 @@ export default ({ userPosition, businesses, history, radius, originalBusinesses,
                     />
 
                     {/* optional in case we want to mark the position of the business */}
+                    <ul>
                     {businesses.map(business => (
+                        <li key={business.id}>
                         <PopupMarker
+                            id={business.id}
                             history={history}
                             business={business}
                             lat={+business.lat}
@@ -97,7 +94,9 @@ export default ({ userPosition, businesses, history, radius, originalBusinesses,
                             setCurrentMarker={setCurrentMarker}
                             currentMarker={currentMarker}
                         />
+                        </li>
                     ))}
+                    </ul>
                 </GoogleMap>
             </LoadScript>
         </div>
