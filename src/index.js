@@ -7,6 +7,12 @@ import './theme/reset.scss';
 import messages from './Languages';
 import * as serviceWorker from './serviceWorker';
 
+//payment addons
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+import CheckoutForm from './CheckoutForm';
+const stripePromise = loadStripe("pk_test_rnw2unZs4CYiELSPBGjfxAbC007hRxV4QA");
+
 
 const AppIndex = () => {
     const [lang, setLang] = useState('ar');
