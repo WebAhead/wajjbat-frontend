@@ -187,6 +187,7 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
           setEditBusiness(null);
           return;
         }
+        history.push('/profile-business-list');
       } else {
         // handle error with popup ?
       }
