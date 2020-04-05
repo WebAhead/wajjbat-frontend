@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Marker, InfoWindow, InfoBox } from '@react-google-maps/api';
-import { Rating } from '@material-ui/lab';
+import { Marker, InfoWindow} from '@react-google-maps/api';
 import { FormattedMessage } from 'react-intl';
-import path, { dirname } from 'path';
+import path from 'path';
 import './style.scss';
 
 export default ({ lat, lng, business, history, setCurrentMarker, currentMarker }) => {

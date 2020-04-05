@@ -1,4 +1,4 @@
-import React, { useEffect, useState, } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './style.scss';
 import { FormattedMessage } from 'react-intl';
@@ -13,14 +13,17 @@ export default function BusinessPage(props) {
     const [activeTab, setActiveTab] = useState('details');
     const [reviews, setReveiws] = useState('');
     const [refresh, setRefresh] = useState('');
+
     useEffect(() => {
-        (async function getImages() {
+        async function getImages() {
             const { data } = await axios.get(
                 `${process.env.REACT_APP_API_URL}/api/businesses/${props.match.params.id}`,
             );
             setReveiws(data.reviews);
             setBusinessData(data);
-        })();
+        }
+
+        getImages();
     }, [props.match.params.id, refresh]);
 
     useEffect(() => {

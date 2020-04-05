@@ -64,11 +64,11 @@ export default function BusinessDetails({ businessData, userPosition }) {
 
             <div className={style['place-features']}>
                 <PlaceFeature
-                    featureValue={businessData.smokingArea}
+                    featureValue={businessData.smokingarea}
                     label="Smoking Area"
                 />
                 <PlaceFeature featureValue={businessData.parking} label="Parking" />
-                <PlaceFeature featureValue={businessData.freeWifi} label="Free Wifi" />
+                <PlaceFeature featureValue={businessData.freewifi} label="Free Wifi" />
             </div>
 
             <div className={style['contact-container']}>

@@ -46,9 +46,14 @@ export default {
     'Add Business': 'إضافة تجارة',
     'Choose location': 'اختار موقع',
     'Reviews amount template':'بالاعتماد على تقييم {reviews} مستخدم',
-    'business followers': '{followers} متابعين',
+    'Distance': 'المسافه',
+    'Edit': 'تعديل',
+    'Back': 'رجوع',
+    'Promotions': 'الترقيه',
     'searchPlaceholder': 'بحث حسب الاسم, النوع أو اسلوب المطبخ',
+    'business followers': '{followers} متابعين',
     'Follow': 'تابع',
-    'Unfollow': 'ازالة المتابعة'
+    'Unfollow': 'ازالة المتابعة',
+    'Logout': 'الخروج',
 
 };

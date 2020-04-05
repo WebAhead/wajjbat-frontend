@@ -34,7 +34,7 @@ function BusinessReviews(props) {
     const classes = useStyles();
 
     useEffect(() => {
-        (async function fetchIsLoggedIn() {
+        async function fetchIsLoggedIn() {
             try {
                 const { data } = await axios.get(
                     `${process.env.REACT_APP_API_URL}/api/isLoggedIn`,
@@ -54,7 +54,8 @@ function BusinessReviews(props) {
             } catch (error) {
                 console.log(error);
             }
-        })();
+        };
+        fetchIsLoggedIn();
     }, []);
 
     const handleReviews = () => {

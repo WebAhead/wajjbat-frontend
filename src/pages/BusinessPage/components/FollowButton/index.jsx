@@ -33,32 +33,32 @@ export default function IconButtons() {
     useEffect(async () => {
         try{ 
             const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/isfollowing`, { userId: 4, businessId: 1});
-            setFollowed(data); 
+            setFollowed(data.success);
+            console.log('followed ', followed);
+             
         } catch(err){
             console.log(err);
         }
     },[])
 
     async function followUnfollow() {
-        if (followed.success){
+
+        console.log('followed ', followed)
+        if (followed){
             const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/unfollow/`, { userId: 4, businessId: 1 })
             setFollowed(data.success); 
-            setFollowMessage('Unfollow')}
-        else{
+            setFollowMessage('Unfollow')
+        } else {
             const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/follow/`, { userId: 4, businessId: 1 })
             setFollowed(data.success); 
             setFollowMessage('Follow')}
     }
 
-    if(!followed){
-        return <h1>Loading...</h1>
-    }
- 
     return (
         <div className={classes.root}>
             <IconButton onClick={followUnfollow} className={classes.iconButton}>
                 <FormattedMessage id={followMessage} />
-                {followed.success ? <HighlightOffIcon className={classes.addMargin} /> : <AddIcon className={classes.addMargin} />}
+                {followed ? <HighlightOffIcon className={classes.addMargin} /> : <AddIcon className={classes.addMargin} />}
             </IconButton>
         </div>
     );

@@ -47,8 +47,12 @@ export default {
     'Add Business': 'Add Business',
     'Choose location': 'Choose location',
     'Reviews amount template':'Based on {reviews} reviews',
-    'business followers': '{followers} followers',
     'Follow': 'Follow',
-    'Unfollow' : 'Unfollow'
-
+    'Unfollow' : 'Unfollow',
+    'Distance': 'Distance',
+    'Edit': 'Edit',
+    'Back': 'Back',
+    'Promotions': 'Promotions',
+    'business followers': '{followers} followers',
+    'Logout': 'Logout',
 };

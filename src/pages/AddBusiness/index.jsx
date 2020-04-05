@@ -28,32 +28,35 @@ const cuisines = [
 
 const endPointUrl = process.env.REACT_APP_API_URL;
 
-function AddBusiness({ intl }) {
-    const history = useHistory();
+const editingDefaultObj = {
+    images: []
+}
 
-    const [mainImg, setMainImg] = useState('');
-    const [subImgs, setSubImgs] = useState([]);
+function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
+    const history = useHistory();
+    const [mainImg, setMainImg] = useState(editing.image || '');
+    const [subImgs, setSubImgs] = useState([...editing.images] || []);
     const [userPosition, setUserPosition] = useState({});
     const [userId, setUserId] = useState('');
     const [businessLatlng, setBusinessLatlng] = useState({});
+    const [missingType, setMissingType] = useState(false);
+    const [missingCuisine, setMissingCuisine] = useState(false);
+    const [missingImage, setMissingImage] = useState(false);
+    const [reqErr, setReqErr] = useState(false);
 
     const [business, setBusiness] = useState(() => ({
-        name: '',
-        description: '',
-        phone: '',
-        email: '',
-        cuisine: '',
-        address: '',
-        type: '',
-        parking: false,
-        smokingArea: false,
-        freeWifi: false,
+        id: editing.id || null,
+        name: editing.name || '',
+        description: editing.description || '',
+        phone: editing.phone || '',
+        email: editing.email || '',
+        cuisine: editing.cuisine || '',
+        address: editing.address || '',
+        type: editing.type || '',
+        parking: editing.parking || false,
+        smokingArea: editing.smokingarea || false,
+        freeWifi: editing.freewifi || false,
     }));
-
-    // useEffect(() => {
-    //     navigator.geolocation.getCurrentPosition(({ coords }) => setUserPosition({ lat: coords.latitude, lng: coords.longitude })
-    //     );
-    // }, []);
 
     useEffect(() => {
     // here we get the user location  after the user approve using
@@ -81,7 +84,7 @@ function AddBusiness({ intl }) {
     }, []);
 
     useEffect(() => {
-        (async function getUserId() {
+        async function getUserId() {
             const { data } = await axios.get(`${endPointUrl}/api/isLoggedIn`, {
                 withCredentials: true,
             });
@@ -90,7 +93,8 @@ function AddBusiness({ intl }) {
             } else {
                 setUserId(data.id);
             }
-        })();
+        }
+        getUserId();
     }, []);
 
     const handleChange = ({ currentTarget: input }) => {
@@ -111,9 +115,29 @@ function AddBusiness({ intl }) {
         }));
     };
 
+    const checkInput = async () => {
+        if (!business.type || !business.type.length) {
+            setMissingType(true);
+        } else setMissingType(false);
+
+        if (!business.cuisine || !business.cuisine.length) {
+            setMissingCuisine(true);
+        } else setMissingCuisine(false);
+        if (!mainImg.length) {
+            setMissingImage(true);
+        } else setMissingImage(false);
+    };
     const handleSubmit = async e => {
         e.preventDefault();
-
+        await checkInput();
+        if (
+            !business.cuisine
+      || !business.cuisine.length
+      || !business.type
+      || !business.type.length
+        )
+            return;
+        if (missingCuisine || missingType) return;
         const data = {
             userId,
             ...business,
@@ -122,22 +146,22 @@ function AddBusiness({ intl }) {
             lat: businessLatlng.lat,
             lng: businessLatlng.lng,
         };
-        console.log(data);
         try {
-            const result = await axios.post(
-                `${endPointUrl}/api/new-businesses`,
-                data,
-                { withCredentials: true },
-            );
-
+            let apiUrl = `${endPointUrl}/api/new-businesses`;
+            if (editing.name) apiUrl = `${endPointUrl}/api/update-business`;
+            const result = await axios.post(apiUrl, data, { withCredentials: true });
             if (result.data.success) {
+                if (editing.name) {
+                    setEditBusiness(null);
+                    return;
+                }
                 history.push('/profile-business-list');
             } else {
                 // handle error with popup ?
             }
         } catch (err) {
             // handle error with popup ?
-            console.log(err);
+            setReqErr(err);
             history.push('/profile-business-list');
         }
 
@@ -205,7 +229,8 @@ function AddBusiness({ intl }) {
                                 label={translate('Type')}
                                 className="form-input"
                                 onSelect={handleTypeSelect}
-                                value={business.type}
+                                value={business.type.length ? business.type : null}
+                                required
                             />
                             <Select
                                 items={cuisines}
@@ -225,6 +250,7 @@ function AddBusiness({ intl }) {
                             className="form-input"
                             value={business.phone}
                             onChange={handleChange}
+                            required
                         />
 
                         <input
@@ -234,6 +260,7 @@ function AddBusiness({ intl }) {
                             className="form-input"
                             value={business.email}
                             onChange={handleChange}
+                            required
                         />
 
                         <textarea
@@ -244,6 +271,7 @@ function AddBusiness({ intl }) {
                             placeholder={translate('Address')}
                             value={business.address}
                             onChange={handleChange}
+                            required
                         />
 
                         <div className="checkbox">
@@ -254,6 +282,7 @@ function AddBusiness({ intl }) {
                                     name="parking"
                                     value={business.parking}
                                     onChange={handleCheckBox}
+                                    checked={business.parking}
                                 />
                                 <label htmlFor="parking">
                                     <FormattedMessage id="Parking" />
@@ -268,6 +297,7 @@ function AddBusiness({ intl }) {
                                     name="smokingArea"
                                     value={business.smokingArea}
                                     onChange={handleCheckBox}
+                                    checked={business.smokingArea}
                                 />
                                 <label htmlFor="smokingArea">
                                     <FormattedMessage id="Smoking Area" />
@@ -281,6 +311,7 @@ function AddBusiness({ intl }) {
                                     name="freeWifi"
                                     value={business.freeWifi}
                                     onChange={handleCheckBox}
+                                    checked={business.freeWifi}
                                 />
                                 <label htmlFor="freeWifi">
                                     <FormattedMessage id="Free Wifi" />
@@ -302,10 +333,35 @@ function AddBusiness({ intl }) {
                             setBusinessLatlng={setBusinessLatlng}
                             latLng={businessLatlng}
                         />
+                        {missingType && (
+                            <span className="error-msg">Please select business type.</span>
+                        )}
+                        {missingCuisine && (
+                            <span className="error-msg">Please select business cusine.</span>
+                        )}
+                        {missingImage && (
+                            <span className="error-msg">
+                Please upload at least one primary image.
+                            </span>
+                        )}
 
-                        <button type="submit" className="submit-btn">
-                            <FormattedMessage id="Submit" />
-                        </button>
+                        {reqErr && (
+                            <span className="error-msg">
+                Unexpected error while handling the request,please try again
+                later.
+                            </span>
+                        )}
+            
+                        {!editing.name && (
+                            <button type="submit" className="submit-btn">
+                                <FormattedMessage id="Submit" />
+                            </button>
+                        )}
+                        {editing.name && (
+                            <button type="submit" className="submit-btn">
+                                <FormattedMessage id="Edit" />
+                            </button>
+                        )}
                     </form>
                 </div>
             </section>
