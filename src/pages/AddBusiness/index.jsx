@@ -229,9 +229,9 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
                   <button
                     className="remove-img"
                     onClick={() => {
-                      setSubImgs(
-                        subImgs.filter(image => !removedImgs.includes(image)),
-                      );
+                      
+                        subImgs.splice(subImgs.indexOf(subImg),1);
+                      
                       setRemovedImgs([...removedImgs, subImg]);
                     }}
                   >
