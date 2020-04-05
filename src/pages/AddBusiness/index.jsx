@@ -39,6 +39,7 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
   const [subImgs, setSubImgs] = useState(
     [...editing.images.map(({ url }) => url)] || [],
   );
+  const [removedImgs, setRemovedImgs] = useState([]);
   const [userPosition, setUserPosition] = useState({});
   const [userId, setUserId] = useState('');
   const [businessLatlng, setBusinessLatlng] = useState({});
@@ -130,17 +131,41 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
       setMissingImage(true);
     } else setMissingImage(false);
   };
+
+  const removeImage = async imageUrl => {
+    try {
+      let apiUrl = `${endPointUrl}/api/update-picture`;
+      const result = await axios.post(
+        apiUrl,
+        { businessId: editing.id, imageUrl },
+        { withCredentials: true },
+      );
+      if (result.data.success) {
+        console.log('picture removed');
+      } else {
+        console.log('failed to remove picture');
+      }
+    } catch (err) {
+      // handle error with popup ?
+      setReqErr(err);
+    }
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
+    // Input validation
     await checkInput();
     if (
       !business.cuisine ||
       !business.cuisine.length ||
       !business.type ||
-      !business.type.length
+      !business.type.length ||
+      missingCuisine ||
+      missingType ||
+      !mainImg
     )
       return;
-    if (missingCuisine || missingType) return;
+
     const data = {
       userId,
       ...business,
@@ -149,6 +174,10 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
       lat: businessLatlng.lat,
       lng: businessLatlng.lng,
     };
+
+    if (removedImgs.length) {
+      removedImgs.forEach(imgUrl => removeImage(imgUrl));
+    }
     try {
       let apiUrl = `${endPointUrl}/api/new-businesses`;
       if (editing.name) apiUrl = `${endPointUrl}/api/update-business`;
@@ -158,14 +187,12 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
           setEditBusiness(null);
           return;
         }
-        history.push('/profile-business-list');
       } else {
         // handle error with popup ?
       }
     } catch (err) {
       // handle error with popup ?
       setReqErr(err);
-      history.push('/profile-business-list');
     }
 
     // Redirect the user to another page
@@ -178,13 +205,40 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
       <header className="create-business-header">
         <div className="header-items">
           {mainImg ? (
-            <img src={mainImg} alt="main-img" />
+              <div className="main-img-container">
+                {editing.name && (
+                  <button
+                    className="remove-img"
+                    onClick={() => {
+                      setMainImg('');
+                    }}
+                  >
+                    X
+                  </button>
+                )}
+              <img src={mainImg} alt="main-img" />
+            </div>
           ) : (
             <ImageInput height="150px" onChange={url => setMainImg(url)} />
           )}
           <div className="sub-imgs">
             {subImgs.map((subImg, index) => (
-              <img key={index + 1} src={subImg} alt="sub-img" />
+              <div className="sub-img-container">
+                {editing.name && (
+                  <button
+                    className="remove-img"
+                    onClick={() => {
+                      setSubImgs(
+                        subImgs.filter(image => !removedImgs.includes(image)),
+                      );
+                      setRemovedImgs([...removedImgs, subImg]);
+                    }}
+                  >
+                    X
+                  </button>
+                )}
+                <img key={index + 1} src={subImg} alt="sub-img" />
+              </div>
             ))}
             <ImageInput
               height="40px"
