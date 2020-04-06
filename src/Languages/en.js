@@ -47,6 +47,8 @@ export default {
     'Add Business': 'Add Business',
     'Choose location': 'Choose location',
     'Reviews amount template':'Based on {reviews} reviews',
+    'Follow': 'Follow',
+    'Unfollow' : 'Unfollow',
     'Distance': 'Distance',
     'Edit': 'Edit',
     'Back': 'Back',

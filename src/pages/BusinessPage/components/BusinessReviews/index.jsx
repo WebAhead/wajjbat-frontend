@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import axios from 'axios';
 import { Rating } from '@material-ui/lab';
-
 import './styles.scss';
 import ReviewCard from 'components/Cards/ReviewCard';
 

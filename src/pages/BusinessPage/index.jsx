@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 import axios from 'axios';
 import './style.scss';
 import { FormattedMessage } from 'react-intl';
@@ -79,6 +78,7 @@ export default function BusinessPage(props) {
             >
                 <div>
                     <BusinessDetails
+                        logged={props.logged}
                         businessData={businessData.details}
                         userPosition={userPosition}
                     />
