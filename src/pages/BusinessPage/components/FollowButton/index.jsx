@@ -7,22 +7,20 @@ import axios from 'axios'
 
 const useStyles = makeStyles(() => ({
     root:{
-        background:'none',
-        textAlign: 'center'
-    },
-    iconButton:{
+        'background':'none',
+        'textAlign': 'center',
+        'marginTop': '15px',
         'border': '2px solid #21b5a2',
         'backgroundColor': 'transparent',
-        'borderRadius': '6px',
-        'width':'5rem',
         'color': '#21b5a2',
-        'fontSize': '12px',
-        '&:hover': {
-            backgroundColor: 'transparent'
-        },
+        'borderRadius': '5px',
+        'fontSize': '16px',
+        'padding': '4px 8px',
+        'marginBottom': '-50px',
+        'cursor': 'pointer'
     },
     addMargin:{
-        margin: '0 10px'
+        margin: '5px 10px'
     }
 }));
 
@@ -31,13 +29,17 @@ export default function IconButtons() {
     const classes = useStyles();
     const [follows, setFollows] = useState(null);
 
-    useEffect(async () => {
-        try{ 
-            const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/isfollowing`, { userId: 4, businessId: 1});
-            setFollows(data.success);
-        } catch(err){
-            console.log(err);
+    useEffect(() => {
+        async function checkIsFollowing() {
+            try{ 
+                const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/isfollowing`, { userId: 4, businessId: 1});
+                setFollows(data.success);
+            } catch(err){
+                console.log(err);
+            }
         }
+
+        checkIsFollowing()
     },[])
 
     async function followUnfollow() {
@@ -51,11 +53,10 @@ export default function IconButtons() {
         }
     }
     return (
-        <div className={classes.root}>
-            <IconButton onClick={followUnfollow} className={classes.iconButton}>
-                {follows ? <FormattedMessage id="Unfollow" />
-                         : <FormattedMessage id="Follow"/>}    
-            </IconButton>
+        <div className={classes.root} onClick={followUnfollow}>
+            {follows 
+                ? <FormattedMessage id="Unfollow" />
+                : <FormattedMessage id="Follow" />}    
         </div>
     )
 }

@@ -28,27 +28,34 @@ export default function BusinessDetails({ logged, businessData, userPosition }) 
                 </div>
 
                 <div className={style['business-rating']}>
-                        { logged ? 
-                               (<div className={style['follow-btn']}>
-                                <FollowButton />
-                                </div>)
-                                : ''}
-                    <Link to={{ pathname: `/followers/${businessData.id}` }}>
-                           <div className={style['followers-by-business']}>
+                    <div>
+                        <div className={style['followers-by-business']}>
+                            <Link
+                                to={{ pathname: `/followers/${businessData.id}` }} 
+                                style={{display: 'flex', alignItems: 'center'}}
+                            >
                                
-                            <GroupIcon
-                                style={{ color: '#21b5a2', }}
-                                fontSize="small"
-                            />
-
-                            <span className={style['followers-amount']}>
-                                <FormattedMessage
-                                    id="business followers"
-                                    values={{ followers: businessData.followers.count }}
+                                <GroupIcon
+                                    style={{ color: '#21b5a2', }}
+                                    fontSize="small"
                                 />
-                            </span>
+
+                                <span className={style['followers-amount']}>
+                                    <FormattedMessage
+                                        id="business followers"
+                                        values={{ followers: businessData.followers.count }}
+                                    />
+                                </span>
+                            </Link>
+                            { logged 
+                                ? ( 
+                                    <div className={style['follow-btn']}>
+                                        <FollowButton />
+                                    </div>
+                                )
+                                : ''}
                         </div>
-                    </Link>
+                    </div>
 
                     <Rating
                         name="half-rating"
@@ -77,7 +84,6 @@ export default function BusinessDetails({ logged, businessData, userPosition }) 
             <div className={style['contact-container']}>
                 <Contact email={businessData.email} phone={businessData.phone} />
             </div>
-
             
 
             <div className={style.address}>
