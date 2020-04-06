@@ -36,7 +36,6 @@ export default function NavBar(props) {
         checkLogin();
     }, []);
 
-    useEffect(() => {
         async function logout() {
             if (!logged) {
 
@@ -56,9 +55,7 @@ export default function NavBar(props) {
             return 1
 
         };
-        logout();
 
-    }, [logged])
 
     useEffect(() => {
         props.setLang(lang);
@@ -95,7 +92,7 @@ export default function NavBar(props) {
           setMenuShowSideBar={setMenuShowSideBar}
           showMenuSideBar={showMenuSideBar}
           logged={logged}
-          setLogged={setLogged}
+          logout={logout}
           lang={lang}
           handleLang={handleLang}
         />
