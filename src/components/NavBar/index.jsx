@@ -8,15 +8,15 @@ import Menu from '@material-ui/icons/Menu';
 import MenuSideBar from '../MenuSideBar';
 
 export default function NavBar(props) {
-  const history = useHistory();
-  const [lang, setLang] = useState('ar');
-  const [logged, setLogged] = useState(false);
-  const [showMenuSideBar, setMenuShowSideBar] = useState(false);
+    const history = useHistory();
+    const [lang, setLang] = useState('ar');
+    const [logged, setLogged] = useState(false);
+    const [showMenuSideBar, setMenuShowSideBar] = useState(false);
 
-  const handleLang = value => {
-    localStorage.setItem('language', value);
-    setLang(value);
-  };
+    const handleLang = value => {
+        localStorage.setItem('language', value);
+        setLang(value);
+    };
 
     useEffect(() => {
 
@@ -38,7 +38,7 @@ export default function NavBar(props) {
 
     useEffect(() => {
         async function logout() {
-            if (!logged) {
+            if (logged) {
 
                 try {
                     const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/logout`, {
@@ -64,42 +64,42 @@ export default function NavBar(props) {
         props.setLang(lang);
     }, [lang, props]);
 
-  const useStyles = makeStyles({
-    root: { color: '#21b5a2', height: '40px', width: '40px' }
-  });
+    const useStyles = makeStyles({
+        root: { color: '#21b5a2', height: '40px', width: '40px' }
+    });
 
-  const classes = useStyles();
+    const classes = useStyles();
 
-  return (
-    <div className="navBar">
-      <img onClick={() => history.push('/')} className="logo-img" src={require('../../assets/icons/logo-3.png')} alt="Logo image" />
+    return (
+        <div className="navBar">
+            <img onClick={() => history.push('/')} className="logo-img" src={require('../../assets/icons/logo-3.png')} alt="Logo image" />
 
-      <div className="login">
-        <button onClick={() => history.push('/search')}>
-          <Search
-            classes={{
-              root: classes.root
-            }}
-          />
-        </button>
-        <button onClick={() => setMenuShowSideBar(!showMenuSideBar)}>
-          <Menu
-            classes={{
-              root: classes.root
-            }}
-          />
-        </button>
-      </div>
-      <div>
-        <MenuSideBar
-          setMenuShowSideBar={setMenuShowSideBar}
-          showMenuSideBar={showMenuSideBar}
-          logged={logged}
-          setLogged={setLogged}
-          lang={lang}
-          handleLang={handleLang}
-        />
-      </div>
-    </div>
-  );
+            <div className="login">
+                <button onClick={() => history.push('/search')}>
+                    <Search
+                        classes={{
+                            root: classes.root
+                        }}
+                    />
+                </button>
+                <button onClick={() => setMenuShowSideBar(!showMenuSideBar)}>
+                    <Menu
+                        classes={{
+                            root: classes.root
+                        }}
+                    />
+                </button>
+            </div>
+            <div>
+                <MenuSideBar
+                    setMenuShowSideBar={setMenuShowSideBar}
+                    showMenuSideBar={showMenuSideBar}
+                    logged={logged}
+                    setLogged={setLogged}
+                    lang={lang}
+                    handleLang={handleLang}
+                />
+            </div>
+        </div>
+    );
 }
