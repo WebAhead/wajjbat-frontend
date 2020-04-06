@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 import { useHistory } from 'react-router-dom';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 
-export default function MenuSideBar({ setMenuShowSideBar, showMenuSideBar, logged, setLogged, lang, handleLang }) {
+export default function MenuSideBar({ setMenuShowSideBar, showMenuSideBar, logged, logout, lang, handleLang }) {
     const [hideProfile, setHideProfile] = useState(false);
     const history = useHistory();
 
@@ -23,7 +23,7 @@ export default function MenuSideBar({ setMenuShowSideBar, showMenuSideBar, logge
     };
 
     const handleLogout = () => {
-        setLogged(false);
+        logout();
         const cookies = new Cookies();
         cookies.remove('wajjbat_access_token');
         history.push('/');

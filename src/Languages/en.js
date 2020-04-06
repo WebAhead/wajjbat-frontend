@@ -55,4 +55,8 @@ export default {
     'Promotions': 'Promotions',
     'business followers': '{followers} followers',
     'Logout': 'Logout',
+    'bronze': 'Bronze Package',
+    'silver': 'Silver Package',
+    'gold': 'Gold Package',
+    'purchaseClicks': 'Purchase Clicks',
 };
