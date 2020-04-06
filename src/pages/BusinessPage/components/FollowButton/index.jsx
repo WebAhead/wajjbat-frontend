@@ -7,59 +7,56 @@ import axios from 'axios'
 
 const useStyles = makeStyles(() => ({
     root:{
-        background:'none',
-        textAlign: 'center'
-    },
-    iconButton:{
-        'border': '2px solid #c4c4c4',
+        'background':'none',
+        'textAlign': 'center',
+        'marginTop': '15px',
+        'border': '2px solid #21b5a2',
         'backgroundColor': 'transparent',
-        'borderRadius': '6px',
-        'width':'90%',
-        '&:hover': {
-            backgroundColor: 'transparent'
-        },
+        'color': '#21b5a2',
+        'borderRadius': '5px',
+        'fontSize': '16px',
+        'padding': '4px 8px',
+        'marginBottom': '-50px',
+        'cursor': 'pointer'
     },
     addMargin:{
-        margin: '0 10px'
+        margin: '5px 10px'
     }
 }));
 
 export default function IconButtons() {
 
     const classes = useStyles();
-    const [followed, setFollowed] = useState(null);
-    const [followMessage, setFollowMessage] = useState('Follow');
+    const [follows, setFollows] = useState(null);
 
-    useEffect(async () => {
-        try{ 
-            const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/isfollowing`, { userId: 4, businessId: 1});
-            setFollowed(data.success);
-            console.log('followed ', followed);
-             
-        } catch(err){
-            console.log(err);
+    useEffect(() => {
+        async function checkIsFollowing() {
+            try{ 
+                const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/isfollowing`, { userId: 4, businessId: 1});
+                setFollows(data.success);
+            } catch(err){
+                console.log(err);
+            }
         }
+
+        checkIsFollowing()
     },[])
 
     async function followUnfollow() {
-
-        console.log('followed ', followed)
-        if (followed){
+        if (follows){
+            setFollows(false);
             const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/unfollow/`, { userId: 4, businessId: 1 })
-            setFollowed(data.success); 
-            setFollowMessage('Unfollow')
+            
         } else {
+            setFollows(true); 
             const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/follow/`, { userId: 4, businessId: 1 })
-            setFollowed(data.success); 
-            setFollowMessage('Follow')}
+        }
     }
-
     return (
-        <div className={classes.root}>
-            <IconButton onClick={followUnfollow} className={classes.iconButton}>
-                <FormattedMessage id={followMessage} />
-                {followed ? <HighlightOffIcon className={classes.addMargin} /> : <AddIcon className={classes.addMargin} />}
-            </IconButton>
+        <div className={classes.root} onClick={followUnfollow}>
+            {follows 
+                ? <FormattedMessage id="Unfollow" />
+                : <FormattedMessage id="Follow" />}    
         </div>
-    );
+    )
 }

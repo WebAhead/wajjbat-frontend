@@ -55,5 +55,8 @@ export default {
     'Follow': 'تابع',
     'Unfollow': 'ازالة المتابعة',
     'Logout': 'الخروج',
-
+    'bronze': 'حملة Bronze',
+    'silver': 'حملة Silver',
+    'gold': 'حملة Gold',
+    'purchaseClicks': 'شراء نقرات',
 };

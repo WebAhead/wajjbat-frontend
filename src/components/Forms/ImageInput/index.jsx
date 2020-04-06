@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Dropzone from '../Dropzone';
 
-export default function UploadInput({ onChange, onError, height, width, multiple, onChangeMultiple }) {
+export default function UploadInput({ onChange, onError, height, width, multiple, onChangeMultiple, userId }) {
     const uploadFile = (file, signedRequest, url) => axios
         .put(signedRequest, file, {
             headers: {
@@ -28,7 +28,7 @@ export default function UploadInput({ onChange, onError, height, width, multiple
     const getSignedRequest = (files) => {
         if (multiple) {
             Promise.all(
-                files.map((file) => axios.get(`${process.env.REACT_APP_API_URL}/api/sign-s3?file-name=${file.name}&file-type=${file.type}`)),
+                files.map((file) => axios.get(`${process.env.REACT_APP_API_URL}/api/sign-s3?file-name=${userId}-${Date.now()}-${file.name}&file-type=${file.type}`)),
             )
                 .then((res) => Promise.all(res.map((file, i) => uploadFile(files[i], file.data.signedRequest, file.data.url)))
                     .then((images) => onChangeMultiple(images))
@@ -38,7 +38,7 @@ export default function UploadInput({ onChange, onError, height, width, multiple
 
             axios
                 .get(
-                    `${process.env.REACT_APP_API_URL}/api/sign-s3?file-name=${files[0].name}&file-type=${files[0].type}`,
+                    `${process.env.REACT_APP_API_URL}/api/sign-s3?file-name=${userId}-${Date.now()}-${files[0].name}&file-type=${files[0].type}`,
                 )
                 .then((res) => {
                     if (res.status === 200) {

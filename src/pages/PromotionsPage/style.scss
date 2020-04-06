@@ -1,0 +1,33 @@
+@import "theme/colors.scss";
+
+.promotionsPage {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    .promotionsTitle {
+        font-size: 2rem;
+        color: #21b5a2;
+        margin: 2rem 0;
+    }
+
+    .clicksOption {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 70%;
+        padding: 1rem;
+        border: 1px green solid;
+        border-radius: 0.5rem;
+        margin-top: 2rem;
+        
+        .numOfClicks {
+            font-size: 4rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+    }
+}
