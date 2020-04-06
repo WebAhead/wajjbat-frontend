@@ -36,7 +36,6 @@ export default function NavBar(props) {
         checkLogin();
     }, []);
 
-    useEffect(() => {
         async function logout() {
             if (logged) {
 
@@ -56,9 +55,7 @@ export default function NavBar(props) {
             return 1
 
         };
-        logout();
 
-    }, [logged])
 
     useEffect(() => {
         props.setLang(lang);
@@ -73,33 +70,33 @@ export default function NavBar(props) {
     return (
         <div className="navBar">
             <img onClick={() => history.push('/')} className="logo-img" src={require('../../assets/icons/logo-3.png')} alt="Logo image" />
+      <div className="login">
+        <button onClick={() => history.push('/search')}>
+          <Search
+            classes={{
+              root: classes.root
+            }}
+          />
+        </button>
+        <button onClick={() => setMenuShowSideBar(!showMenuSideBar)}>
+          <Menu
+            classes={{
+              root: classes.root
+            }}
+          />
+        </button>
+      </div>
+      <div>
+        <MenuSideBar
+          setMenuShowSideBar={setMenuShowSideBar}
+          showMenuSideBar={showMenuSideBar}
+          logged={logged}
+          logout={logout}
+          lang={lang}
+          handleLang={handleLang}
+        />
+      </div>
+    </div>
+  );
 
-            <div className="login">
-                <button onClick={() => history.push('/search')}>
-                    <Search
-                        classes={{
-                            root: classes.root
-                        }}
-                    />
-                </button>
-                <button onClick={() => setMenuShowSideBar(!showMenuSideBar)}>
-                    <Menu
-                        classes={{
-                            root: classes.root
-                        }}
-                    />
-                </button>
-            </div>
-            <div>
-                <MenuSideBar
-                    setMenuShowSideBar={setMenuShowSideBar}
-                    showMenuSideBar={showMenuSideBar}
-                    logged={logged}
-                    setLogged={setLogged}
-                    lang={lang}
-                    handleLang={handleLang}
-                />
-            </div>
-        </div>
-    );
 }
