@@ -10,6 +10,7 @@ import ProfileBusinesList from './pages/ProfileBusinessList';
 import ReviewerPage from './pages/ReviewerPage';
 import FollowersPage from './pages/FollowersPage';
 import SearchResults from './pages/SearchResults';
+import PromotionsPage from './pages/PromotionsPage';
 
 import './App.scss';
 
@@ -26,6 +27,7 @@ export default props => (
             <Route path="/reviewer/:fullname/:reviewerid" component={ReviewerPage} />
             <Route path="/followers/:businessid" component={FollowersPage} />
             <Route path="/search" component={SearchResults} />
+            <Route path="/promotions/:id" component={PromotionsPage} />
         </Switch>
     </div>
 );

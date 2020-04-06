@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link , useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import axios from 'axios';
 import BusinessesList from 'components/BusinessesList/index';
 import './style.scss';
+
 
 const endPointUrl = process.env.REACT_APP_API_URL;
 export default function ProfileBusinesList(props) {
     const [businesses, setBusinesses] = useState([]);
     const [selectedBusiness, setSelectedBusiness] = useState(null);
     const [editBusiness, setEditBusiness] = useState(null);
+    
+    const history = useHistory();
 
     const handleNav = () =>{
         setSelectedBusiness(null);
@@ -58,10 +61,12 @@ export default function ProfileBusinesList(props) {
                         setEditBusiness={setEditBusiness}
                     />
                 </div>
-                {!selectedBusiness &&
-                <button className="add-business-btn" onClick={handleAddBusiness}>
-                    <FormattedMessage id="Add Business" />
-                </button>}
+                {!selectedBusiness
+                && (
+                    <button className="add-business-btn" onClick={handleAddBusiness}>
+                        <FormattedMessage id="Add Business" />
+                    </button>
+                )}
             </div>
         </>
     );
