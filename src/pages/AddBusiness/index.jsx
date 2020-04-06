@@ -220,7 +220,7 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
                             <img src={mainImg} alt="main-img" />
                         </div>
                     ) : (
-                        <ImageInput height="150px" onChange={url => setMainImg(url)} />
+                        <ImageInput height="150px" userId={userId} onChange={url => setMainImg(url)} />
                     )}
                     <div className="sub-imgs">
                         {subImgs.map((subImg, index) => (
@@ -242,6 +242,7 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
                             </div>
                         ))}
                         <ImageInput
+                            userId={userId}
                             height="40px"
                             width="40px"
                             onChange={url => setSubImgs([...subImgs, url])}
