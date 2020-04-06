@@ -33,14 +33,13 @@ const editingDefaultObj = {
 };
 
 function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
-    console.log('Now editing:', editing);
     const history = useHistory();
     const [mainImg, setMainImg] = useState(editing.image || '');
     const [subImgs, setSubImgs] = useState(
         [...editing.images.map(({ url }) => url)] || [],
     );
     const [removedImgs, setRemovedImgs] = useState([]);
-    const [newImgs, setNewImgs] = useState([])
+    const [newImgs, setNewImgs] = useState([]);
     const [userPosition, setUserPosition] = useState({});
     const [userId, setUserId] = useState('');
     const [businessLatlng, setBusinessLatlng] = useState({});
@@ -66,7 +65,6 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
     useEffect(() => {
     // here we get the user location  after the user approve using
     // The HTML Geolocation API which is used to locate a user's position.
-    console.log('Editing lat lng:',editing.lat,editing.lng);
         if (navigator.geolocation) {
             setUserPosition({
                 lat: 32.8172164,
@@ -171,7 +169,7 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
         const data = {
             userId,
             ...business,
-            subImgs,
+            subImgs:editing.name ? newImgs : subImgs,
             primaryImage: mainImg,
             lat: businessLatlng.lat,
             lng: businessLatlng.lng,
@@ -247,8 +245,14 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
                             userId={userId}
                             height="40px"
                             width="40px"
-                            onChange={url => setSubImgs([...subImgs, url])}
-                            onChangeMultiple={images => setSubImgs([...subImgs, ...images])}
+                            onChange={url => {
+                                setNewImgs([...newImgs, url]);
+                                setSubImgs([...subImgs, url]);
+                            }}
+                            onChangeMultiple={images => {
+                                setNewImgs([...newImgs, ...images]);
+                                setSubImgs([...subImgs, ...images])
+                            }}
                             multiple
                         />
                     </div>
