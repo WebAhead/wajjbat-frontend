@@ -11,10 +11,12 @@ const useStyles = makeStyles(() => ({
         textAlign: 'center'
     },
     iconButton:{
-        'border': '2px solid #c4c4c4',
+        'border': '2px solid #21b5a2',
         'backgroundColor': 'transparent',
         'borderRadius': '6px',
-        'width':'90%',
+        'width':'5rem',
+        'color': '#21b5a2',
+        'fontSize': '12px',
         '&:hover': {
             backgroundColor: 'transparent'
         },
@@ -27,39 +29,33 @@ const useStyles = makeStyles(() => ({
 export default function IconButtons() {
 
     const classes = useStyles();
-    const [followed, setFollowed] = useState(null);
-    const [followMessage, setFollowMessage] = useState('Follow');
+    const [follows, setFollows] = useState(null);
 
     useEffect(async () => {
         try{ 
             const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/isfollowing`, { userId: 4, businessId: 1});
-            setFollowed(data.success);
-            console.log('followed ', followed);
-             
+            setFollows(data.success);
         } catch(err){
             console.log(err);
         }
     },[])
 
     async function followUnfollow() {
-
-        console.log('followed ', followed)
-        if (followed){
+        if (follows){
+            setFollows(false);
             const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/unfollow/`, { userId: 4, businessId: 1 })
-            setFollowed(data.success); 
-            setFollowMessage('Unfollow')
+            
         } else {
+            setFollows(true); 
             const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/follow/`, { userId: 4, businessId: 1 })
-            setFollowed(data.success); 
-            setFollowMessage('Follow')}
+        }
     }
-
     return (
         <div className={classes.root}>
             <IconButton onClick={followUnfollow} className={classes.iconButton}>
-                <FormattedMessage id={followMessage} />
-                {followed ? <HighlightOffIcon className={classes.addMargin} /> : <AddIcon className={classes.addMargin} />}
+                {follows ? <FormattedMessage id="Unfollow" />
+                         : <FormattedMessage id="Follow"/>}    
             </IconButton>
         </div>
-    );
+    )
 }

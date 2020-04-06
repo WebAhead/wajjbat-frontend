@@ -78,6 +78,7 @@ export default function BusinessPage(props) {
             >
                 <div>
                     <BusinessDetails
+                        logged={props.logged}
                         businessData={businessData.details}
                         userPosition={userPosition}
                     />
