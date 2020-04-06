@@ -28,7 +28,7 @@ export default function ProfileBusinesList(props) {
             setBusinesses(data);
         };
         getBusinesses();
-    }, []);
+    }, [editBusiness]);
 
     const handleAddBusiness = () => {
         window.location = '/create-business ';

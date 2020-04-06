@@ -1,9 +1,11 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, {useState} from 'react';
-import BusinessCard from '../Cards/BusinessCard';
-import BusinessPage from '../../pages/BusinessPage';
 import './style.scss';
 import { FormattedMessage } from 'react-intl';
 import EditBusiness from 'components/EditBusiness/EditBusiness';
+import {useHistory} from 'react-router-dom';
+import BusinessCard from '../Cards/BusinessCard';
+import BusinessPage from '../../pages/BusinessPage';
 
 export default ({
     businesses,
@@ -14,8 +16,9 @@ export default ({
     editBusiness,
     setEditBusiness,
 }) => {
-    const [businessData, setBusinessData] = useState(null);
 
+    const [businessData, setBusinessData] = useState(null);
+    const history = useHistory();
     const handleBack = () => {
         if (editBusiness) setEditBusiness(null);
         else if (selectedBusiness) setSelectedBusiness(null);
@@ -26,17 +29,20 @@ export default ({
             <div className="selected-business-container">
                 <div className="business-control-navbar">
                     <button
-                        onClick={() => setEditBusiness(true)}
                         className="business-control-btn"
+                        onClick={() => setEditBusiness(true)}
                     >
                         <FormattedMessage id="Edit" />
                     </button>
-                    <button className="business-control-btn">
+                    <button 
+                        className="business-control-btn"
+                        onClick={()=>history.push(`/promotions/${selectedBusiness.id}`)}
+                    >
                         <FormattedMessage id="Promotions" />
                     </button>
                     <button
-                        onClick={() => handleBack()}
                         className="business-control-back-btn"
+                        onClick={() => handleBack()}
                     >
                         <FormattedMessage id="Back" />
                     </button>
@@ -61,6 +67,7 @@ export default ({
         <>
             <ul className="businesses-list">
                 {businesses.map(business => (
+                    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
                     <li key={business.id} onClick={() => setSelectedBusiness(business)}>
                         <BusinessCard
                             business={business}

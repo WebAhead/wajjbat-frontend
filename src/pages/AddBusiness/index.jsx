@@ -29,13 +29,17 @@ const cuisines = [
 const endPointUrl = process.env.REACT_APP_API_URL;
 
 const editingDefaultObj = {
-    images: []
-}
+    images: [],
+};
 
 function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
+    console.log('Now editing:', editing);
     const history = useHistory();
     const [mainImg, setMainImg] = useState(editing.image || '');
-    const [subImgs, setSubImgs] = useState([...editing.images] || []);
+    const [subImgs, setSubImgs] = useState(
+        [...editing.images.map(({ url }) => url)] || [],
+    );
+    const [removedImgs, setRemovedImgs] = useState([]);
     const [userPosition, setUserPosition] = useState({});
     const [userId, setUserId] = useState('');
     const [businessLatlng, setBusinessLatlng] = useState({});
@@ -127,17 +131,41 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
             setMissingImage(true);
         } else setMissingImage(false);
     };
+
+    const removeImage = async imageUrl => {
+        try {
+            const apiUrl = `${endPointUrl}/api/update-picture`;
+            const result = await axios.post(
+                apiUrl,
+                { businessId: editing.id, imageUrl },
+                { withCredentials: true },
+            );
+            if (result.data.success) {
+                console.log('picture removed');
+            } else {
+                console.log('failed to remove picture');
+            }
+        } catch (err) {
+            // handle error with popup ?
+            setReqErr(err);
+        }
+    };
+
     const handleSubmit = async e => {
         e.preventDefault();
+        // Input validation
         await checkInput();
         if (
             !business.cuisine
       || !business.cuisine.length
       || !business.type
       || !business.type.length
+      || missingCuisine
+      || missingType
+      || !mainImg
         )
             return;
-        if (missingCuisine || missingType) return;
+
         const data = {
             userId,
             ...business,
@@ -146,6 +174,10 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
             lat: businessLatlng.lat,
             lng: businessLatlng.lng,
         };
+
+        if (removedImgs.length) {
+            removedImgs.forEach(imgUrl => removeImage(imgUrl));
+        }
         try {
             let apiUrl = `${endPointUrl}/api/new-businesses`;
             if (editing.name) apiUrl = `${endPointUrl}/api/update-business`;
@@ -162,7 +194,6 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
         } catch (err) {
             // handle error with popup ?
             setReqErr(err);
-            history.push('/profile-business-list');
         }
 
     // Redirect the user to another page
@@ -175,13 +206,40 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
             <header className="create-business-header">
                 <div className="header-items">
                     {mainImg ? (
-                        <img src={mainImg} alt="main-img" />
+                        <div className="main-img-container">
+                            {editing.name && (
+                                <button
+                                    className="remove-img"
+                                    onClick={() => {
+                                        setMainImg('');
+                                    }}
+                                >
+                    X
+                                </button>
+                            )}
+                            <img src={mainImg} alt="main-img" />
+                        </div>
                     ) : (
                         <ImageInput height="150px" onChange={url => setMainImg(url)} />
                     )}
                     <div className="sub-imgs">
                         {subImgs.map((subImg, index) => (
-                            <img key={index + 1} src={subImg} alt="sub-img" />
+                            <div className="sub-img-container">
+                                {editing.name && (
+                                    <button
+                                        className="remove-img"
+                                        onClick={() => {
+                      
+                                            subImgs.splice(subImgs.indexOf(subImg),1);
+                      
+                                            setRemovedImgs([...removedImgs, subImg]);
+                                        }}
+                                    >
+                    X
+                                    </button>
+                                )}
+                                <img key={index + 1} src={subImg} alt="sub-img" />
+                            </div>
                         ))}
                         <ImageInput
                             height="40px"
@@ -292,7 +350,6 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
                             <div className="checkbox-items">
                                 <input
                                     type="checkbox"
-                                    primaryImage
                                     className="checkbox-input"
                                     name="smokingArea"
                                     value={business.smokingArea}
@@ -351,7 +408,7 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
                 later.
                             </span>
                         )}
-            
+
                         {!editing.name && (
                             <button type="submit" className="submit-btn">
                                 <FormattedMessage id="Submit" />
