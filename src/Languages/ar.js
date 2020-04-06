@@ -53,5 +53,8 @@ export default {
     'searchPlaceholder': 'بحث حسب الاسم, النوع أو اسلوب المطبخ',
     'business followers': '{followers} متابعين',
     'Logout': 'الخروج',
-
+    'bronze': 'حملة Bronze',
+    'silver': 'حملة Silver',
+    'gold': 'حملة Gold',
+    'purchaseClicks': 'شراء نقرات',
 };
