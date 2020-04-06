@@ -40,6 +40,7 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
         [...editing.images.map(({ url }) => url)] || [],
     );
     const [removedImgs, setRemovedImgs] = useState([]);
+    const [newImgs, setNewImgs] = useState([])
     const [userPosition, setUserPosition] = useState({});
     const [userId, setUserId] = useState('');
     const [businessLatlng, setBusinessLatlng] = useState({});
@@ -65,14 +66,15 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
     useEffect(() => {
     // here we get the user location  after the user approve using
     // The HTML Geolocation API which is used to locate a user's position.
+    console.log('Editing lat lng:',editing.lat,editing.lng);
         if (navigator.geolocation) {
             setUserPosition({
                 lat: 32.8172164,
                 lng: 34.9912262,
             });
             setBusinessLatlng({
-                lat: 32.8172164,
-                lng: 34.9912262,
+                lat: +editing.lat || 32.8172164,
+                lng: +editing.lng || 34.9912262,
             });
             navigator.geolocation.getCurrentPosition(({ coords }) => {
                 setUserPosition({
@@ -80,8 +82,8 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
                     lng: coords.longitude,
                 });
                 setBusinessLatlng({
-                    lat: coords.latitude,
-                    lng: coords.longitude,
+                    lat: +editing.lat || coords.latitude,
+                    lng: +editing.lng || coords.longitude,
                 });
             });
         }
