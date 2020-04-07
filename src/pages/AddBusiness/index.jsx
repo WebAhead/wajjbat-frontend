@@ -33,13 +33,13 @@ const editingDefaultObj = {
 };
 
 function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
-    console.log('Now editing:', editing);
     const history = useHistory();
     const [mainImg, setMainImg] = useState(editing.image || '');
     const [subImgs, setSubImgs] = useState(
         [...editing.images.map(({ url }) => url)] || [],
     );
     const [removedImgs, setRemovedImgs] = useState([]);
+    const [newImgs, setNewImgs] = useState([]);
     const [userPosition, setUserPosition] = useState({});
     const [userId, setUserId] = useState('');
     const [businessLatlng, setBusinessLatlng] = useState({});
@@ -71,8 +71,8 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
                 lng: 34.9912262,
             });
             setBusinessLatlng({
-                lat: 32.8172164,
-                lng: 34.9912262,
+                lat: +editing.lat || 32.8172164,
+                lng: +editing.lng || 34.9912262,
             });
             navigator.geolocation.getCurrentPosition(({ coords }) => {
                 setUserPosition({
@@ -80,8 +80,8 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
                     lng: coords.longitude,
                 });
                 setBusinessLatlng({
-                    lat: coords.latitude,
-                    lng: coords.longitude,
+                    lat: +editing.lat || coords.latitude,
+                    lng: +editing.lng || coords.longitude,
                 });
             });
         }
@@ -169,7 +169,7 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
         const data = {
             userId,
             ...business,
-            subImgs,
+            subImgs:editing.name ? newImgs : subImgs,
             primaryImage: mainImg,
             lat: businessLatlng.lat,
             lng: businessLatlng.lng,
@@ -245,8 +245,14 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
                             userId={userId}
                             height="40px"
                             width="40px"
-                            onChange={url => setSubImgs([...subImgs, url])}
-                            onChangeMultiple={images => setSubImgs([...subImgs, ...images])}
+                            onChange={url => {
+                                setNewImgs([...newImgs, url]);
+                                setSubImgs([...subImgs, url]);
+                            }}
+                            onChangeMultiple={images => {
+                                setNewImgs([...newImgs, ...images]);
+                                setSubImgs([...subImgs, ...images])
+                            }}
                             multiple
                         />
                     </div>
