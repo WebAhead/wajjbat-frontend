@@ -3,8 +3,13 @@ import axios from 'axios';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 import './style.scss';
+import {loadStripe} from '@stripe/stripe-js';
+import {Elements} from '@stripe/react-stripe-js';
+import PaymentForm from '../../components/Payment';
 
 const endPointUrl = process.env.REACT_APP_API_URL;
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const PromotionsPage = props => {
     const history = useHistory();
@@ -48,6 +53,12 @@ const PromotionsPage = props => {
             >
                 <span className="numOfClicks">1000</span>
                 <FormattedMessage id="gold" />
+            </div>
+            <div>
+                <Elements stripe={stripePromise}>
+
+                    <PaymentForm />
+                </Elements>
             </div>
         </div>
     );
