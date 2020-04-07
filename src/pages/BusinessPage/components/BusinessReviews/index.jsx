@@ -62,9 +62,11 @@ function BusinessReviews(props) {
         if (!props.reviews.length) {
             return '';
         }
+        console.log(props.reviews);
 
-        return props.reviews.map(currentReview => (
+        return props.reviews.map((currentReview, index)=> (
             <ReviewCard
+                key={index}
                 rating={currentReview.rating}
                 fullname={currentReview.fullname}
                 profile_image={currentReview.profile_image}
