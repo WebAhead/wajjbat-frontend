@@ -7,11 +7,11 @@ import './theme/reset.scss';
 import messages from './Languages';
 import * as serviceWorker from './serviceWorker';
 
-//payment addons
+// payment addons
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import CheckoutForm from './CheckoutForm';
-const stripePromise = loadStripe("pk_test_rnw2unZs4CYiELSPBGjfxAbC007hRxV4QA");
+const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
 
 
 const AppIndex = () => {
