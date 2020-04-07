@@ -4,7 +4,6 @@ import { Link, useHistory } from 'react-router-dom';
 import './style.scss';
 
 import SliderContainer from 'components/Slider';
-// import BusinessesList from 'components/BusinessesList';
 import BusinessesMap from 'components/BusinessesMap'
 import Footer from 'components/Footer';
 import BusinessSlide from './components/BusinessSlide';

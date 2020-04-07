@@ -75,7 +75,7 @@ export default function NavBar(props) {
 
     return (
         <div className="navBar">
-            <img onClick={() => history.push('/')} className="logo-img" src={require('../../assets/icons/logo-3.png')} alt="Logo image" />
+            <img onClick={() => history.push('/')} className="logo-img" src={require('../../assets/icons/logo-3.png')} alt="Logo" />
       <div className="login">
         <button onClick={() => history.push('/search')}>
           <Search

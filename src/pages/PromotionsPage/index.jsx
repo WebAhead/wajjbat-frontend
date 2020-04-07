@@ -7,7 +7,7 @@ const endPointUrl = process.env.REACT_APP_API_URL;
 
 const PromotionsPage = props => {
     const history = useHistory();
-    const business = props.match.params.id;
+    const business = props.id || props.match.params.id;
 
     const goToPayment = (clicks) => {
         // take user to payment
