@@ -19,10 +19,8 @@ export default function NavBar(props) {
     };
 
     useEffect(() => {
-
         async function checkLogin() {
-            const currentLang = localStorage.getItem('language') || lang;
-            setLang(currentLang);
+
             try {
                 const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/isLoggedIn`, {
                     withCredentials: true
@@ -35,6 +33,14 @@ export default function NavBar(props) {
         };
         checkLogin();
     }, []);
+    
+    useEffect(()=>{
+      async function getLang() {
+        const currentLang = localStorage.getItem('language') || lang;
+        setLang(currentLang);
+      }
+      getLang();
+    })
 
         async function logout() {
             if (logged) {

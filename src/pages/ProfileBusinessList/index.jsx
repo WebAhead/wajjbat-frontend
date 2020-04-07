@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import axios from 'axios';
 import BusinessesList from 'components/BusinessesList/index';
@@ -13,10 +13,6 @@ export default function ProfileBusinesList(props) {
 
   const history = useHistory();
 
-  const handleNav = () => {
-    setSelectedBusiness(null);
-    setEditBusiness(null);
-  };
 
   useEffect(() => {
     async function getBusinesses() {
@@ -27,10 +23,10 @@ export default function ProfileBusinesList(props) {
       setBusinesses(data);
     }
     getBusinesses();
-  }, [editBusiness]);
+  }, [editBusiness,selectedBusiness]);
 
   const handleAddBusiness = () => {
-    window.location = '/create-business ';
+    history.push('/create-business');
   };
 
   return (

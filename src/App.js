@@ -19,20 +19,23 @@ export default props => {
     const [lang,setLang] = React.useState('en');
     const [logged,setLogged] = React.useState(false);
     
-    React.useEffect(async () => {
-        const currentLang = localStorage.getItem('language') || lang;
-        setLang(currentLang);
-        try {
-            const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/isLoggedIn`, {
-                withCredentials: true
-            });
-
-            if (data.id) setLogged(true);
-            return 1;
-        } catch (error) {
-            console.log(error);
-            return 1;
+    React.useEffect(()=>{
+        async function initPage () {
+            const currentLang = localStorage.getItem('language') || lang;
+            setLang(currentLang);
+            try {
+                const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/isLoggedIn`, {
+                    withCredentials: true
+                });
+    
+                if (data.id) setLogged(true);
+                return 1;
+            } catch (error) {
+                console.log(error);
+                return 1;
+            }
         }
+        initPage();
     }, []);
     return (
         <div className="App">

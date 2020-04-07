@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { useHistory } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
 import './styles.scss';

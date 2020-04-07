@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import Signin from 'pages/Signin';
 import './style.scss';
 import Cookies from 'universal-cookie';
 import { useHistory } from 'react-router-dom';

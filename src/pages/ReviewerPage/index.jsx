@@ -25,7 +25,7 @@ export default props => {
                 console.log(error);
             }
         }());
-    },[])
+    },[reviewer,reviewerID])
 
     if(!reviewerDetails || !reviews){
         return (
