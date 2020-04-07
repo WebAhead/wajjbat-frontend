@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import BusinessesList from 'components/BusinessesList';
 import SearchBar from '../../components/SearchBar';
 import './style.scss';

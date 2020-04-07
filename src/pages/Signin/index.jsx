@@ -37,7 +37,7 @@ function Signin({ intl }) {
                     withCredentials: true,
                 },
             );
-            window.location = '/';
+            history.push('/');
         } catch (error) {
             console.log('Error: ', error);
         }
@@ -59,7 +59,7 @@ function Signin({ intl }) {
                     withCredentials: true,
                 },
             );
-            window.location = '/';
+            history.push('/');
         } catch (error) {
             console.log('Error: ', error);
         }

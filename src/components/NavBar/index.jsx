@@ -19,10 +19,8 @@ export default function NavBar(props) {
     };
 
     useEffect(() => {
-
         async function checkLogin() {
-            const currentLang = localStorage.getItem('language') || lang;
-            setLang(currentLang);
+
             try {
                 const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/isLoggedIn`, {
                     withCredentials: true
@@ -35,6 +33,14 @@ export default function NavBar(props) {
         };
         checkLogin();
     }, []);
+    
+    useEffect(()=>{
+      async function getLang() {
+        const currentLang = localStorage.getItem('language') || lang;
+        setLang(currentLang);
+      }
+      getLang();
+    })
 
         async function logout() {
             if (logged) {
@@ -69,7 +75,7 @@ export default function NavBar(props) {
 
     return (
         <div className="navBar">
-            <img onClick={() => history.push('/')} className="logo-img" src={require('../../assets/icons/logo-3.png')} alt="Logo image" />
+            <img onClick={() => history.push('/')} className="logo-img" src={require('../../assets/icons/logo-3.png')} alt="Logo" />
       <div className="login">
         <button onClick={() => history.push('/search')}>
           <Search

@@ -185,6 +185,8 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
             if (result.data.success) {
                 if (editing.name) {
                     setEditBusiness(null);
+                    setSubImgs([]);
+                    setNewImgs([]);
                     return;
                 }
                 history.push('/profile-business-list');
@@ -224,7 +226,7 @@ function AddBusiness({ intl, editing = editingDefaultObj, setEditBusiness }) {
                     )}
                     <div className="sub-imgs">
                         {subImgs.map((subImg, index) => (
-                            <div className="sub-img-container">
+                            <div key={index} className="sub-img-container">
                                 {editing.name && (
                                     <button
                                         className="remove-img"

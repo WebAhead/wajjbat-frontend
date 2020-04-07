@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './style.scss';
-import { injectIntl, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 export default function SearchBar({ businesses, setSearchData }) {
     const [query, setQuery] = useState('');

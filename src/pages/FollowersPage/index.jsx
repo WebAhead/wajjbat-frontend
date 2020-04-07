@@ -22,7 +22,7 @@ export default (props) => {
             }
         };
         getFollowers();
-    },[])
+    },[businessid])
 
     if(!businessFollowersData){
         return (

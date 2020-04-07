@@ -45,7 +45,7 @@ function BusinessReviews(props) {
                 if (data.id) {
                     setIsLoggedIn([true, data.id]);
 
-                    props.reviews.map(item => {
+                    props.reviews.forEach(item => {
                         if (item.id === data.id) {
                             setHasReviewed(true);
                         }
@@ -56,15 +56,17 @@ function BusinessReviews(props) {
             }
         };
         fetchIsLoggedIn();
-    }, []);
+    }, [props.reviews]);
 
     const handleReviews = () => {
         if (!props.reviews.length) {
             return '';
         }
+        console.log(props.reviews);
 
-        return props.reviews.map(currentReview => (
+        return props.reviews.map((currentReview, index)=> (
             <ReviewCard
+                key={index}
                 rating={currentReview.rating}
                 fullname={currentReview.fullname}
                 profile_image={currentReview.profile_image}

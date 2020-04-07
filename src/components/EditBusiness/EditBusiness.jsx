@@ -10,6 +10,7 @@ export default ({ editingBusiness, setEditBusiness, businessData, setBusinessDat
 
         async function getEditingBusinessData () {
             if (editingBusiness && setBusinessData) {
+                console.log('Getting editing busienss data ...');
                 try {
                     const { data } = await axios.get(
                         `${process.env.REACT_APP_API_URL}/api/businesses/${editingBusiness.id}`,
@@ -25,6 +26,7 @@ export default ({ editingBusiness, setEditBusiness, businessData, setBusinessDat
             }
         }
         getEditingBusinessData();
+        return ()=>setBusinessData(null);
     }, [editingBusiness,setBusinessData]);
 
     if (err) {
