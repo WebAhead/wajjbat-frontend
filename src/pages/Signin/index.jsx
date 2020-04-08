@@ -13,7 +13,7 @@ const endPointUrl = process.env.REACT_APP_API_URL;
 const facebookId = process.env.REACT_APP_FACEBOOK_ID;
 const googleId = process.env.REACT_APP_GOOGLE_ID;
 
-function Signin({ intl }) {
+function Signin({ intl, setLogged }) {
     const history = useHistory();
     const back = () => {
         history.goBack();
@@ -37,6 +37,8 @@ function Signin({ intl }) {
                     withCredentials: true,
                 },
             );
+            
+            setLogged(true)
             history.push('/');
         } catch (error) {
             console.log('Error: ', error);
@@ -59,6 +61,8 @@ function Signin({ intl }) {
                     withCredentials: true,
                 },
             );
+
+            setLogged(true)
             history.push('/');
         } catch (error) {
             console.log('Error: ', error);

@@ -37,7 +37,7 @@ export default (props) => {
             }
         }
         initPage();
-    }, []);
+    }, [logged]);
 
     useEffect(() => {
         async function getLang() {
@@ -49,7 +49,7 @@ export default (props) => {
 
     return (
         <div className="App">
-            <NavBar setLang={props.setLang} />
+            <NavBar setLang={props.setLang} logged={logged} setLogged={setLogged} />
             <Switch className="App">
                 <Route
                     path="/business/:id"
@@ -58,7 +58,7 @@ export default (props) => {
                     )}
                 />
                 <Route exact path="/" render={() => <HomePage {...props} />} />
-                <Route path="/signin" component={Signin} />
+                <Route path="/signin" component={() => <Signin setLogged={setLogged} />} />
                 <Route path="/profile" component={ProfilePage} />
                 <Route path="/profile-business-list" component={ProfileBusinesList} />
                 <Route path="/create-business" component={AddBusiness} />
