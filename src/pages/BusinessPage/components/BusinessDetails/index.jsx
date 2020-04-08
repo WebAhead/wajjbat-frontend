@@ -11,7 +11,8 @@ import Contact from '../Contact';
 import BusinessPageMap from '../BusinessPageMap/index';
 
 export default function BusinessDetails({ logged, businessData, userPosition }) {
-    if (businessData === undefined) {
+
+    if (businessData === undefined) {       
         return (
             <div className={style.emptyBusinessDetails}>
                 <CircularProgress disableShrink />
@@ -31,7 +32,10 @@ export default function BusinessDetails({ logged, businessData, userPosition }) 
                     <div>
                         <div className={style['followers-by-business']}>
                             <Link
-                                to={{ pathname: `/followers/${businessData.id}` }} 
+                                to={{
+                                    pathname: `/followers/${businessData.id}`
+                                    , state:{businessData}
+                                }} 
                                 style={{display: 'flex', alignItems: 'center'}}
                             >
                                

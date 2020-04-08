@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function InsetDividers({businessFollowersData}) {
     
-    const classes = useStyles();
+    const classes = useStyles(); 
 
     return (
         <List className={classes.root}>
@@ -20,9 +20,9 @@ export default function InsetDividers({businessFollowersData}) {
                 <div>
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar src="https://creativeartworksblog.files.wordpress.com/2019/02/horseanddog-jeffjett.jpeg?w=754&h=754" />
+                            <Avatar src={follower.profile_image} />
                         </ListItemAvatar>
-                        <ListItemText primary={`Mahmod Mhamed ID ${follower.id}`} secondary={`Since: ${follower.created_at}`} />
+                        <ListItemText primary={`${follower.first_name} ${follower.last_name}`} secondary={`Since: ${follower.created_at.split('T')[0]}`} />
                     </ListItem>
                     <Divider variant="inset" component="li" />
                 </div>
