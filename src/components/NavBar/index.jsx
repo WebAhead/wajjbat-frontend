@@ -7,60 +7,44 @@ import Search from '@material-ui/icons/Search';
 import Menu from '@material-ui/icons/Menu';
 import MenuSideBar from '../MenuSideBar';
 
-export default function NavBar(props) {
+export default function NavBar({logged, setLogged, ...props}) {
     const history = useHistory();
     const [lang, setLang] = useState('ar');
-    const [logged, setLogged] = useState(false);
     const [showMenuSideBar, setMenuShowSideBar] = useState(false);
 
     const handleLang = value => {
         localStorage.setItem('language', value);
         setLang(value);
     };
-
-    useEffect(() => {
-        async function checkLogin() {
-
-            try {
-                const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/isLoggedIn`, {
-                    withCredentials: true
-                });
-
-                if (data.id) setLogged(true);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        checkLogin();
-    }, []);
+  
     
     useEffect(()=>{
-      async function getLang() {
-        const currentLang = localStorage.getItem('language') || lang;
-        setLang(currentLang);
-      }
-      getLang();
+        async function getLang() {
+            const currentLang = localStorage.getItem('language') || lang;
+            setLang(currentLang);
+        }
+        getLang();
     })
 
-        async function logout() {
-            if (logged) {
+    async function logout() {
+        if (logged) {
 
-                try {
-                    const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/logout`, {
-                        withCredentials: true
-                    });
+            try {
+                const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/logout`, {
+                    withCredentials: true
+                });
                 
-                    if (data.status) setLogged(false);
-                    return 1;
-                } catch (error) {
-                    console.log(error);
-                    return 1;
-                }
+                if (data.status) setLogged(false);
+                return 1;
+            } catch (error) {
+                console.log(error);
+                return 1;
             }
+        }
 
-            return 1
+        return 1
 
-        };
+    };
 
 
     useEffect(() => {
@@ -76,33 +60,33 @@ export default function NavBar(props) {
     return (
         <div className="navBar">
             <img onClick={() => history.push('/')} className="logo-img" src={require('../../assets/icons/logo-3.png')} alt="Logo" />
-      <div className="login">
-        <button onClick={() => history.push('/search')}>
-          <Search
-            classes={{
-              root: classes.root
-            }}
-          />
-        </button>
-        <button onClick={() => setMenuShowSideBar(!showMenuSideBar)}>
-          <Menu
-            classes={{
-              root: classes.root
-            }}
-          />
-        </button>
-      </div>
-      <div>
-        <MenuSideBar
-          setMenuShowSideBar={setMenuShowSideBar}
-          showMenuSideBar={showMenuSideBar}
-          logged={logged}
-          logout={logout}
-          lang={lang}
-          handleLang={handleLang}
-        />
-      </div>
-    </div>
-  );
+            <div className="login">
+                <button onClick={() => history.push('/search')}>
+                    <Search
+                        classes={{
+                            root: classes.root
+                        }}
+                    />
+                </button>
+                <button onClick={() => setMenuShowSideBar(!showMenuSideBar)}>
+                    <Menu
+                        classes={{
+                            root: classes.root
+                        }}
+                    />
+                </button>
+            </div>
+            <div>
+                <MenuSideBar
+                    setMenuShowSideBar={setMenuShowSideBar}
+                    showMenuSideBar={showMenuSideBar}
+                    logged={logged}
+                    logout={logout}
+                    lang={lang}
+                    handleLang={handleLang}
+                />
+            </div>
+        </div>
+    );
 
 }
