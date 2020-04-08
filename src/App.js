@@ -51,9 +51,9 @@ export default (props) => {
 
   return (
     <div className="App">
-      <NavBar setLang={props.setLang} logged={logged} setLogged={setLogged} />
+      <NavBar setLang={props.setLang} logged={logged} setLogged={setLogged} userid={userid} />
       <Switch className="App">
-        <Route path="/business/:id" component={({ ...props }) => <BusinessPage logged={logged} {...props} />} />
+        <Route path="/business/:id" component={({ ...props }) => <BusinessPage logged={logged} userid={userid} {...props} />} />
         <Route exact path="/" render={() => <HomePage {...props} />} />
         <Route path="/signin" component={() => <Signin setLogged={setLogged} />} />
         <Route path="/profile" component={ProfilePage} />
@@ -63,7 +63,7 @@ export default (props) => {
         <Route path="/followers/:businessid" component={FollowersPage} />
         <Route path="/search" component={SearchResults} />
         <Route path="/promotions/:id" component={PromotionsPage} />
-        <Route path="/following/:userid" component={() => <FollowingPage userid={userid} />} />
+        <Route path="/following/:userid" component={(props) => <FollowingPage userid={userid} {...props} />} />
       </Switch>
     </div>
   );

@@ -8,7 +8,10 @@ const endPointUrl = process.env.REACT_APP_API_URL;
 
 export default (props) => {
   const [userFollowingData, setUserFollowingData] = useState(null);
+
   const userid = props.match.params.userid;
+  console.log('props: ', props);
+  console.log('userid: ', userid);
 
   useEffect(() => {
     async function getFollowing() {

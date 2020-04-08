@@ -7,7 +7,7 @@ import Search from '@material-ui/icons/Search';
 import Menu from '@material-ui/icons/Menu';
 import MenuSideBar from '../MenuSideBar';
 
-export default function NavBar({ logged, setLogged, ...props }) {
+export default function NavBar({ logged, setLogged, userid, ...props }) {
   const history = useHistory();
   const [lang, setLang] = useState('ar');
   const [showMenuSideBar, setMenuShowSideBar] = useState(false);
