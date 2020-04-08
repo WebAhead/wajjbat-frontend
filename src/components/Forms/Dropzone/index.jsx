@@ -64,7 +64,7 @@ export default function StyledDropzone(props) {
             ...(isDragAccept ? acceptStyle : {}),
             ...(isDragReject ? rejectStyle : {}),
         }),
-        [isDragAccept, isDragActive, isDragReject],
+        [isDragAccept, isDragActive, isDragReject, baseStyle],
     );
 
     return (

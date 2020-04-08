@@ -18,7 +18,9 @@ export default ({
 }) => {
 
     const [businessData, setBusinessData] = useState(null);
+
     const history = useHistory();
+    
     const handleBack = () => {
         if (editBusiness) setEditBusiness(null);
         else if (selectedBusiness) setSelectedBusiness(null);

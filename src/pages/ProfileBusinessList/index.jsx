@@ -1,73 +1,54 @@
 import React, { useEffect, useState } from 'react';
-import { Link , useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import axios from 'axios';
 import BusinessesList from 'components/BusinessesList/index';
 import './style.scss';
 
-
 const endPointUrl = process.env.REACT_APP_API_URL;
 export default function ProfileBusinesList(props) {
-    const [businesses, setBusinesses] = useState([]);
-    const [selectedBusiness, setSelectedBusiness] = useState(null);
-    const [editBusiness, setEditBusiness] = useState(null);
-    
-    const history = useHistory();
+  const [businesses, setBusinesses] = useState([]);
+  const [selectedBusiness, setSelectedBusiness] = useState(null);
+  const [editBusiness, setEditBusiness] = useState(null);
 
-    const handleNav = () =>{
-        setSelectedBusiness(null);
-        setEditBusiness(null);
+  const history = useHistory();
+
+
+  useEffect(() => {
+    async function getBusinesses() {
+      const { data } = await axios.get(`${endPointUrl}/api/business-list`, {
+        withCredentials: true
+      });
+
+      setBusinesses(data);
     }
+    getBusinesses();
+  }, [editBusiness,selectedBusiness]);
 
-    useEffect(() => {
-        async function getBusinesses() {
-            const { data } = await axios.get(`${endPointUrl}/api/business-list`, {
-                withCredentials: true,
-            });
+  const handleAddBusiness = () => {
+    history.push('/create-business');
+  };
 
-            setBusinesses(data);
-        };
-        getBusinesses();
-    }, [editBusiness]);
-
-    const handleAddBusiness = () => {
-        window.location = '/create-business ';
-    };
-
-    return (
-        <>
-            <div className="navbar-container">
-                <button className="navButton">
-                    <Link to="/profile">
-                        <FormattedMessage id="Profile" />
-                    </Link>
-                </button>
-
-                <button onClick={handleNav} className="navButton">
-                    <Link to="/profile-business-list">
-                        <FormattedMessage id="Business" />
-                    </Link>
-                </button>
-            </div>
-            <div className="profile-businesses-container">
-                <div className="businesses-cards">
-                    <BusinessesList
-                        businesses={businesses}
-                        homeView={false}
-                        cardWidth="100%"
-                        selectedBusiness={selectedBusiness}
-                        setSelectedBusiness={setSelectedBusiness}
-                        editBusiness={editBusiness}
-                        setEditBusiness={setEditBusiness}
-                    />
-                </div>
-                {!selectedBusiness
-                && (
-                    <button className="add-business-btn" onClick={handleAddBusiness}>
-                        <FormattedMessage id="Add Business" />
-                    </button>
-                )}
-            </div>
-        </>
-    );
+  return (
+    <>
+      <div className="profile-businesses-container">
+        <div className="businesses-cards">
+          <BusinessesList
+            businesses={businesses}
+            homeView={false}
+            cardWidth="100%"
+            selectedBusiness={selectedBusiness}
+            setSelectedBusiness={setSelectedBusiness}
+            editBusiness={editBusiness}
+            setEditBusiness={setEditBusiness}
+          />
+        </div>
+        {!selectedBusiness && (
+          <button className="add-business-btn" onClick={handleAddBusiness}>
+            <FormattedMessage id="Add Business" />
+          </button>
+        )}
+      </div>
+    </>
+  );
 }

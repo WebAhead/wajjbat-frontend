@@ -7,11 +7,9 @@ import Search from '@material-ui/icons/Search';
 import Menu from '@material-ui/icons/Menu';
 import MenuSideBar from '../MenuSideBar';
 
-export default function NavBar(props) {
+export default function NavBar({ logged, setLogged, ...props }) {
   const history = useHistory();
   const [lang, setLang] = useState('ar');
-  const [logged, setLogged] = useState(false);
-  const [userid, setUserid] = useState('');
   const [showMenuSideBar, setMenuShowSideBar] = useState(false);
 
   const handleLang = (value) => {
@@ -20,24 +18,12 @@ export default function NavBar(props) {
   };
 
   useEffect(() => {
-    async function checkLogin() {
+    async function getLang() {
       const currentLang = localStorage.getItem('language') || lang;
       setLang(currentLang);
-      try {
-        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/isLoggedIn`, {
-          withCredentials: true,
-        });
-
-        if (data.id) {
-          setLogged(true);
-          setUserid(data.id);
-        }
-      } catch (error) {
-        console.log(error);
-      }
     }
-    checkLogin();
-  }, []);
+    getLang();
+  });
 
   async function logout() {
     if (logged) {
@@ -69,7 +55,7 @@ export default function NavBar(props) {
 
   return (
     <div className="navBar">
-      <img onClick={() => history.push('/')} className="logo-img" src={require('../../assets/icons/logo-3.png')} alt="Logo image" />
+      <img onClick={() => history.push('/')} className="logo-img" src={require('../../assets/icons/logo-3.png')} alt="Logo" />
       <div className="login">
         <button onClick={() => history.push('/search')}>
           <Search
