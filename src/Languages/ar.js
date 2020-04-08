@@ -49,7 +49,7 @@ export default {
     'Distance': 'المسافه',
     'Edit': 'تعديل',
     'Back': 'رجوع',
-    'Promotions': 'الترقيه',
+    'Promotions': 'ترقيه',
     'searchPlaceholder': 'بحث حسب الاسم, النوع أو اسلوب المطبخ',
     'business followers': '{followers} متابعين',
     'Follow': 'تابع',
@@ -59,4 +59,6 @@ export default {
     'silver': 'حملة Silver',
     'gold': 'حملة Gold',
     'purchaseClicks': 'شراء نقرات',
+    'checkout': 'الدفع',
+    'cancel': 'الغاء'
 };
