@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { IntlProvider } from 'react-intl';
 import { BrowserRouter } from 'react-router-dom';
+
 import App from './App';
 import './theme/reset.scss';
 import messages from './Languages';
 import * as serviceWorker from './serviceWorker';
-
 
 const AppIndex = () => {
     const [lang, setLang] = useState('ar');

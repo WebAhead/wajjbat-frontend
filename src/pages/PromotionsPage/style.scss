@@ -23,6 +23,7 @@
         border: 1px green solid;
         border-radius: 0.5rem;
         margin-top: 2rem;
+        cursor: pointer;
         
         .numOfClicks {
             font-size: 4rem;
@@ -30,4 +31,35 @@
             margin-bottom: 1rem;
         }
     }
+
+    .checkoutButton {
+        margin-top: 2rem;
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+        border: solid 1px #508991;
+        background-color: #21b5a2;
+        outline: none;
+        color: white;
+        font-size: larger;
+        transition-property: background-color;
+    }
+
+    .checkoutButton:hover {
+        background-color: #41c5b4;
+    }
+
+    .selected {
+        box-shadow: 0 0 10px #41c5b4;
+        color: #219c8c;
+    }
+}
+
+.cancelButton {
+    margin-top: 2rem;
+    color: rgb(177, 177, 177);
+    cursor: pointer;
+}
+
+.cancelButton:hover {
+    color: gray;
 }
