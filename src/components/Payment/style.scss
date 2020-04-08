@@ -25,7 +25,26 @@
     background-color: #fefde5 !important;
   }
   
-  .confirm-order {
+  .confirmOrderButton {
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    border: solid 1px #508991;
+    background-color: #21b5a2;
+    outline: none;
+    color: white;
+    font-size: medium;
+    transition-property: background-color;
+}
 
-  }
+.confirmOrderButton:hover {
+    background-color: #41c5b4;
+}
   
+  .paymentForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+  }

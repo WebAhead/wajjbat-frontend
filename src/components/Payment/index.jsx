@@ -1,6 +1,8 @@
 /* eslint-disable no-lonely-if */
 import React from 'react';
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
+import axios from 'axios';
+import './style.scss';
 
 const CARD_ELEMENT_OPTIONS = {
     style: {
@@ -20,52 +22,55 @@ const CARD_ELEMENT_OPTIONS = {
     },
 };
 
-export default function CheckoutForm() {
+function stripeTokenHandler(token, business, clicks) {
+    const paymentData = {token: token.id};
+  
+    // Use fetch to send the token ID and any other payment data to your server.
+    // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+
+    axios.post(`${process.env.REACT_APP_API_URL}/payment/pay`, {
+        paymentData,
+        business,
+        clicks
+    })
+        .then(response => {
+            alert('Payment request to server succeeded');
+            window.location.href = '/profile-business-list';
+        })
+        .catch(err => {
+            alert('Payment request to server failed');
+            console.log(err);
+        });
+}
+
+export default function CheckoutForm(props) {
     const stripe = useStripe();
     const elements = useElements();
-
+  
     const handleSubmit = async (event) => {
-    // We don't want to let default form submission happen here,
-    // which would refresh the page.
         event.preventDefault();
-
+  
         if (!stripe || !elements) {
-            // Stripe.js has not yet loaded.
-            // Make sure to disable form submission until Stripe.js has loaded.
+        // disable form submission until Stripe has loaded
             return;
         }
-
-        const result = await stripe.confirmCardPayment('{CLIENT_SECRET}', {
-            payment_method: {
-                card: elements.getElement(CardElement),
-                billing_details: {
-                    name: 'Jenny Rosen',
-                },
-            }
-        });
-
+  
+        const card = elements.getElement(CardElement);
+        const result = await stripe.createToken(card);
+  
         if (result.error) {
-            // Show error to your customer (e.g., insufficient funds)
             console.log(result.error.message);
         } else {
-            // The payment has been processed!
-            if (result.paymentIntent.status === 'succeeded') {
-                // Show a success message to your customer
-                // There's a risk of the customer closing the window before callback
-                // execution. Set up a webhook or plugin to listen for the
-                // payment_intent.succeeded event that handles any business critical
-                // post-payment actions.
-            }
+            console.log(stripeTokenHandler(result.token, props.business, props.clicks));
         }
     };
-
+  
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Card details
-                <CardElement options={CARD_ELEMENT_OPTIONS} />
-            </label>      
-            <button styleName="confirm-order" disabled={!stripe}>Confirm order</button>
+        <form onSubmit={handleSubmit} className="paymentForm">
+            <CardElement options={CARD_ELEMENT_OPTIONS} />
+            <button className="confirmOrderButton" disabled={!stripe}>
+                Confirm Order
+            </button>
         </form>
     );
 }

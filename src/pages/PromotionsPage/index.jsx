@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import './style.scss';
 import {loadStripe} from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
-import PaymentForm from '../../components/Payment';
+import CheckoutForm from '../../components/Payment';
 
 
 const endPointUrl = process.env.REACT_APP_API_URL;
@@ -28,7 +28,10 @@ const PromotionsPage = props => {
                             </span>
 
                             <Elements stripe={stripePromise}>
-                                <PaymentForm />
+                                <CheckoutForm 
+                                    business={business}
+                                    clicks={selected}
+                                />
                             </Elements>
 
                             <a className="cancelButton" onClick={() => setPaymentPage(false)}>
