@@ -27,7 +27,6 @@ export default function MenuSideBar({ setMenuShowSideBar, showMenuSideBar, logge
     const cookies = new Cookies();
     cookies.remove('wajjbat_access_token');
     history.push('/');
-    console.log('after redirect');
   };
 
   return (
@@ -60,11 +59,11 @@ export default function MenuSideBar({ setMenuShowSideBar, showMenuSideBar, logge
             )}
             {logged && (
               <div className="menuItem">
-                <Link to={{ pathname: `/Following/${userid}` }}>
-                  <a href="">
-                    <FormattedMessage id="following" />
-                  </a>
-                </Link>
+                <a href="/">
+                  <Link to={{ pathname: `/Following/${userid}` }}>
+                    <FormattedMessage id="Following" />
+                  </Link>
+                </a>
               </div>
             )}
             {logged && (

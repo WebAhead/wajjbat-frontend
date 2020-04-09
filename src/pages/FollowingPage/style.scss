@@ -1,0 +1,54 @@
+@import 'theme/colors.scss';
+
+.followers-list {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.h1 {
+  font-size: 16px;
+  color: red;
+  text-align: center;
+}
+
+.emptyBusinessDetails {
+  margin: 0 auto;
+}
+
+.business-profile-container {
+  display: flex;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  box-shadow: 0 5px 10px -6px $dark-green;
+  padding: 20px 10px;
+  max-width: 90%;
+  margin: auto;
+  margin-bottom: 20px;
+
+  .business-profile-container-headers {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    height: 70px;
+    margin: 0 10px;
+  }
+
+  img {
+    border-radius: 50%;
+    height: 90px;
+    width: 90px;
+  }
+
+  h2 {
+    text-transform: uppercase;
+  }
+}
+
+.emptyUserFollowingDetails {
+  text-align: center;
+  margin-top: 40px;
+}
