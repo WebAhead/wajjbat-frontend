@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import './style.scss';
 import Cookies from 'universal-cookie';
-import { useHistory } from 'react-router-dom';
+import { useHistory , Link } from 'react-router-dom';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 
-export default function MenuSideBar({ setMenuShowSideBar, showMenuSideBar, logged, logout, lang, handleLang }) {
+
+export default function MenuSideBar({ setMenuShowSideBar, showMenuSideBar, logged, logout, lang, handleLang, userid }) {
     const [hideProfile, setHideProfile] = useState(false);
     const history = useHistory();
 
@@ -26,7 +27,6 @@ export default function MenuSideBar({ setMenuShowSideBar, showMenuSideBar, logge
         const cookies = new Cookies();
         cookies.remove('wajjbat_access_token');
         history.push('/');
-        console.log('after redirect');
     };
 
     return (
@@ -34,11 +34,11 @@ export default function MenuSideBar({ setMenuShowSideBar, showMenuSideBar, logge
             className="main-sideBar"
             id="main-sideBar"
             style={{
-                right: showMenuSideBar ? '0%' : '-100%'
+                right: showMenuSideBar ? '0%' : '-100%',
             }}
         >
             <div className="overlay" onClick={menuSideBarHandler}>
-                <div className="sideBar" id="sideBar" onClick={e => e.stopPropagation()}>
+                <div className="sideBar" id="sideBar" onClick={(e) => e.stopPropagation()}>
                     <button className="sideBarHider" style={{ float: 'left' }} onClick={menuSideBarHandler}>
             ×
                     </button>
@@ -54,6 +54,15 @@ export default function MenuSideBar({ setMenuShowSideBar, showMenuSideBar, logge
                             <div className="menuItem">
                                 <a href="" onClick={handleProfile}>
                                     <FormattedMessage id="Profile" />
+                                </a>
+                            </div>
+                        )}
+                        {logged && (
+                            <div className="menuItem" onClick={() => menuSideBarHandler()}>
+                                <a href="/">
+                                    <Link to={{ pathname: `/Following/${userid}` }}>
+                                        <FormattedMessage id="Following" />
+                                    </Link>
                                 </a>
                             </div>
                         )}
