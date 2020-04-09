@@ -15,20 +15,20 @@
   margin: 0 auto;
 }
 
-.business-profile-container {
+.following-businesses-container {
   display: flex;
   align-items: center;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin-bottom: 30px;
   margin-top: 20px;
   box-shadow: 0 5px 10px -6px $dark-green;
   padding: 20px 10px;
-  max-width: 90%;
+  max-width: 80%;
   margin: auto;
   margin-bottom: 20px;
 
-  .business-profile-container-headers {
+  .following-businesses-container-headers {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
